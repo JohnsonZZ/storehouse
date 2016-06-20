@@ -486,7 +486,7 @@
 					<li class="">
 						<a href="widgets.html">
 							<i class="menu-icon fa fa-list-alt"></i>
-							<span class="menu-text"> Widgets </span>
+							<span class="menu-text"> 发送订单 </span>
 						</a>
 
 						<b class="arrow"></b>
@@ -603,7 +603,7 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="ace-icon fa fa-home home-icon"></i>
-								<a href="<?php echo U('Index/index');?>">首页</a>
+								<a href="#">首页</a>
 							</li>
 							<li class="active">控制台</li>
 						</ul><!-- /.breadcrumb -->
@@ -629,40 +629,66 @@
 						<!-- /section:settings.box -->
 						<div class="page-header">
 							<h1>
-								用户日志
+								产品列表
 							</h1>
 						</div><!-- /.page-header -->
-						<div class="row">
-									<div class="col-xs-12">
-										<table id="simple-table" class="table table-striped table-bordered table-hover">
-											<thead>
-												<tr>
-													<th>用户</th>
-													<th>IP</th>
-													<th class="logcontent">日志内容</th>
-													<th>时间</th>
-												</tr>
-											</thead>
 
-											<tbody>
-												<?php if(is_array($log)): foreach($log as $key=>$val): ?><tr>
-														<td><?php echo ($val['username']); ?></td>
-														<td><?php echo ($val['ip']); ?></td>
-														<td><?php echo ($val['log']); ?></td>
-														<td><?php echo ($val['time']); ?></td>
-													</tr><?php endforeach; endif; ?>
-											</tbody>					
-										</table>
-										
-										<ul class="pagination pull-right">
-										  <?php echo ($page); ?>
-										</ul>
-									</div><!-- /.span -->
-								</div><!-- /.row -->
+						<div class="row">
+							<div class="col-xs-12">
+								<table id="simple-table" class="table table-striped table-bordered table-hover">
+									<thead>
+										<tr>
+											<th class="center">
+												<label class="pos-rel">
+													<input type="checkbox" class="ace" />
+													<span class="lbl"></span>
+												</label>
+											</th>
+											<th>图片</th>
+											<th>内容</th>								
+											<th>
+												操作
+											</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										 <?php if(is_array($goods)): foreach($goods as $key=>$val): ?><tr>
+												<td class="center">
+													<label class="pos-rel">
+														<input type="checkbox" class="ace" />
+														<span class="lbl"></span>
+													</label>
+												</td>
+												<td><?php echo ($val["href"]); ?></td>
+												<td><?php echo ($val["content"]); ?></td>
+												<td>
+													<div class="hidden-sm hidden-xs action-buttons">
+														<a class="green" href="<?php echo U('edit');?>?id=<?php echo ($val["id"]); ?>">
+															<i class="ace-icon fa fa-pencil bigger-130" title="修改"></i>
+														</a>
+
+														<a class="red" href="#">
+															<i class="ace-icon fa fa-trash-o bigger-130" title="删除"></i>
+														</a>
+													</div>
+												</td>
+											</tr><?php endforeach; endif; ?>	
+									</tbody>
+								</table>
+							</div><!-- /.span -->
+						</div><!-- /.row -->
 					</div><!-- /.page-content -->
 				</div>
 			</div><!-- /.main-content -->
-			<div class="footer">
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+			</a>
+		</div><!-- /.main-container -->
+
+		<!-- basic scripts -->
+		<div class="footer">
 	<div class="footer-inner">
 		<!-- #section:basics/footer -->
 		<div class="footer-content">
@@ -678,11 +704,6 @@
 		<!-- /section:basics/footer -->
 	</div>
 </div>
-			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
-				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
-			</a>
-		</div><!-- /.main-container -->
-		<!-- basic scripts -->	
 				<script src="/storehouse/Public/js/jquery/jquery.js"></script>   
 		
 		<!-- layer 2.2 -->
@@ -694,9 +715,13 @@
 		<script src="/storehouse/Public/js/ace/ace.sidebar.js"></script>
 		<script src="/storehouse/Public/js/ace/ace.sidebar-scroll-1.js"></script>
 
-		<script>
-			
+		<script type="text/javascript">
+			$('#allGoods').addClass("active").siblings().removeClass("active");
+			$('#listGoods').addClass("active");
+	
 		</script>
+		
+
 
 	</body>
 </html>

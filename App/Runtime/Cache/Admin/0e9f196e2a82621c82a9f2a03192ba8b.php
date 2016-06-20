@@ -486,7 +486,7 @@
 					<li class="">
 						<a href="widgets.html">
 							<i class="menu-icon fa fa-list-alt"></i>
-							<span class="menu-text"> Widgets </span>
+							<span class="menu-text"> 发送订单 </span>
 						</a>
 
 						<b class="arrow"></b>
@@ -497,14 +497,7 @@
 							<i class="menu-icon fa fa-calendar"></i>
 
 							<span class="menu-text">
-								Calendar
-
-								<!-- #section:basics/sidebar.layout.badge -->
-								<span class="badge badge-transparent tooltip-error" title="2 Important Events">
-									<i class="ace-icon fa fa-exclamation-triangle red bigger-130"></i>
-								</span>
-
-								<!-- /section:basics/sidebar.layout.badge -->
+								订单管理
 							</span>
 						</a>
 
@@ -637,7 +630,7 @@
 									<ul class="ace-thumbnails clearfix">
 										
 											<!-- #section:pages/gallery.caption -->
-										<?php $__FOR_START_27582__=2;$__FOR_END_27582__=$lenFolder;for($i=$__FOR_START_27582__;$i < $__FOR_END_27582__;$i+=1){ ?><li id="ul-margin" >
+										<?php $__FOR_START_3919__=2;$__FOR_END_3919__=$lenFolder;for($i=$__FOR_START_3919__;$i < $__FOR_END_3919__;$i+=1){ ?><li id="ul-margin" >
 												<a href="<?php echo U('image');?>?folder=<?php echo ($folder[$i]); ?>" data-rel="colorbox" class="cboxElement">
 													<img width="150" height="150" alt="150x150" src="/storehouse/Public/images/timg1.jpg">	
 												</a>
@@ -653,7 +646,7 @@
 													</a>
 												</div>
 											</li><?php } ?>
-										<?php $__FOR_START_29727__=1;$__FOR_END_29727__=$lenFiles;for($i=$__FOR_START_29727__;$i < $__FOR_END_29727__;$i+=1){ ?><li  id="ul-margin" >
+										<?php $__FOR_START_18140__=1;$__FOR_END_18140__=$lenFiles;for($i=$__FOR_START_18140__;$i < $__FOR_END_18140__;$i+=1){ ?><li  id="ul-margin" >
 												<?php if( $i == 1 ): ?><a href="<?php echo U('index');?>" data-rel="colorbox" class="cboxElement">
 														<img width="150" height="150" alt="150x150" src="/storehouse/Public/images/timg1.jpg" />	
 													</a>
@@ -747,7 +740,7 @@
 					$(".layui-layer-content").css("overflow-x","hidden");
 				})
 			});
-			$('#allGallery').addClass('open').siblings().removeClass("open");
+			$('#allGallery').addClass('active').siblings().removeClass("active");
 			$('.del-folder').click(function(){		
 				var val = $(this).attr('val');
 				layer.open({

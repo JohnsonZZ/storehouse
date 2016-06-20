@@ -1,7 +1,8 @@
 <?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
 <html lang="en">
 	<head>
-			<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<meta charset="utf-8" />
 	<title>华创 | 控制台</title>
 
@@ -21,8 +22,9 @@
 	<link rel="stylesheet" href="/storehouse/Bootstrap/css/ace.css" class="ace-main-stylesheet" id="main-ace-style" />
 	
 	<!--自己添加的css-->
-	<link rel="stylesheet" href="/storehouse/Public/css/main.css" />
-
+	<link rel="stylesheet" href="/storehouse/Public/css/main.css" />	
+	<link rel="stylesheet" href="/storehouse/Public/css/jquery-ui.custom.css">
+	<link rel="stylesheet" href="/storehouse/Bootstrap/css/fileinput.min.css">
 	</head>
 
 	<body class="no-skin">
@@ -486,7 +488,7 @@
 					<li class="">
 						<a href="widgets.html">
 							<i class="menu-icon fa fa-list-alt"></i>
-							<span class="menu-text"> Widgets </span>
+							<span class="menu-text"> 发送订单 </span>
 						</a>
 
 						<b class="arrow"></b>
@@ -603,7 +605,7 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="ace-icon fa fa-home home-icon"></i>
-								<a href="<?php echo U('Index/index');?>">首页</a>
+								<a href="#">首页</a>
 							</li>
 							<li class="active">控制台</li>
 						</ul><!-- /.breadcrumb -->
@@ -620,7 +622,6 @@
 
 						<!-- /section:basics/content.searchbox -->
 					</div>
-
 					<!-- /section:basics/content.breadcrumbs -->
 					<div class="page-content">
 						<!-- #section:settings.box -->
@@ -629,40 +630,62 @@
 						<!-- /section:settings.box -->
 						<div class="page-header">
 							<h1>
-								用户日志
+								添加产品
 							</h1>
 						</div><!-- /.page-header -->
-						<div class="row">
-									<div class="col-xs-12">
-										<table id="simple-table" class="table table-striped table-bordered table-hover">
-											<thead>
-												<tr>
-													<th>用户</th>
-													<th>IP</th>
-													<th class="logcontent">日志内容</th>
-													<th>时间</th>
-												</tr>
-											</thead>
 
-											<tbody>
-												<?php if(is_array($log)): foreach($log as $key=>$val): ?><tr>
-														<td><?php echo ($val['username']); ?></td>
-														<td><?php echo ($val['ip']); ?></td>
-														<td><?php echo ($val['log']); ?></td>
-														<td><?php echo ($val['time']); ?></td>
-													</tr><?php endforeach; endif; ?>
-											</tbody>					
-										</table>
-										
-										<ul class="pagination pull-right">
-										  <?php echo ($page); ?>
-										</ul>
-									</div><!-- /.span -->
-								</div><!-- /.row -->
-					</div><!-- /.page-content -->
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+								<form class="form-horizontal" role="form"  action="<?php echo U('update');?>"  id="Goodsform" method="post" enctype="multipart/form-data">
+									<!-- #section:elements.form -->
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right " for="href"> 图片 </label>
+
+										<div class="col-sm-9">
+											<input type="file" id="href" placeholder="输入名称" name="href" class="col-xs-10 col-sm-5">
+										</div>
+									</div>
+
+									<!-- /section:elements.form -->
+									<div class="space-4"></div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="content"> 内容 </label>
+
+										<div class="col-sm-9">
+											 <textarea id="content" name="content" type="text/plain">
+											</textarea>
+										</div>
+									</div>
+									
+									<div class="space-4"></div>
+									<div class="clearfix form-actions">
+										<div class="col-md-offset-3 col-md-9">
+											<button class="btn btn-info" type="button" id="addButton" >
+												<i class="ace-icon fa fa-check bigger-110"></i>
+												提交
+											</button>
+
+											&nbsp; &nbsp; &nbsp;
+											<button class="btn" type="reset">
+												<i class="ace-icon fa fa-undo bigger-110"></i>
+												重置
+											</button>
+										</div>
+									</div>
+
+
+								</form>
+							</div>
+						</div>
+					</div>						
 				</div>
-			</div><!-- /.main-content -->
-			<div class="footer">
+			</div>				
+		</div><!-- /.main-content -->
+
+			
+		<div class="footer">
 	<div class="footer-inner">
 		<!-- #section:basics/footer -->
 		<div class="footer-content">
@@ -678,11 +701,13 @@
 		<!-- /section:basics/footer -->
 	</div>
 </div>
+
 			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
 				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
 			</a>
 		</div><!-- /.main-container -->
-		<!-- basic scripts -->	
+
+		<!-- basic scripts -->
 				<script src="/storehouse/Public/js/jquery/jquery.js"></script>   
 		
 		<!-- layer 2.2 -->
@@ -694,9 +719,46 @@
 		<script src="/storehouse/Public/js/ace/ace.sidebar.js"></script>
 		<script src="/storehouse/Public/js/ace/ace.sidebar-scroll-1.js"></script>
 
-		<script>
-			
+		<script src="/storehouse/Bootstrap/js/fileinput.min.js"></script>
+		<script src="/storehouse/Bootstrap/js/fileinput_locale_zh.js"></script>		
+		<script charset="utf-8" src="/storehouse/Plugins/ueditor/ueditor.config.js"></script>
+		<script charset="utf-8" src="/storehouse/Plugins/ueditor/ueditor.all.min.js"></script>
+		<script charset="utf-8" src="/storehouse/Plugins/ueditor/lang/zh-cn/zh-cn.js"></script>
+		<script type="text/javascript">
+			$('#allGoods').addClass("active").siblings().removeClass("active");
+			$('#addGoods').addClass("active");
+			var ue = UE.getEditor('content',{ initialFrameWidth: 800 ,initialFrameHeight: 500});
+			var html;
+			$('#href').fileinput({
+                language: 'zh', //设置语言
+                allowedFileExtensions : ['jpg', 'png','gif'],//接收的文件后缀,
+                showUpload: false, //是否显示上传按钮
+                showCaption: false,//是否显示标题
+                browseClass: "btn btn-primary", //按钮样式 
+				maxFileSize: 2048,
+            });
+			$("#addButton").click(function(){
+				var href = $('#href').val();
+				ue.ready(function(){ 
+				
+					 $('#content').value = ue.getContent();
+				
+				
+				});
+				if(href.length==0){
+					layer.msg("图不能为空");
+					return false;
+				}
+				if(!ue.hasContents()){
+					layer.msg("内容不能为空");
+					return false;
+				}
+				$('#Goodsform').submit();
+				
+			});
 		</script>
+		
+
 
 	</body>
 </html>

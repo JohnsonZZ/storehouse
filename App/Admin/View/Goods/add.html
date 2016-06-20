@@ -125,8 +125,8 @@
 		<script charset="utf-8" src="__PLUGINS__/ueditor/ueditor.all.min.js"></script>
 		<script charset="utf-8" src="__PLUGINS__/ueditor/lang/zh-cn/zh-cn.js"></script>
 		<script type="text/javascript">
-			$('#allGoods').addClass("open").siblings().removeClass("open");
-			$('#addGoods').addClass("open");
+			$('#allGoods').addClass("active").siblings().removeClass("active");
+			$('#addGoods').addClass("active");
 			var ue = UE.getEditor('content',{ initialFrameWidth: 800 ,initialFrameHeight: 500});
 			var html;
 			$('#href').fileinput({
