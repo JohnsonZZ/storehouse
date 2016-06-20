@@ -85,7 +85,7 @@
 													</span>
 												</div>
 												<else />
-												<a href="javascript:void(0);" data-rel="colorbox" class="cboxElement">
+												<a href="javascript:void(0);" data-rel="colorbox" class="cboxElement files">
 													<img width="150" height="150" alt="150x150" src="__PUBLIC__/upload/image/{$where}/{$files[$i]}" />	
 												</a>
 												<div class="tags label-right">
@@ -128,7 +128,24 @@
 		</div><!-- /.main-container -->
 		<!-- basic scripts -->	
 		<include file="Public/script" />
+		<script src="__PLUGINS__/layer/layer.js"></script>
 		<script>
+		    $(".files").each(function(){
+				$(this).click(function(){
+					var src = $(this).children().attr("src");
+					layer.open({
+					  type: 1,
+					  title: false,
+					  closeBtn: 0,
+					  maxWidth: 1000,
+					  scrollbar: false,
+					  skin: 'layui-layer-nobg', //没有背景色
+					  shadeClose: true,
+					  content: "<img style='max-width:1000px;' src="+src+">"
+					});
+					$(".layui-layer-content").css("overflow-x","hidden");
+				})
+			});
 			$('#allGallery').addClass('open').siblings().removeClass("open");
 			$('.del-folder').click(function(){		
 				var val = $(this).attr('val');
