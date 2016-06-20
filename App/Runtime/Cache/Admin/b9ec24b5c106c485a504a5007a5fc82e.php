@@ -1,7 +1,9 @@
 <?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
 <html lang="en">
 	<head>
-			<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	
+	<link rel="stylesheet" href="/storehouse/Public/css/jquery-ui.custom.css">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<meta charset="utf-8" />
 	<title>华创 | 控制台</title>
 
@@ -22,7 +24,6 @@
 	
 	<!--自己添加的css-->
 	<link rel="stylesheet" href="/storehouse/Public/css/main.css" />
-
 	</head>
 
 	<body class="no-skin">
@@ -454,7 +455,7 @@
 					<li class="">
 						<a href="#" class="dropdown-toggle">
 							<i class="menu-icon fa fa-pencil-square-o"></i>
-							<span class="menu-text"> 新闻资讯 </span>
+							<span class="menu-text"> 账户管理 </span>
 
 							<b class="arrow fa fa-angle-down"></b>
 						</a>
@@ -465,16 +466,23 @@
 							<li class="">
 								<a href="form-elements.html">
 									<i class="menu-icon fa fa-caret-right"></i>
-									查看新闻
+									查看账户
 								</a>
 
 								<b class="arrow"></b>
 							</li>
+							<li class="">
+								<a href="form-elements.html">
+									<i class="menu-icon fa fa-caret-right"></i>
+									添加卖家
+								</a>
 
+								<b class="arrow"></b>
+							</li>
 							<li class="">
 								<a href="form-elements-2.html">
 									<i class="menu-icon fa fa-caret-right"></i>
-									添加新闻
+									添加库员
 								</a>
 
 								<b class="arrow"></b>
@@ -605,7 +613,7 @@
 								<i class="ace-icon fa fa-home home-icon"></i>
 								<a href="<?php echo U('Index/index');?>">首页</a>
 							</li>
-							<li class="active">图片</li>
+							<li class="active">管理员</li>
 						</ul><!-- /.breadcrumb -->
 
 						<!-- #section:basics/content.searchbox -->
@@ -620,77 +628,76 @@
 
 						<!-- /section:basics/content.searchbox -->
 					</div>
-
 					<!-- /section:basics/content.breadcrumbs -->
 					<div class="page-content">
-							<div class="row">
+						<!-- #section:settings.box -->
+						
+
+						<!-- /section:settings.box -->
+						<div class="page-header">
+							<h1>
+								添加管理员
+							</h1>
+						</div><!-- /.page-header -->
+
+						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
-								<div>
-									<ul class="ace-thumbnails clearfix">
-										
-											<!-- #section:pages/gallery.caption -->
-										<?php $__FOR_START_20843__=2;$__FOR_END_20843__=$lenFolder;for($i=$__FOR_START_20843__;$i < $__FOR_END_20843__;$i+=1){ ?><li id="ul-margin" >
-												<a href="<?php echo U('image');?>?folder=<?php echo ($folder[$i]); ?>" data-rel="colorbox" class="cboxElement">
-													<img width="150" height="150" alt="150x150" src="/storehouse/Public/images/timg1.jpg">	
-												</a>
-												<div class="tags label-right">
-												<span class="label-holder">
-														<span class="label" ><?php echo ($folder[$i]); ?></span>
-													</span>
-												</div>
-												<div class="tools tools-top">													
-												
-													<a href="javascript:void(0);" class="del-folder" val="<?php echo U('delFolder');?>?folder=<?php echo ($folder[$i]); ?>" >
-														<i class="ace-icon fa fa-times red" title="删除"></i>
-													</a>
-												</div>
-											</li><?php } ?>
-										<?php $__FOR_START_29896__=1;$__FOR_END_29896__=$lenFiles;for($i=$__FOR_START_29896__;$i < $__FOR_END_29896__;$i+=1){ ?><li  id="ul-margin" >
-												<?php if( $i == 1 ): ?><a href="<?php echo U('index');?>" data-rel="colorbox" class="cboxElement">
-														<img width="150" height="150" alt="150x150" src="/storehouse/Public/images/timg1.jpg" />	
-													</a>
-													<div class="tags label-right">
-													<span class="label-holder">
-															<span class="label" ><?php echo ($files[$i]); ?></span>
-													</span>
-												</div>
-												<?php else: ?>
-												<a href="javascript:void(0);" data-rel="colorbox" class="cboxElement files">
-													<img width="150" height="150" alt="150x150" src="/storehouse/Public/upload/image/<?php echo ($where); ?>/<?php echo ($files[$i]); ?>" />	
-												</a>
-												<div class="tags label-right">
-												<span class="label-holder">
-														<span class="label" ><?php echo ($files[$i]); ?></span>
-												</span>
-												</div>
-												<div class="tools tools-top">
-													
-													<a href="">
-														<i class="ace-icon fa fa-pencil" title="查看"></i>
-													</a>
+								<form class="form-horizontal" action="<?php echo U('Admin/update');?>" id="formAdmin" role="form" method="post">
+									<!-- #section:elements.form -->
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="username"> 登录名 </label>
+										<div class="col-sm-9">
+											<input type="text" id="username" placeholder="username" name="username" class="col-xs-10 col-sm-5">
+										</div>
+									</div>
 
-													<a href="javascript:void(0);" class="del-file" val="<?php echo U('delFile');?>?folder=<?php echo ($where); ?>&file=<?php echo ($files[$i]); ?>" >
-														<i class="ace-icon fa fa-times red" title="删除"></i>
-													</a>
-												</div><?php endif; ?>
-											</li><?php } ?>
-										
 									
-									</ul>
-									<ul class="pagination pull-right">
-										  <?php echo ($page); ?>
-										</ul>
-								</div><!-- PAGE CONTENT ENDS -->
-							</div><!-- /.col -->
+
+									<!-- /section:elements.form -->
+									<div class="space-4"></div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="pwd"> 密码 </label>
+
+										<div class="col-sm-9">
+											<input type="password" id="pwd" placeholder="pwd" name="pwd"  class="col-xs-10 col-sm-5">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="compwd"> 确认密码 </label>
+										<div class="col-sm-9">
+											<input type="password" id="compwd" placeholder="pwd" name="compwd"  class="col-xs-10 col-sm-5">		
+										</div>
+									</div>
+
+									<div class="space-4"></div>
+									<div class="clearfix form-actions">
+										<div class="col-md-offset-3 col-md-9">
+											<button class="btn btn-info addButton" type="submit">
+												<i class="ace-icon fa fa-check bigger-110"></i>
+												提交
+											</button>
+
+											&nbsp; &nbsp; &nbsp;
+											<button class="btn" type="reset">
+												<i class="ace-icon fa fa-undo bigger-110"></i>
+												重置
+											</button>
+										</div>
+									</div>
+
+
+								</form>
+							</div>
 						</div>
-						<div class="page-header">
-							
-						</div>
-					</div><!-- /.page-content -->
+					</div>						
 				</div>
-			</div><!-- /.main-content -->
-			<div class="footer">
+			</div>				
+		</div><!-- /.main-content -->
+
+			
+		<div class="footer">
 	<div class="footer-inner">
 		<!-- #section:basics/footer -->
 		<div class="footer-content">
@@ -706,11 +713,13 @@
 		<!-- /section:basics/footer -->
 	</div>
 </div>
+
 			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
 				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
 			</a>
 		</div><!-- /.main-container -->
-		<!-- basic scripts -->	
+
+		<!-- basic scripts -->
 				<script src="/storehouse/Public/js/jquery/jquery.js"></script>   
 		
 		<!-- layer 2.2 -->
@@ -722,52 +731,12 @@
 		<script src="/storehouse/Public/js/ace/ace.sidebar.js"></script>
 		<script src="/storehouse/Public/js/ace/ace.sidebar-scroll-1.js"></script>
 
-		<script src="/storehouse/Plugins/layer/layer.js"></script>
-		<script>
-		    $(".files").each(function(){
-				$(this).click(function(){
-					var src = $(this).children().attr("src");
-					layer.open({
-					  type: 1,
-					  title: false,
-					  closeBtn: 0,
-					  maxWidth: 1000,
-					  scrollbar: false,
-					  skin: 'layui-layer-nobg', //没有背景色
-					  shadeClose: true,
-					  content: "<img style='max-width:1000px;' src="+src+">"
-					});
-					$(".layui-layer-content").css("overflow-x","hidden");
-				})
-			});
-			$('#allGallery').addClass('active').siblings().removeClass("active");
-			$('.del-folder').click(function(){		
-				var val = $(this).attr('val');
-				layer.open({
-					icon:0,
-					title: '删除文件夹',
-					type: 0, 
-					content: '是否删除选中的文件夹<br />(文件也随之删除)',
-					btn: ['确认', '取消'],
-					yes: function(){
-						location.href = val;
-						}
-				});		
-			});
-			$('.del-file').click(function(){		
-				var val = $(this).attr('val');
-				layer.open({
-					icon:0,
-					title: '删除图片',
-					type: 0, 
-					content: '是否删除选中的图片',
-					btn: ['确认', '取消'],
-					yes: function(){
-						location.href = val;
-						}
-				});		
-			});
+		<script type="text/javascript">
+			$('#allAdmin').addClass("active").siblings().removeClass("active");
+			$('#addAdmin').addClass("active");
 		</script>
+		
+
 
 	</body>
 </html>
