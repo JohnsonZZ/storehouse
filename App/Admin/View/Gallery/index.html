@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<include file="Public/header"  title="华创 | 控制台"/>
+
+	</head>
+
+	<body class="no-skin">
+		<include file="Public/nav" />
+
+		<!-- /section:basics/navbar.layout -->
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+			<include file="Public/sidebar" />
+			
+	
+			<!-- /section:basics/sidebar -->
+			<div class="main-content">
+				<div class="main-content-inner">
+					<!-- #section:basics/content.breadcrumbs -->
+					<div class="breadcrumbs" id="breadcrumbs">
+						<script type="text/javascript">
+							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+						</script>
+
+						<ul class="breadcrumb">
+							<li>
+								<i class="ace-icon fa fa-home home-icon"></i>
+								<a href="{:U('Index/index')}">首页</a>
+							</li>
+							<li class="active">图片</li>
+						</ul><!-- /.breadcrumb -->
+
+						<!-- #section:basics/content.searchbox -->
+						<div class="nav-search" id="nav-search">
+							<form class="form-search">
+								<span class="input-icon">
+									<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+									<i class="ace-icon fa fa-search nav-search-icon"></i>
+								</span>
+							</form>
+						</div><!-- /.nav-search -->
+
+						<!-- /section:basics/content.searchbox -->
+					</div>
+
+					<!-- /section:basics/content.breadcrumbs -->
+					<div class="page-content">
+							<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+								<div>
+									<ul class="ace-thumbnails clearfix">
+										
+											<!-- #section:pages/gallery.caption -->
+										<for start="2" end="$lenFolder" >
+											<li id="ul-margin" >
+												<a href="{:U('image')}?folder={$folder[$i]}" data-rel="colorbox" class="cboxElement">
+													<img width="150" height="150" alt="150x150" src="__PUBLIC__/images/timg1.jpg">	
+												</a>
+												<div class="tags label-right">
+												<span class="label-holder">
+														<span class="label" >{$folder[$i]}</span>
+													</span>
+												</div>
+												<div class="tools tools-top">													
+												
+													<a href="javascript:void(0);" class="del-folder" val="{:U('delFolder')}?folder={$folder[$i]}" >
+														<i class="ace-icon fa fa-times red" title="删除"></i>
+													</a>
+												</div>
+											</li>
+										</for>
+										<for start="1" end="$lenFiles" >	
+											<li  id="ul-margin" >
+												<if condition=" $i eq 1 ">
+													<a href="{:U('index')}" data-rel="colorbox" class="cboxElement">
+														<img width="150" height="150" alt="150x150" src="__PUBLIC__/images/timg1.jpg" />	
+													</a>
+													<div class="tags label-right">
+													<span class="label-holder">
+															<span class="label" >{$files[$i]}</span>
+													</span>
+												</div>
+												<else />
+												<a href="javascript:void(0);" data-rel="colorbox" class="cboxElement">
+													<img width="150" height="150" alt="150x150" src="__PUBLIC__/upload/image/{$where}/{$files[$i]}" />	
+												</a>
+												<div class="tags label-right">
+												<span class="label-holder">
+														<span class="label" >{$files[$i]}</span>
+												</span>
+												</div>
+												<div class="tools tools-top">
+													
+													<a href="">
+														<i class="ace-icon fa fa-pencil" title="查看"></i>
+													</a>
+
+													<a href="javascript:void(0);" class="del-file" val="{:U('delFile')}?folder={$where}&file={$files[$i]}" >
+														<i class="ace-icon fa fa-times red" title="删除"></i>
+													</a>
+												</div>
+												</if>
+											</li>
+										</for>
+										
+									
+									</ul>
+									<ul class="pagination pull-right">
+										  {$page}
+										</ul>
+								</div><!-- PAGE CONTENT ENDS -->
+							</div><!-- /.col -->
+						</div>
+						<div class="page-header">
+							
+						</div>
+					</div><!-- /.page-content -->
+				</div>
+			</div><!-- /.main-content -->
+			<include file="Public/footer" />
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+			</a>
+		</div><!-- /.main-container -->
+		<!-- basic scripts -->	
+		<include file="Public/script" />
+		<script>
+			$('#allGallery').addClass('open').siblings().removeClass("open");
+			$('.del-folder').click(function(){		
+				var val = $(this).attr('val');
+				layer.open({
+					icon:0,
+					title: '删除文件夹',
+					type: 0, 
+					content: '是否删除选中的文件夹<br />(文件也随之删除)',
+					btn: ['确认', '取消'],
+					yes: function(){
+						location.href = val;
+						}
+				});		
+			});
+			$('.del-file').click(function(){		
+				var val = $(this).attr('val');
+				layer.open({
+					icon:0,
+					title: '删除图片',
+					type: 0, 
+					content: '是否删除选中的图片',
+					btn: ['确认', '取消'],
+					yes: function(){
+						location.href = val;
+						}
+				});		
+			});
+		</script>
+
+	</body>
+</html>
