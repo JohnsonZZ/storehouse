@@ -760,20 +760,9 @@
 		<script src="/storehouse/Public/js/ace/ace.sidebar.js"></script>
 		<script src="/storehouse/Public/js/ace/ace.sidebar-scroll-1.js"></script>
 
-		<script type="text/javascript" src="/storehouse/Public/js/tableExport/tableExport.js"></script>
-		<script type="text/javascript" src="/storehouse/Public/js/tableExport/jquery.base64.js"></script>
-		<script type="text/javascript" src="/storehouse/Public/js/tableExport/jspdf/libs/sprintf.js"></script>
-		<script type="text/javascript" src="/storehouse/Public/js/tableExport/jspdf/jspdf.js"></script>
-		<script type="text/javascript" src="/storehouse/Public/js/tableExport/jspdf/libs/base64.js"></script>
 		<script type="text/javascript">
 			$('#allGoods').addClass("active").siblings().removeClass("active");
 			$('#listGoods').addClass("active");
-			$('#Excel').click(function(){
-				$('#simple-table').tableExport({type:'excel',escape:'false'});
-			});
-			$('#PDF').click(function(){
-				$('#simple-table').tableExport({type:'pdf',escape:'false'});
-			});
 			$(function(){
 			$(".check-all").click(function(){
 				$(".uids").prop("checked", this.checked);

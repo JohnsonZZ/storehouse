@@ -644,16 +644,10 @@
 									<div class="clearfix">
 										<div class="pull-right tableTools-container">
 											<div class="dt-buttons btn-overlap btn-group">
-												<a id="Excel" class="dt-button buttons-excel buttons-flash btn btn-white btn-primary btn-bold" title="Export to Excel">
+												<a id="Excel" class="dt-button buttons-excel buttons-flash btn btn-white btn-primary btn-bold" title="Export to Excel" href="<?php echo U('excel');?>">
 													<span>
 														<i class="fa fa-file-excel-o bigger-110 green"></i>
 														<span class="hidden">Export to Excel</span>
-													</span>
-												</a>
-												<a id="PDF" class="dt-button buttons-pdf buttons-flash btn btn-white btn-primary btn-bold" title="Export to PDF">
-													<span>
-														<i class="fa fa-file-pdf-o bigger-110 red"></i>
-														<span class="hidden">Export to PDF</span>
 													</span>
 												</a>
 												<a id="print" class="dt-button buttons-print btn btn-white btn-primary btn-bold" title="Print">

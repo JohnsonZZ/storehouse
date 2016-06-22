@@ -22,4 +22,29 @@ class IndexController extends ComController {
 		$this->assign('log',$log);
 		$this->display();
 	}
+	public function excel(){
+		vendor("PHPExcel.PHPExcel"); 
+		vendor("PHPExcel.PHPExcel.IOFactory"); 
+		$objPHPExcel = new \PHPExcel();  		
+		$objPHPExcel->getProperties()->setCreator("Maarten Balliauw")
+							 ->setLastModifiedBy("Maarten Balliauw")
+							 ->setTitle("PHPExcel Test Document")
+							 ->setSubject("PHPExcel Test Document")
+							 ->setDescription("Test document for PHPExcel, generated using PHP classes.")
+							 ->setKeywords("office PHPExcel php")
+							 ->setCategory("Test result file");
+	    $objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('A1', 'Hello')
+            ->setCellValue('B2', 'world!')
+            ->setCellValue('C1', 'Hello')
+            ->setCellValue('D2', 'world!');
+		$objPHPExcel->getActiveSheet()->setTitle('Simple');
+		$objPHPExcel->setActiveSheetIndex(0);
+		header('Content-Type: application/vnd.ms-excel');  
+        header('Content-Disposition: attachment;filename="订单汇总表('.date('Ymd-His').').xls"');  //日期为文件名后缀  
+        header('Cache-Control: max-age=0');  
+  
+        $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');  //excel5为xls格式，excel2007为xlsx格式  
+        $objWriter->save('php://output');  
+	}
 }
