@@ -454,7 +454,7 @@
 					<li class="">
 						<a href="#" class="dropdown-toggle">
 							<i class="menu-icon fa fa-pencil-square-o"></i>
-							<span class="menu-text"> 新闻资讯 </span>
+							<span class="menu-text"> 账户管理 </span>
 
 							<b class="arrow fa fa-angle-down"></b>
 						</a>
@@ -465,16 +465,23 @@
 							<li class="">
 								<a href="form-elements.html">
 									<i class="menu-icon fa fa-caret-right"></i>
-									查看新闻
+									查看账户
 								</a>
 
 								<b class="arrow"></b>
 							</li>
+							<li class="">
+								<a href="form-elements.html">
+									<i class="menu-icon fa fa-caret-right"></i>
+									添加卖家
+								</a>
 
+								<b class="arrow"></b>
+							</li>
 							<li class="">
 								<a href="form-elements-2.html">
 									<i class="menu-icon fa fa-caret-right"></i>
-									添加新闻
+									添加库员
 								</a>
 
 								<b class="arrow"></b>
@@ -492,8 +499,8 @@
 						<b class="arrow"></b>
 					</li>
 
-					<li class="">
-						<a href="calendar.html">
+					<li id="allOrder">
+						<a href="<?php echo U('Order/index');?>">
 							<i class="menu-icon fa fa-calendar"></i>
 
 							<span class="menu-text">
@@ -630,7 +637,7 @@
 									<ul class="ace-thumbnails clearfix">
 										
 											<!-- #section:pages/gallery.caption -->
-										<?php $__FOR_START_20843__=2;$__FOR_END_20843__=$lenFolder;for($i=$__FOR_START_20843__;$i < $__FOR_END_20843__;$i+=1){ ?><li id="ul-margin" >
+										<?php $__FOR_START_32190__=2;$__FOR_END_32190__=$lenFolder;for($i=$__FOR_START_32190__;$i < $__FOR_END_32190__;$i+=1){ ?><li id="ul-margin" >
 												<a href="<?php echo U('image');?>?folder=<?php echo ($folder[$i]); ?>" data-rel="colorbox" class="cboxElement">
 													<img width="150" height="150" alt="150x150" src="/storehouse/Public/images/timg1.jpg">	
 												</a>
@@ -646,7 +653,7 @@
 													</a>
 												</div>
 											</li><?php } ?>
-										<?php $__FOR_START_29896__=1;$__FOR_END_29896__=$lenFiles;for($i=$__FOR_START_29896__;$i < $__FOR_END_29896__;$i+=1){ ?><li  id="ul-margin" >
+										<?php $__FOR_START_7711__=1;$__FOR_END_7711__=$lenFiles;for($i=$__FOR_START_7711__;$i < $__FOR_END_7711__;$i+=1){ ?><li  id="ul-margin" >
 												<?php if( $i == 1 ): ?><a href="<?php echo U('index');?>" data-rel="colorbox" class="cboxElement">
 														<img width="150" height="150" alt="150x150" src="/storehouse/Public/images/timg1.jpg" />	
 													</a>

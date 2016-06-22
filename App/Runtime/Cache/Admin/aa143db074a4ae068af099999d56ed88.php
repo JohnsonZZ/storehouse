@@ -454,7 +454,7 @@
 					<li class="">
 						<a href="#" class="dropdown-toggle">
 							<i class="menu-icon fa fa-pencil-square-o"></i>
-							<span class="menu-text"> 新闻资讯 </span>
+							<span class="menu-text"> 账户管理 </span>
 
 							<b class="arrow fa fa-angle-down"></b>
 						</a>
@@ -465,16 +465,23 @@
 							<li class="">
 								<a href="form-elements.html">
 									<i class="menu-icon fa fa-caret-right"></i>
-									查看新闻
+									查看账户
 								</a>
 
 								<b class="arrow"></b>
 							</li>
+							<li class="">
+								<a href="form-elements.html">
+									<i class="menu-icon fa fa-caret-right"></i>
+									添加卖家
+								</a>
 
+								<b class="arrow"></b>
+							</li>
 							<li class="">
 								<a href="form-elements-2.html">
 									<i class="menu-icon fa fa-caret-right"></i>
-									添加新闻
+									添加库员
 								</a>
 
 								<b class="arrow"></b>
@@ -492,8 +499,8 @@
 						<b class="arrow"></b>
 					</li>
 
-					<li class="">
-						<a href="calendar.html">
+					<li id="allOrder">
+						<a href="<?php echo U('Order/index');?>">
 							<i class="menu-icon fa fa-calendar"></i>
 
 							<span class="menu-text">
@@ -635,12 +642,39 @@
 
 						<div class="row">
 							<div class="col-xs-12">
+								<div class="clearfix">
+										<div class="pull-right tableTools-container">
+											<div class="dt-buttons btn-overlap btn-group">
+												<a id="Excel" class="dt-button buttons-excel buttons-flash btn btn-white btn-primary btn-bold" title="Export to Excel">
+													<span>
+														<i class="fa fa-file-excel-o bigger-110 green"></i>
+														<span class="hidden">Export to Excel</span>
+													</span>
+												</a>
+												<a id="PDF" class="dt-button buttons-pdf buttons-flash btn btn-white btn-primary btn-bold" title="Export to PDF">
+													<span>
+														<i class="fa fa-file-pdf-o bigger-110 red"></i>
+														<span class="hidden">Export to PDF</span>
+													</span>
+												</a>
+												<a class="dt-button buttons-print btn btn-white btn-primary btn-bold" title="Print">
+													<span>
+														<i class="fa fa-print bigger-110 grey"></i>
+														<span class="hidden">Print</span>
+													</span>
+												</a>
+											</div>
+										</div>
+									</div>
+								<div class="table-header">
+									Results for "Latest Registered Domains"
+								</div>
 								<table id="simple-table" class="table table-striped table-bordered table-hover">
 									<thead>
 										<tr>
-											<th class="center">
+											<th class="center col-sm-1" rowspan="1" colspan="1">
 												<label class="pos-rel">
-													<input type="checkbox" class="ace" />
+													<input type="checkbox" class="ace check-all" value=""/>
 													<span class="lbl"></span>
 												</label>
 											</th>
@@ -656,7 +690,7 @@
 										 <?php if(is_array($goods)): foreach($goods as $key=>$val): ?><tr>
 												<td class="center">
 													<label class="pos-rel">
-														<input type="checkbox" class="ace" />
+														<input type="checkbox" class="uids ace" name="id[]" value="<?php echo ($val['id']); ?>"/>
 														<span class="lbl"></span>
 													</label>
 												</td>
@@ -664,16 +698,27 @@
 												<td><?php echo ($val["content"]); ?></td>
 												<td>
 													<div class="hidden-sm hidden-xs action-buttons">
-														<a class="green" href="<?php echo U('edit');?>?id=<?php echo ($val["id"]); ?>">
+														<a class="blue" href="<?php echo U('edit');?>?id=<?php echo ($val["id"]); ?>">
 															<i class="ace-icon fa fa-pencil bigger-130" title="修改"></i>
 														</a>
 
-														<a class="red" href="#">
+														<a class="red del" val="<?php echo U('del');?>?id=<?php echo ($val['id']); ?>" href="javascript:;">
 															<i class="ace-icon fa fa-trash-o bigger-130" title="删除"></i>
 														</a>
 													</div>
 												</td>
 											</tr><?php endforeach; endif; ?>	
+										<tr>
+											<td class="center">
+												<button id="del" class="btn btn-xs btn-danger">
+													<i class="ace-icon fa fa-trash-o bigger-110"></i>
+													删除
+												</button>
+											</td>
+											<td></td>
+											<td></td>
+											<td></td>
+										</tr>
 									</tbody>
 								</table>
 							</div><!-- /.span -->
@@ -715,13 +760,60 @@
 		<script src="/storehouse/Public/js/ace/ace.sidebar.js"></script>
 		<script src="/storehouse/Public/js/ace/ace.sidebar-scroll-1.js"></script>
 
+		<script type="text/javascript" src="/storehouse/Public/js/tableExport/tableExport.js"></script>
+		<script type="text/javascript" src="/storehouse/Public/js/tableExport/jquery.base64.js"></script>
+		<script type="text/javascript" src="/storehouse/Public/js/tableExport/jspdf/libs/sprintf.js"></script>
+		<script type="text/javascript" src="/storehouse/Public/js/tableExport/jspdf/jspdf.js"></script>
+		<script type="text/javascript" src="/storehouse/Public/js/tableExport/jspdf/libs/base64.js"></script>
 		<script type="text/javascript">
 			$('#allGoods').addClass("active").siblings().removeClass("active");
 			$('#listGoods').addClass("active");
-	
+			$('#Excel').click(function(){
+				$('#simple-table').tableExport({type:'excel',escape:'false'});
+			});
+			$('#PDF').click(function(){
+				$('#simple-table').tableExport({type:'pdf',escape:'false'});
+			});
+			$(function(){
+			$(".check-all").click(function(){
+				$(".uids").prop("checked", this.checked);
+			});
+			$(".uids").click(function(){
+				$(".uids").each(function(i){
+					if(!this.checked){
+						$(".check-all").prop("checked", false);
+						return false;
+					}else{
+						$(".check-all").prop("checked", true);
+					}
+				});
+			})
+			$("#del").click(function(){
+				layer.open({
+					icon:0,
+					title: '删除列表',
+					type: 0, 
+					content: '是否删除选中列表',
+					btn: ['确认', '取消'],
+					yes: function(){
+						$('#form').submit();
+						}
+				});	
+			})
+			$(".del").click(function(){
+				var val=$(this).attr('val');
+				layer.open({
+					icon:0,
+					title: '删除列表',
+					type: 0, 
+					content: '是否删除选中列表',
+					btn: ['确认', '取消'],
+					yes: function(){
+							location.href = val;
+						}
+				});	
+			})
+		})
 		</script>
-		
-
-
 	</body>
 </html>

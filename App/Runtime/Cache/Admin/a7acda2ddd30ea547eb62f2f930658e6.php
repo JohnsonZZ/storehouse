@@ -2,7 +2,6 @@
 <html lang="en">
 	<head>
 	
-	<link rel="stylesheet" href="/storehouse/Public/css/jquery-ui.custom.css">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<meta charset="utf-8" />
 	<title>华创 | 控制台</title>
@@ -23,7 +22,9 @@
 	<link rel="stylesheet" href="/storehouse/Bootstrap/css/ace.css" class="ace-main-stylesheet" id="main-ace-style" />
 	
 	<!--自己添加的css-->
-	<link rel="stylesheet" href="/storehouse/Public/css/main.css" />
+	<link rel="stylesheet" href="/storehouse/Public/css/main.css" />	
+	<link rel="stylesheet" href="/storehouse/Public/css/jquery-ui.custom.css">
+	<link rel="stylesheet" href="/storehouse/Bootstrap/css/fileinput.min.css">
 	</head>
 
 	<body class="no-skin">
@@ -500,7 +501,7 @@
 						<b class="arrow"></b>
 					</li>
 
-					<li id="allOrder">
+					<li class="">
 						<a href="<?php echo U('Order/index');?>">
 							<i class="menu-icon fa fa-calendar"></i>
 
@@ -611,9 +612,9 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="ace-icon fa fa-home home-icon"></i>
-								<a href="<?php echo U('Index/index');?>">首页</a>
+								<a href="#">首页</a>
 							</li>
-							<li class="active">管理员</li>
+							<li class="active">控制台</li>
 						</ul><!-- /.breadcrumb -->
 
 						<!-- #section:basics/content.searchbox -->
@@ -636,45 +637,43 @@
 						<!-- /section:settings.box -->
 						<div class="page-header">
 							<h1>
-								添加管理员
+								添加产品
 							</h1>
 						</div><!-- /.page-header -->
 
 						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
-								<form class="form-horizontal" action="<?php echo U('Admin/update');?>" id="formAdmin" role="form" method="post">
+								<form class="form-horizontal" role="form"  action="<?php echo U('update');?>"  id="Goodsform" method="post" enctype="multipart/form-data">
 									<!-- #section:elements.form -->
+									<input type="hidden" name="id" value="<?php echo ($goods["id"]); ?>" />
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="username"> 登录名 </label>
+										<label class="col-sm-3 control-label no-padding-right " for="href"> 原图 </label>
 										<div class="col-sm-9">
-											<input type="text" id="username" placeholder="username" name="username" class="col-xs-10 col-sm-5">
+											<img src="/storehouse/Public/upload/image/goods/<?php echo ($goods['href']); ?>"   id="oldimg"  width="60px" height="60px">
 										</div>
 									</div>
-
-									
-
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right " for="href"> 图片 </label>
+										<div class="col-sm-9">
+											<input type="file" id="href" placeholder="输入名称" name="href" class="col-xs-10 col-sm-5">
+										</div>
+									</div>
 									<!-- /section:elements.form -->
 									<div class="space-4"></div>
-
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="pwd"> 密码 </label>
+										<label class="col-sm-3 control-label no-padding-right" for="content">  </label>
 
 										<div class="col-sm-9">
-											<input type="password" id="pwd" placeholder="pwd" name="pwd"  class="col-xs-10 col-sm-5">
+											 <textarea id="content" name="content" type="text/plain"><?php echo ($goods['content']); ?>
+											</textarea>
 										</div>
 									</div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="compwd"> 确认密码 </label>
-										<div class="col-sm-9">
-											<input type="password" id="compwd" placeholder="pwd" name="compwd"  class="col-xs-10 col-sm-5">		
-										</div>
-									</div>
-
+									
 									<div class="space-4"></div>
 									<div class="clearfix form-actions">
 										<div class="col-md-offset-3 col-md-9">
-											<button class="btn btn-info addButton" type="submit">
+											<button class="btn btn-info" type="button" id="addButton" >
 												<i class="ace-icon fa fa-check bigger-110"></i>
 												提交
 											</button>
@@ -731,9 +730,36 @@
 		<script src="/storehouse/Public/js/ace/ace.sidebar.js"></script>
 		<script src="/storehouse/Public/js/ace/ace.sidebar-scroll-1.js"></script>
 
+		<script src="/storehouse/Bootstrap/js/fileinput.min.js"></script>
+		<script src="/storehouse/Bootstrap/js/fileinput_locale_zh.js"></script>		
+		<script charset="utf-8" src="/storehouse/Plugins/ueditor/ueditor.config.js"></script>
+		<script charset="utf-8" src="/storehouse/Plugins/ueditor/ueditor.all.min.js"></script>
+		<script charset="utf-8" src="/storehouse/Plugins/ueditor/lang/zh-cn/zh-cn.js"></script>
 		<script type="text/javascript">
-			$('#allAdmin').addClass("active").siblings().removeClass("active");
-			$('#addAdmin').addClass("active");
+			$('#allGoods').addClass("active").siblings().removeClass("active");
+			$('#addGoods').addClass("active");
+			var ue = UE.getEditor('content',{ initialFrameWidth: 800 ,initialFrameHeight: 500});
+			var html;
+			$('#href').fileinput({
+                language: 'zh', //设置语言
+                allowedFileExtensions : ['jpg', 'png','gif'],//接收的文件后缀,
+                showUpload: false, //是否显示上传按钮
+                showCaption: false,//是否显示标题
+                browseClass: "btn btn-primary", //按钮样式 
+				maxFileSize: 2048,
+            });
+			$("#addButton").click(function(){
+				var href = $('#href').val();
+				ue.ready(function(){ 				
+					$('#content').value = ue.getContent();
+				});
+				if(!ue.hasContents()){
+					layer.msg("内容不能为空");
+					return false;
+				}
+				$('#Goodsform').submit();
+				
+			});
 		</script>
 		
 

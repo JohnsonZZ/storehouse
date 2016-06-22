@@ -1,9 +1,7 @@
 <?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
 <html lang="en">
 	<head>
-	
-	<link rel="stylesheet" href="/storehouse/Public/css/jquery-ui.custom.css">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+			<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<meta charset="utf-8" />
 	<title>华创 | 控制台</title>
 
@@ -24,6 +22,7 @@
 	
 	<!--自己添加的css-->
 	<link rel="stylesheet" href="/storehouse/Public/css/main.css" />
+
 	</head>
 
 	<body class="no-skin">
@@ -611,9 +610,9 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="ace-icon fa fa-home home-icon"></i>
-								<a href="<?php echo U('Index/index');?>">首页</a>
+								<a href="#">首页</a>
 							</li>
-							<li class="active">管理员</li>
+							<li class="active">订单管理</li>
 						</ul><!-- /.breadcrumb -->
 
 						<!-- #section:basics/content.searchbox -->
@@ -628,6 +627,7 @@
 
 						<!-- /section:basics/content.searchbox -->
 					</div>
+
 					<!-- /section:basics/content.breadcrumbs -->
 					<div class="page-content">
 						<!-- #section:settings.box -->
@@ -636,67 +636,21 @@
 						<!-- /section:settings.box -->
 						<div class="page-header">
 							<h1>
-								添加管理员
+								查看订单
 							</h1>
 						</div><!-- /.page-header -->
 
-						<div class="row">
-							<div class="col-xs-12">
-								<!-- PAGE CONTENT BEGINS -->
-								<form class="form-horizontal" action="<?php echo U('Admin/update');?>" id="formAdmin" role="form" method="post">
-									<!-- #section:elements.form -->
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="username"> 登录名 </label>
-										<div class="col-sm-9">
-											<input type="text" id="username" placeholder="username" name="username" class="col-xs-10 col-sm-5">
-										</div>
-									</div>
-
-									
-
-									<!-- /section:elements.form -->
-									<div class="space-4"></div>
-
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="pwd"> 密码 </label>
-
-										<div class="col-sm-9">
-											<input type="password" id="pwd" placeholder="pwd" name="pwd"  class="col-xs-10 col-sm-5">
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="compwd"> 确认密码 </label>
-										<div class="col-sm-9">
-											<input type="password" id="compwd" placeholder="pwd" name="compwd"  class="col-xs-10 col-sm-5">		
-										</div>
-									</div>
-
-									<div class="space-4"></div>
-									<div class="clearfix form-actions">
-										<div class="col-md-offset-3 col-md-9">
-											<button class="btn btn-info addButton" type="submit">
-												<i class="ace-icon fa fa-check bigger-110"></i>
-												提交
-											</button>
-
-											&nbsp; &nbsp; &nbsp;
-											<button class="btn" type="reset">
-												<i class="ace-icon fa fa-undo bigger-110"></i>
-												重置
-											</button>
-										</div>
-									</div>
-
-
-								</form>
-							</div>
-						</div>
-					</div>						
+						
+					</div><!-- /.page-content -->
 				</div>
-			</div>				
-		</div><!-- /.main-content -->
+			</div><!-- /.main-content -->
 
-			
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+			</a>
+		</div><!-- /.main-container -->
+
+		<!-- basic scripts -->
 		<div class="footer">
 	<div class="footer-inner">
 		<!-- #section:basics/footer -->
@@ -713,13 +667,6 @@
 		<!-- /section:basics/footer -->
 	</div>
 </div>
-
-			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
-				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
-			</a>
-		</div><!-- /.main-container -->
-
-		<!-- basic scripts -->
 				<script src="/storehouse/Public/js/jquery/jquery.js"></script>   
 		
 		<!-- layer 2.2 -->
@@ -732,8 +679,7 @@
 		<script src="/storehouse/Public/js/ace/ace.sidebar-scroll-1.js"></script>
 
 		<script type="text/javascript">
-			$('#allAdmin').addClass("active").siblings().removeClass("active");
-			$('#addAdmin').addClass("active");
+			$('#allOrder').addClass("active");
 		</script>
 		
 

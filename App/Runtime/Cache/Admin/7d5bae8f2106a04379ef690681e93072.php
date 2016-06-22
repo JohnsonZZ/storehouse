@@ -499,8 +499,8 @@
 						<b class="arrow"></b>
 					</li>
 
-					<li class="">
-						<a href="calendar.html">
+					<li id="allOrder">
+						<a href="<?php echo U('Order/index');?>">
 							<i class="menu-icon fa fa-calendar"></i>
 
 							<span class="menu-text">

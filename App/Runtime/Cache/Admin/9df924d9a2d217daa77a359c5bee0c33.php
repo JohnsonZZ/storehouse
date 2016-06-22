@@ -1,5 +1,5 @@
 <?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
-<html lang="en">
+<html>
 	<head>
 			<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<meta charset="utf-8" />
@@ -454,7 +454,7 @@
 					<li class="">
 						<a href="#" class="dropdown-toggle">
 							<i class="menu-icon fa fa-pencil-square-o"></i>
-							<span class="menu-text"> 新闻资讯 </span>
+							<span class="menu-text"> 账户管理 </span>
 
 							<b class="arrow fa fa-angle-down"></b>
 						</a>
@@ -465,16 +465,23 @@
 							<li class="">
 								<a href="form-elements.html">
 									<i class="menu-icon fa fa-caret-right"></i>
-									查看新闻
+									查看账户
 								</a>
 
 								<b class="arrow"></b>
 							</li>
+							<li class="">
+								<a href="form-elements.html">
+									<i class="menu-icon fa fa-caret-right"></i>
+									添加卖家
+								</a>
 
+								<b class="arrow"></b>
+							</li>
 							<li class="">
 								<a href="form-elements-2.html">
 									<i class="menu-icon fa fa-caret-right"></i>
-									添加新闻
+									添加库员
 								</a>
 
 								<b class="arrow"></b>
@@ -486,14 +493,14 @@
 					<li class="">
 						<a href="widgets.html">
 							<i class="menu-icon fa fa-list-alt"></i>
-							<span class="menu-text"> Widgets </span>
+							<span class="menu-text"> 发送订单 </span>
 						</a>
 
 						<b class="arrow"></b>
 					</li>
 
-					<li class="">
-						<a href="calendar.html">
+					<li id="allOrder">
+						<a href="<?php echo U('Order/index');?>">
 							<i class="menu-icon fa fa-calendar"></i>
 
 							<span class="menu-text">
@@ -634,26 +641,52 @@
 						</div><!-- /.page-header -->
 						<div class="row">
 									<div class="col-xs-12">
+									<div class="clearfix">
+										<div class="pull-right tableTools-container">
+											<div class="dt-buttons btn-overlap btn-group">
+												<a id="Excel" class="dt-button buttons-excel buttons-flash btn btn-white btn-primary btn-bold" title="Export to Excel">
+													<span>
+														<i class="fa fa-file-excel-o bigger-110 green"></i>
+														<span class="hidden">Export to Excel</span>
+													</span>
+												</a>
+												<a id="PDF" class="dt-button buttons-pdf buttons-flash btn btn-white btn-primary btn-bold" title="Export to PDF">
+													<span>
+														<i class="fa fa-file-pdf-o bigger-110 red"></i>
+														<span class="hidden">Export to PDF</span>
+													</span>
+												</a>
+												<a id="print" class="dt-button buttons-print btn btn-white btn-primary btn-bold" title="Print">
+													<span>
+														<i class="fa fa-print bigger-110 grey"></i>
+														<span class="hidden">Print</span>
+													</span>
+												</a>
+											</div>
+										</div>
+									</div>
 										<table id="simple-table" class="table table-striped table-bordered table-hover">
-											<thead>
-												<tr>
-													<th>用户</th>
-													<th>IP</th>
-													<th class="logcontent">日志内容</th>
-													<th>时间</th>
-												</tr>
-											</thead>
+											<form id="zhangzhen" method="post" action="<?php echo U('table');?>" target="_blank">
+												<thead>
+													<tr>
+														<th>用户</th>
+														<th>IP</th>
+														<th class="logcontent">日志内容</th>
+														<th>时间</th>
+													</tr>
+												</thead>
 
-											<tbody>
-												<?php if(is_array($log)): foreach($log as $key=>$val): ?><tr>
-														<td><?php echo ($val['username']); ?></td>
-														<td><?php echo ($val['ip']); ?></td>
-														<td><?php echo ($val['log']); ?></td>
-														<td><?php echo ($val['time']); ?></td>
-													</tr><?php endforeach; endif; ?>
-											</tbody>					
+												<tbody>
+													<?php if(is_array($log)): foreach($log as $key=>$val): ?><input type="hidden"  name="id[]" value="<?php echo ($val['id']); ?>">
+														<tr>
+															<td><?php echo ($val['username']); ?></td>
+															<td><?php echo ($val['ip']); ?></td>
+															<td><?php echo ($val['log']); ?></td>
+															<td><?php echo ($val['time']); ?></td>
+														</tr><?php endforeach; endif; ?>
+												</tbody>	
+											</form>
 										</table>
-										
 										<ul class="pagination pull-right">
 										  <?php echo ($page); ?>
 										</ul>
@@ -695,7 +728,9 @@
 		<script src="/storehouse/Public/js/ace/ace.sidebar-scroll-1.js"></script>
 
 		<script>
-			
+			$("#print").click(function(){
+				$("#zhangzhen").submit();
+			})
 		</script>
 
 	</body>
