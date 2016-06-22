@@ -62,7 +62,7 @@
 									<div class="clearfix">
 										<div class="pull-right tableTools-container">
 											<div class="dt-buttons btn-overlap btn-group">
-												<a id="Excel" class="dt-button buttons-excel buttons-flash btn btn-white btn-primary btn-bold" title="Export to Excel" href="{:U('excel')}">
+												<a id="excel" class="dt-button buttons-excel buttons-flash btn btn-white btn-primary btn-bold" title="Export to Excel">
 													<span>
 														<i class="fa fa-file-excel-o bigger-110 green"></i>
 														<span class="hidden">Export to Excel</span>
@@ -78,7 +78,7 @@
 										</div>
 									</div>
 										<table id="simple-table" class="table table-striped table-bordered table-hover">
-											<form id="zhangzhen" method="post" action="{:U('table')}" target="_blank">
+											<form id="zhangzhen" method="post" action="" target="_blank">
 												<thead>
 													<tr>
 														<th>用户</th>
@@ -118,6 +118,11 @@
 		<include file="Public/script" />
 		<script>
 			$("#print").click(function(){
+				$("#zhangzhen").attr("action","{:U(table)}");
+				$("#zhangzhen").submit();
+			})
+			$("#excel").click(function(){
+				$("#zhangzhen").attr("action","{:U(excel)}");
 				$("#zhangzhen").submit();
 			})
 		</script>

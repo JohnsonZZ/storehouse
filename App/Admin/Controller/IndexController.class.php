@@ -24,7 +24,12 @@ class IndexController extends ComController {
 	}
 	public function excel(){
 		vendor("PHPExcel.PHPExcel"); 
-		vendor("PHPExcel.PHPExcel.IOFactory"); 
+		vendor("PHPExcel.PHPExcel.IOFactory");
+		$id = I('post.id');
+		$map['id'] = array('in',$id);
+		$Log = M('Log');	
+		$log = $Log->where($map)->select();
+		$i=1;
 		$objPHPExcel = new \PHPExcel();  		
 		$objPHPExcel->getProperties()->setCreator("Maarten Balliauw")
 							 ->setLastModifiedBy("Maarten Balliauw")
@@ -33,18 +38,29 @@ class IndexController extends ComController {
 							 ->setDescription("Test document for PHPExcel, generated using PHP classes.")
 							 ->setKeywords("office PHPExcel php")
 							 ->setCategory("Test result file");
-	    $objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('A1', 'Hello')
-            ->setCellValue('B2', 'world!')
-            ->setCellValue('C1', 'Hello')
-            ->setCellValue('D2', 'world!');
+		$objPHPExcel->getActiveSheet()->getStyle('A')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+		$objPHPExcel->setActiveSheetIndex(0)
+					->setCellValue('A1', '用户')
+					->setCellValue('B1', 'ip')
+					->setCellValue('C1', '日志内容')	
+					->setCellValue('D1', '时间');
+							 
+		foreach($log as $value){
+			$i++;
+			$objPHPExcel->setActiveSheetIndex(0)
+						->setCellValue("A$i", $value['username'])
+						->setCellValue("B$i", $value['ip'])
+						->setCellValue("C$i", $value['log'])
+						->setCellValue("D$i", $value['time']);
+		}
+		
 		$objPHPExcel->getActiveSheet()->setTitle('Simple');
 		$objPHPExcel->setActiveSheetIndex(0);
 		header('Content-Type: application/vnd.ms-excel');  
-        header('Content-Disposition: attachment;filename="订单汇总表('.date('Ymd-His').').xls"');  //日期为文件名后缀  
+        header('Content-Disposition: attachment;filename="用户日志.xlsx"');  //日期为文件名后缀  
         header('Cache-Control: max-age=0');  
   
-        $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');  //excel5为xls格式，excel2007为xlsx格式  
+        $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');  //excel5为xls格式，excel2007为xlsx格式  
         $objWriter->save('php://output');  
 	}
 }
