@@ -117,21 +117,42 @@
 						</ul>
 					</li>
 
-					<li class="">
-						<a href="widgets.html">
+					
+					<li id="allOrder">
+						<a href="#" class="dropdown-toggle">
 							<i class="menu-icon fa fa-list-alt"></i>
-							<span class="menu-text"> 发送订单 </span>
+							<span class="menu-text"> 订单管理 </span>
+
+							<b class="arrow fa fa-angle-down"></b>
 						</a>
 
 						<b class="arrow"></b>
-					</li>
 
-					<li id="allOrder">
-						<a href="{:U('Order/index')}">
+						<ul class="submenu">
+							<li id="listOrder">
+								<a href="{:U('Order/index')}">
+									<i class="menu-icon fa fa-caret-right"></i>
+									查看订单
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li id="addOrder">
+								<a href="{:U('Order/order')}">
+									<i class="menu-icon fa fa-caret-right"></i>
+									发送订单
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+						</ul>
+					</li>
+					<li id="allStore">
+						<a href="{:U('Store/index')}">
 							<i class="menu-icon fa fa-calendar"></i>
 
 							<span class="menu-text">
-								订单管理
+								仓储管理
 							</span>
 						</a>
 

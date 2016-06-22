@@ -1,7 +1,27 @@
-<!DOCTYPE html>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
 <html lang="en">
 	<head>
-		<include file="Public/header"  title="登录 | 华创控制台"/>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta charset="utf-8" />
+	<title>登录 | 华创控制台</title>
+
+	<meta name="description" content="华创" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+	<!-- bootstrap & fontawesome -->
+	<link rel="stylesheet" href="/storehouse/Bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" href="/storehouse/Bootstrap/css/font-awesome.css" />
+
+	<!-- page specific plugin styles -->
+
+	<!-- text fonts -->
+	<link rel="stylesheet" href="/storehouse/Bootstrap/css/ace-fonts.css" />
+
+	<!-- ace styles -->
+	<link rel="stylesheet" href="/storehouse/Bootstrap/css/ace.css" class="ace-main-stylesheet" id="main-ace-style" />
+	
+	<!--自己添加的css-->
+	<link rel="stylesheet" href="/storehouse/Public/css/main.css" />
 	</head>
 	<body class="login-layout">
 		<div class="main-container">
@@ -28,7 +48,7 @@
 											</h4>
 											
 											<div class="space-6"></div>
-											<form method="post" action="{:U('Login/login')}"  class="form-login">
+											<form method="post" action="<?php echo U('Login/login');?>"  class="form-login">
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">

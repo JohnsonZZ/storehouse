@@ -30,7 +30,7 @@
 								<i class="ace-icon fa fa-home home-icon"></i>
 								<a href="#">首页</a>
 							</li>
-							<li class="active">订单管理</li>
+							<li class="active">仓储管理</li>
 						</ul><!-- /.breadcrumb -->
 
 						<!-- #section:basics/content.searchbox -->
@@ -66,11 +66,15 @@
 											<span class="lbl"></span>
 										</label>
 									</th>
-									<th>产品</th>
+									<th>发货人</th>
+									<th>始发地</th>								
+									<th>寄件地址</th>
+									<th>联系电话</th>
 									<th>收件人</th>
 									<th>城市</th>
 									<th>收货地址</th>
 									<th>联系电话</th>
+									<th>操作员</th>
 									<th>操作</th>
 								</tr>
 							</thead>
@@ -84,11 +88,15 @@
 												<span class="lbl"></span>
 											</label>
 										</td>
-										<td>产品</td>
+										<td>张臻</td>
+										<td>广东肇庆</td>								
+										<td>肇庆学院星湖校区</td>
+										<td>18027824032</td>
 										<td>郑礼旺</td>
 										<td>广东肇庆</td>
 										<td>肇庆学院星湖校区</td>
 										<td>18027824032</td>
+										<td></td>
 										<td>
 											<div class="hidden-sm hidden-xs action-buttons">
 												<a id="print" class="blue" href="javascript:;">
@@ -113,6 +121,10 @@
 									<td></td>
 									<td></td>
 									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
 								</tr>
 							</tbody>
 						</table>
@@ -130,8 +142,7 @@
 		<include file="Public/footer" />
 		<include file="Public/script" />
 		<script type="text/javascript">
-			$('#allOrder').addClass("active").siblings().removeClass("active");
-			$('#listOrder').addClass("active");
+			$('#allStore').addClass("active").siblings().removeClass("active");
 			$("#print").click(function(){
 				layer.open({
 				    type: 2,
@@ -139,7 +150,7 @@
 				    shadeClose: true,
 				    shade: 0.8,
 				    area: ['1358px', '900px'],
-				    content: "{:U(table)}"
+				    content: "{:U(table)}" //iframe的url
 			}); 
 			})
 			

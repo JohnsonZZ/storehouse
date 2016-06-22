@@ -2,11 +2,12 @@
 namespace Admin\Controller;
 use Admin\Controller\ComController;
 header("Content-type:text/html;charset=utf-8");
-class OrderController extends ComController {
+class StoreController extends ComController {
     public function index(){
 		$this->display();
 	}
-	public function order(){
+	public function table(){
+		
 		$this->display();
 	}
 }
