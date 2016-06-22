@@ -66,11 +66,10 @@
 											<span class="lbl"></span>
 										</label>
 									</th>
-									<th>产品</th>
-									<th>收件人</th>
-									<th>城市</th>
-									<th>收货地址</th>
-									<th>联系电话</th>
+									<th>id</th>
+									<th>姓名</th>
+									<th>类型</th>
+									<th>电话</th>
 									<th>操作</th>
 								</tr>
 							</thead>
@@ -84,10 +83,9 @@
 												<span class="lbl"></span>
 											</label>
 										</td>
-										<td>产品</td>
+										<td>id</td>
 										<td>郑礼旺</td>
-										<td>广东肇庆</td>
-										<td>肇庆学院星湖校区</td>
+										<td>超级管理员</td>
 										<td>18027824032</td>
 										<td>
 											<div class="hidden-sm hidden-xs action-buttons">
@@ -112,7 +110,6 @@
 									<td></td>
 									<td></td>
 									<td></td>
-									<td></td>
 								</tr>
 							</tbody>
 						</table>
@@ -130,8 +127,8 @@
 		<include file="Public/footer" />
 		<include file="Public/script" />
 		<script type="text/javascript">
-			$('#allOrder').addClass("active").siblings().removeClass("active");
-			$('#listOrder').addClass("active");
+			$('#allAccount').addClass("active").siblings().removeClass("active");
+			$('#listAccount').addClass("active");
 			$("#print").click(function(){
 				layer.open({
 				    type: 2,

@@ -1,5 +1,5 @@
 <?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
-<html lang="en">
+<html>
 	<head>
 			<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<meta charset="utf-8" />
@@ -648,77 +648,66 @@
 						<!-- /section:settings.box -->
 						<div class="page-header">
 							<h1>
-								发送订单
+								查看订单
 							</h1>
 						</div><!-- /.page-header -->
-						<div class="row">
-							<div class="col-xs-12">
-								<!-- PAGE CONTENT BEGINS -->
-								<form class="form-horizontal" action="<?php echo U('Admin/update');?>" id="formAdmin" role="form" method="post">
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="Goods">产品</label>
-										<div class="col-sm-3">
-											<select class="form-control" id="Goods">
-												<option value="AL">手镯</option>
-												<option value="AK">戒指</option>
-												<option value="AZ">项链</option>
-											</select>
-										</div>
-									</div>
-									<!-- #section:elements.form -->
-									<div class="space-4"></div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="receiver"> 收件人 </label>
-										<div class="col-sm-9">
-											<input type="text" id="receiver" placeholder="收件人" name="receiver" class="col-xs-10 col-sm-5">
-										</div>
-									</div>
+						<table id="simple-table" class="table table-striped table-bordered table-hover">
+							<thead>
+								<tr>
+									<th class="center col-sm-1" rowspan="1" colspan="1">
+										<label class="pos-rel">
+											<input type="checkbox" class="ace check-all" value=""/>
+											<span class="lbl"></span>
+										</label>
+									</th>
+									<th>id</th>
+									<th>姓名</th>
+									<th>类型</th>
+									<th>电话</th>
+									<th>操作</th>
+								</tr>
+							</thead>
 
-									<!-- /section:elements.form -->
-									<div class="space-4"></div>
-
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="city"> 城市 </label>
-
-										<div class="col-sm-9">
-											<input type="text" id="city" placeholder="城市" name="city"  class="col-xs-10 col-sm-5">
-										</div>
-									</div>
-									
-									<div class="space-4"></div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="address"> 收货地址 </label>
-										<div class="col-sm-9">
-											<input type="text" id="address" placeholder="收货地址" name="address"  class="col-xs-10 col-sm-5">		
-										</div>
-									</div>
-									
-									<div class="space-4"></div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="phone"> 联系电话 </label>
-										<div class="col-sm-9">
-											<input type="text" id="phone" placeholder="联系电话" name="phone"  class="col-xs-10 col-sm-5">		
-										</div>
-									</div>
-									<div class="space-4"></div>
-									<div class="clearfix form-actions">
-										<div class="col-md-offset-3 col-md-9">
-											<button class="btn btn-info addButton" type="submit">
-												<i class="ace-icon fa fa-check bigger-110"></i>
-												提交
-											</button>
-
-											&nbsp; &nbsp; &nbsp;
-											<button class="btn" type="reset">
-												<i class="ace-icon fa fa-undo bigger-110"></i>
-												重置
-											</button>
-										</div>
-									</div>
-								</form>
-							</div>
-						</div>
-					
+							<tbody>
+								
+									<tr>
+										<td class="center">
+											<label class="pos-rel">
+												<input type="checkbox" class="uids ace" name="id[]" value="<?php echo ($val['id']); ?>"/>
+												<span class="lbl"></span>
+											</label>
+										</td>
+										<td>id</td>
+										<td>郑礼旺</td>
+										<td>超级管理员</td>
+										<td>18027824032</td>
+										<td>
+											<div class="hidden-sm hidden-xs action-buttons">
+												<a id="print" class="blue" href="javascript:;">
+													<i class="ace-icon fa fa-print bigger-130" title="打印"></i>
+												</a>
+												<a class="red del" val="<?php echo U('del');?>?id=<?php echo ($val['id']); ?>" href="javascript:;">
+													<i class="ace-icon fa fa-trash-o bigger-130" title="删除"></i>
+												</a>
+											</div>
+										</td>
+									</tr>
+								<tr>
+									<td class="center">
+										<button id="del" class="btn btn-xs btn-danger">
+											<i class="ace-icon fa fa-trash-o bigger-110"></i>
+											删除
+										</button>
+									</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+						
 					</div><!-- /.page-content -->
 				</div>
 			</div><!-- /.main-content -->
@@ -757,8 +746,19 @@
 		<script src="/storehouse/Public/js/ace/ace.sidebar-scroll-1.js"></script>
 
 		<script type="text/javascript">
-			$('#allOrder').addClass("active").siblings().removeClass("active");
-			$('#addOrder').addClass("active");
+			$('#allAccount').addClass("active").siblings().removeClass("active");
+			$('#listAccount').addClass("active");
+			$("#print").click(function(){
+				layer.open({
+				    type: 2,
+				    title: '打印页',
+				    shadeClose: true,
+				    shade: 0.8,
+				    area: ['1358px', '900px'],
+				    content: "<?php echo U(table);?>"
+			}); 
+			})
+			
 		</script>
 		
 

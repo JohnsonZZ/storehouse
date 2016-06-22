@@ -1,5 +1,5 @@
 <?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
-<html lang="en">
+<html>
 	<head>
 			<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<meta charset="utf-8" />
@@ -624,7 +624,7 @@
 								<i class="ace-icon fa fa-home home-icon"></i>
 								<a href="#">首页</a>
 							</li>
-							<li class="active">订单管理</li>
+							<li class="active">账户管理</li>
 						</ul><!-- /.breadcrumb -->
 
 						<!-- #section:basics/content.searchbox -->
@@ -656,21 +656,21 @@
 								<!-- PAGE CONTENT BEGINS -->
 								<form class="form-horizontal" action="<?php echo U('Admin/update');?>" id="formAdmin" role="form" method="post">
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="Goods">产品</label>
+										<label class="col-sm-3 control-label no-padding-right" for="Goods">账户类型</label>
 										<div class="col-sm-3">
 											<select class="form-control" id="Goods">
-												<option value="AL">手镯</option>
-												<option value="AK">戒指</option>
-												<option value="AZ">项链</option>
+												<option value="AL">创星谷</option>
+												<option value="AK">散户</option>
+												<option value="AZ">仓库</option>
 											</select>
 										</div>
 									</div>
 									<!-- #section:elements.form -->
 									<div class="space-4"></div>
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="receiver"> 收件人 </label>
+										<label class="col-sm-3 control-label no-padding-right" for="username"> 姓名 </label>
 										<div class="col-sm-9">
-											<input type="text" id="receiver" placeholder="收件人" name="receiver" class="col-xs-10 col-sm-5">
+											<input type="text" id="username" placeholder="姓名" name="username" class="col-xs-10 col-sm-5">
 										</div>
 									</div>
 
@@ -678,18 +678,18 @@
 									<div class="space-4"></div>
 
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="city"> 城市 </label>
+										<label class="col-sm-3 control-label no-padding-right" for="pwd"> 密码 </label>
 
 										<div class="col-sm-9">
-											<input type="text" id="city" placeholder="城市" name="city"  class="col-xs-10 col-sm-5">
+											<input type="password" id="city" placeholder="城市" name="pwd"  class="col-xs-10 col-sm-5">
 										</div>
 									</div>
 									
 									<div class="space-4"></div>
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="address"> 收货地址 </label>
+										<label class="col-sm-3 control-label no-padding-right" for="rpwd"> 确认密码 </label>
 										<div class="col-sm-9">
-											<input type="text" id="address" placeholder="收货地址" name="address"  class="col-xs-10 col-sm-5">		
+											<input type="password" id="rpwd" placeholder="重输入一次密码" name="rpwd"  class="col-xs-10 col-sm-5">		
 										</div>
 									</div>
 									
@@ -757,8 +757,8 @@
 		<script src="/storehouse/Public/js/ace/ace.sidebar-scroll-1.js"></script>
 
 		<script type="text/javascript">
-			$('#allOrder').addClass("active").siblings().removeClass("active");
-			$('#addOrder').addClass("active");
+			$('#allAccount').addClass("active").siblings().removeClass("active");
+			$('#addAccount').addClass("active");
 		</script>
 		
 

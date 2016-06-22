@@ -1,5 +1,5 @@
 <?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
-<html lang="en">
+<html>
 	<head>
 			<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<meta charset="utf-8" />
@@ -451,7 +451,7 @@
 						</ul>
 					</li>
 
-					<li class="">
+					<li id="allAccount">
 						<a href="#" class="dropdown-toggle">
 							<i class="menu-icon fa fa-pencil-square-o"></i>
 							<span class="menu-text"> 账户管理 </span>
@@ -462,31 +462,22 @@
 						<b class="arrow"></b>
 
 						<ul class="submenu">
-							<li class="">
-								<a href="form-elements.html">
+							<li id="listAccount">
+								<a href="<?php echo U('Account/index');?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									查看账户
 								</a>
 
 								<b class="arrow"></b>
 							</li>
-							<li class="">
-								<a href="form-elements.html">
+							<li id="addAccount">
+								<a href="<?php echo U('Account/account');?>">
 									<i class="menu-icon fa fa-caret-right"></i>
-									添加卖家
+									添加账户
 								</a>
 
 								<b class="arrow"></b>
 							</li>
-							<li class="">
-								<a href="form-elements-2.html">
-									<i class="menu-icon fa fa-caret-right"></i>
-									添加库员
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-							
 						</ul>
 					</li>
 
