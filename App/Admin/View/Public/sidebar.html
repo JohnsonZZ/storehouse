@@ -80,7 +80,7 @@
 
 					<li id="allAccount">
 						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-pencil-square-o"></i>
+							<i class="menu-icon fa fa-users"></i>
 							<span class="menu-text"> 账户管理 </span>
 
 							<b class="arrow fa fa-angle-down"></b>
@@ -111,7 +111,7 @@
 					
 					<li id="allOrder">
 						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-list-alt"></i>
+							<i class="menu-icon fa fa-pencil-square-o"></i>
 							<span class="menu-text"> 订单管理 </span>
 
 							<b class="arrow fa fa-angle-down"></b>
@@ -191,15 +191,12 @@
 						</ul>
 					</li>
 
-					<li class="">
+					<li id="allMessage">
 						<a href="#" class="dropdown-toggle">
 							<i class="menu-icon fa fa-file-o"></i>
 
 							<span class="menu-text">
-								其他
-
-								<!-- #section:basics/sidebar.layout.badge -->
-								<span class="badge badge-primary">5</span>
+								消息管理
 
 								<!-- /section:basics/sidebar.layout.badge -->
 							</span>
@@ -210,15 +207,22 @@
 						<b class="arrow"></b>
 
 						<ul class="submenu">
-							<li class="">
-								<a href="faq.html">
+							<li id="listMessage">
+								<a href="{:U('Message/index')}">
 									<i class="menu-icon fa fa-caret-right"></i>
-									FAQ
+									消息列表
 								</a>
 
 								<b class="arrow"></b>
 							</li>
+							<li id="addMessage">
+								<a href="{:U('Message/send')}">
+									<i class="menu-icon fa fa-caret-right"></i>
+									发送消息
+								</a>
 
+								<b class="arrow"></b>
+							</li>
 							
 						</ul>
 					</li>
