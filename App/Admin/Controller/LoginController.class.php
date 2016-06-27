@@ -15,9 +15,7 @@ class LoginController extends Controller {
 		if($result){
 			if($result['pwd'] == sha1($pwd.$result['salt'])){
 				if($remember){
-				
-					cookie('username',$username);
-					dump(cookie('username'));die();
+					cookie('username',$username,604800);
 				}
 				session('username',$username);
 				addlog('登录成功');
