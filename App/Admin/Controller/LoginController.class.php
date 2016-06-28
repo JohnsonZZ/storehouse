@@ -16,8 +16,10 @@ class LoginController extends Controller {
 			if($result['pwd'] == sha1($pwd.$result['salt'])){
 				if($remember){
 					cookie('username',$username,604800);
+					cookie('pwd',$result['pwd'],604800);
 				}
 				session('username',$username);
+				cookie('pwd',$result['pwd']);
 				addlog('登录成功');
 				$this->redirect('Index/index');
 			} else {

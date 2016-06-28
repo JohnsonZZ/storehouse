@@ -2,9 +2,8 @@
 <html lang="en">
 	<head>
 	
-	<include file="Public/header"  title="华创 | 控制台"/>	
 	<link rel="stylesheet" href="__PUBLIC__/css/jquery-ui.custom.css">
-	<link rel="stylesheet" href="__BOOTSTRAP__/css/fileinput.min.css">
+	<include file="Public/header"  title="华创 | 控制台"/>
 	</head>
 
 	<body class="no-skin">
@@ -30,9 +29,9 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="ace-icon fa fa-home home-icon"></i>
-								<a href="#">首页</a>
+								<a href="{:U('Index/index')}">首页</a>
 							</li>
-							<li class="active">控制台</li>
+							<li class="active">公司列表</li>
 						</ul><!-- /.breadcrumb -->
 
 						<!-- #section:basics/content.searchbox -->
@@ -55,39 +54,28 @@
 						<!-- /section:settings.box -->
 						<div class="page-header">
 							<h1>
-								添加产品
+								添加公司
 							</h1>
 						</div><!-- /.page-header -->
 
 						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
-								<form class="form-horizontal" role="form"  action="{:U('update')}"  id="Goodsform" method="post" enctype="multipart/form-data">
+								<form class="form-horizontal" action="{:U('Company/update')}" id="formCompany" role="form" method="post">
+									<input type="hidden" name="id" value="{$company['id']}" class="col-xs-10 col-sm-5">
 									<!-- #section:elements.form -->
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right " for="href"> 图片 </label>
-
+										<label class="col-sm-3 control-label no-padding-right" for="company"> 公司名 </label>
 										<div class="col-sm-9">
-											<input type="file" id="href" placeholder="输入名称" name="href" class="col-xs-10 col-sm-5">
+											<input type="text" id="company" placeholder="company" name="company" value="{$company['company']}" class="col-xs-10 col-sm-5">
 										</div>
 									</div>
 
-									<!-- /section:elements.form -->
-									<div class="space-4"></div>
-
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="content"> 内容 </label>
-
-										<div class="col-sm-9">
-											 <textarea id="content" name="content" type="text/plain">
-											</textarea>
-										</div>
-									</div>
 									
 									<div class="space-4"></div>
 									<div class="clearfix form-actions">
 										<div class="col-md-offset-3 col-md-9">
-											<button class="btn btn-info" type="button" id="addButton" >
+											<button class="btn btn-info addButton" type="button" id="addSubmit"> 
 												<i class="ace-icon fa fa-check bigger-110"></i>
 												提交
 											</button>
@@ -119,43 +107,19 @@
 
 		<!-- basic scripts -->
 		<include file="Public/script" />
-		<script src="__BOOTSTRAP__/js/fileinput.min.js"></script>
-		<script src="__BOOTSTRAP__/js/fileinput_locale_zh.js"></script>		
-		<script charset="utf-8" src="__PLUGINS__/ueditor/ueditor.config.js"></script>
-		<script charset="utf-8" src="__PLUGINS__/ueditor/ueditor.all.min.js"></script>
-		<script charset="utf-8" src="__PLUGINS__/ueditor/lang/zh-cn/zh-cn.js"></script>
 		<script type="text/javascript">
-			$('#allGoods').addClass("active").siblings().removeClass("active");
-			$('#addGoods').addClass("active");
-			var ue = UE.getEditor('content',{ initialFrameWidth: 800 ,initialFrameHeight: 500});
-			var html;
-			$('#href').fileinput({
-                language: 'zh', //设置语言
-                allowedFileExtensions : ['jpg', 'png','gif'],//接收的文件后缀,
-                showUpload: false, //是否显示上传按钮
-                showCaption: false,//是否显示标题
-                browseClass: "btn btn-primary", //按钮样式 
-				maxFileSize: 2048,
-            });
-			$("#addButton").click(function(){
-				var href = $('#href').val();
-				ue.ready(function(){ 
-				
-					 $('#content').value = ue.getContent();
-				
-				
-				});
-				if(href.length==0){
-					layer.msg("图不能为空");
-					return false;
+			$('#allCompany').addClass("active").siblings().removeClass("active");
+			$('#addCompany').addClass("active");
+			$('#addSubmit').click(function(){
+				var company = $('#company').val();
+				if(company == ''){
+					$('#company').val({$company['company']});
 				}
-				if(!ue.hasContents()){
-					layer.msg("内容不能为空");
-					return false;
-				}
-				$('#Goodsform').submit();
-				
+				$('#formCompany').submit();	
+			
+			
 			});
+			
 		</script>
 		
 

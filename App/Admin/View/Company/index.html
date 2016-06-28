@@ -48,86 +48,56 @@
 
 					<!-- /section:basics/content.breadcrumbs -->
 					<div class="page-content">
-						<!-- #section:settings.box -->
-						
-
 						<!-- /section:settings.box -->
 						<div class="page-header">
 							<h1>
-								产品列表
+								所有公司
 							</h1>
 						</div><!-- /.page-header -->
 
 						<div class="row">
 							<div class="col-xs-12">
-								<div class="clearfix">
-										<div class="pull-right tableTools-container">
-											<div class="dt-buttons btn-overlap btn-group">
-												<a id="Excel" class="dt-button buttons-excel buttons-flash btn btn-white btn-primary btn-bold" title="Export to Excel">
-													<span>
-														<i class="fa fa-file-excel-o bigger-110 green"></i>
-														<span class="hidden">Export to Excel</span>
-													</span>
-												</a>
-												<a id="PDF" class="dt-button buttons-pdf buttons-flash btn btn-white btn-primary btn-bold" title="Export to PDF">
-													<span>
-														<i class="fa fa-file-pdf-o bigger-110 red"></i>
-														<span class="hidden">Export to PDF</span>
-													</span>
-												</a>
-												<a class="dt-button buttons-print btn btn-white btn-primary btn-bold" title="Print">
-													<span>
-														<i class="fa fa-print bigger-110 grey"></i>
-														<span class="hidden">Print</span>
-													</span>
-												</a>
-											</div>
-										</div>
-									</div>
-								<div class="table-header">
-									Results for "Latest Registered Domains"
-								</div>
 								<table id="simple-table" class="table table-striped table-bordered table-hover">
 									<thead>
 										<tr>
-											<th class="center col-sm-1" rowspan="1" colspan="1">
+											<th class="center col-xs-1">
 												<label class="pos-rel">
-													<input type="checkbox" class="ace check-all" value=""/>
+													<input type="checkbox" class="ace" />
 													<span class="lbl"></span>
 												</label>
 											</th>
-											<th>图片</th>
-											<th>内容</th>								
-											<th>
+											<th class="col-xs-3">公司</th>
+											<th class="col-xs-7">分类  &ensp;(点击查看分类产品)</th>
+											<th class="col-xs-1">
 												操作
 											</th>
 										</tr>
 									</thead>
 
 									<tbody>
-										 <foreach item="val" name="goods" >
+										<foreach item="val" name="company">
 											<tr>
-												<td class="center">
+												<td class="center col-xs-1">
 													<label class="pos-rel">
-														<input type="checkbox" class="uids ace" name="id[]" value="{$val['id']}"/>
+														<input type="checkbox" class="ace" />
 														<span class="lbl"></span>
 													</label>
 												</td>
-												<td>{$val.href}</td>
-												<td>{$val.content}</td>
+												<td>{$val.company}</td>
+												<td><a href="#" title="sort">{$val.sort}</a></td>
 												<td>
 													<div class="hidden-sm hidden-xs action-buttons">
-														<a class="blue" href="{:U('edit')}?id={$val.id}">
-															<i class="ace-icon fa fa-pencil bigger-130" title="修改"></i>
-														</a>
-
-														<a class="red del" val="{:U('del')}?id={$val['id']}" href="javascript:;">
-															<i class="ace-icon fa fa-trash-o bigger-130" title="删除"></i>
-														</a>
+															<a class="green" href="{:U('edit')}?id={$val.id}">
+																<i class="ace-icon fa fa-pencil bigger-130" title="修改"></i>
+															</a>
+								
+															<a class="red" href="{:U('del')?id={$val.id}}">
+																<i class="ace-icon fa fa-trash-o bigger-130" title="删除"></i>
+															</a>
 													</div>
 												</td>
 											</tr>
-										</foreach>	
+										</foreach>
 										<tr>
 											<td class="center">
 												<button id="del" class="btn btn-xs btn-danger">
@@ -156,48 +126,11 @@
 		<include file="Public/footer" />
 		<include file="Public/script" />
 		<script type="text/javascript">
-			$('#allGoods').addClass("active").siblings().removeClass("active");
-			$('#listGoods').addClass("active");
-			$(function(){
-			$(".check-all").click(function(){
-				$(".uids").prop("checked", this.checked);
-			});
-			$(".uids").click(function(){
-				$(".uids").each(function(i){
-					if(!this.checked){
-						$(".check-all").prop("checked", false);
-						return false;
-					}else{
-						$(".check-all").prop("checked", true);
-					}
-				});
-			})
-			$("#del").click(function(){
-				layer.open({
-					icon:0,
-					title: '删除列表',
-					type: 0, 
-					content: '是否删除选中列表',
-					btn: ['确认', '取消'],
-					yes: function(){
-						$('#form').submit();
-						}
-				});	
-			})
-			$(".del").click(function(){
-				var val=$(this).attr('val');
-				layer.open({
-					icon:0,
-					title: '删除列表',
-					type: 0, 
-					content: '是否删除选中列表',
-					btn: ['确认', '取消'],
-					yes: function(){
-							location.href = val;
-						}
-				});	
-			})
-		})
+			$('#allCompany').addClass("active").siblings().removeClass("active");
+			$('#listCompany').addClass("active");	
 		</script>
+		
+
+
 	</body>
 </html>
