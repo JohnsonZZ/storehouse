@@ -68,8 +68,8 @@
 											</label>
 										</th>
 										<th>产品</th>
+										<th>接单人</th>
 										<th>收件人</th>
-										<th>城市</th>
 										<th>收货地址</th>
 										<th>联系电话</th>
 										<th>操作</th>
@@ -77,7 +77,7 @@
 								</thead>
 
 								<tbody>
-									
+									<volist name="order" id="val">
 										<tr>
 											<td class="center">
 												<label class="pos-rel">
@@ -85,11 +85,11 @@
 													<span class="lbl"></span>
 												</label>
 											</td>
-											<td>产品</td>
-											<td>郑礼旺</td>
-											<td>广东肇庆</td>
-											<td>肇庆学院星湖校区</td>
-											<td>18027824032</td>
+											<td>{$val['pid']}</td>
+											<td>{$val['name']}</td>
+											<td>{$val['buyer']}</td>
+											<td>{$val['address']}</td>
+											<td>{$val['phone']}</td>
 											<td>
 												<div class="action-buttons">
 													<a id="print" class="blue" href="javascript:;">
@@ -101,6 +101,7 @@
 												</div>
 											</td>
 										</tr>
+									</volist>
 									<tr>
 										<td class="center">
 											<button id="del" class="btn btn-xs btn-danger">

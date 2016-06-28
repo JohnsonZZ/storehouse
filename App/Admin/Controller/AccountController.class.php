@@ -38,6 +38,7 @@ class AccountController extends ComController {
 			$data['salt']=base64_encode(mcrypt_create_iv(32,MCRYPT_DEV_RANDOM));
 			$data['pwd']=sha1($data['pwd'].$data['salt']);
 			$User->add($data);
+			addlog('发放账号phone='.$data['phone']);
 			$this->success('注册成功','index');
 		}
 	}
@@ -54,7 +55,8 @@ class AccountController extends ComController {
 			$data['pwd'] = I('post.pwd');
 			$data['salt']=base64_encode(mcrypt_create_iv(32,MCRYPT_DEV_RANDOM));
 			$data['pwd']=sha1($data['pwd'].$data['salt']);
-			$User->where('id='.$id)->save(); // 根据条件更新记录
+			$User->where('id='.$id)->save($data); 
+			addlog('修改id='.$id."账户信息");
 			$this->success('修改成功','index');
 		}
 	}
@@ -66,6 +68,7 @@ class AccountController extends ComController {
 			$map['id']  = array('in',$lids);
 			$result = $User->where($map)->delete();
 			if($result){
+				addlog('删除账户');
 				$this->success('删除成功');
 			} else {
 				$this->error('删除失败');
@@ -74,6 +77,7 @@ class AccountController extends ComController {
 			$map['id'] = $lids;
 			$result = $User->where($map)->delete();
 			if($result){
+				addlog('删除账户');
 				$this->success('删除成功');
 			} else {
 				$this->error('删除失败');
