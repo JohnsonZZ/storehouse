@@ -653,7 +653,7 @@
 									<ul class="ace-thumbnails clearfix">
 										
 											<!-- #section:pages/gallery.caption -->
-										<?php $__FOR_START_13231__=2;$__FOR_END_13231__=$lenFolder;for($i=$__FOR_START_13231__;$i < $__FOR_END_13231__;$i+=1){ ?><li id="ul-margin" >
+										<?php $__FOR_START_14122__=2;$__FOR_END_14122__=$lenFolder;for($i=$__FOR_START_14122__;$i < $__FOR_END_14122__;$i+=1){ ?><li id="ul-margin" >
 												<a href="<?php echo U('image');?>?folder=<?php echo ($folder[$i]); ?>" data-rel="colorbox" class="cboxElement">
 													<img width="150" height="150" alt="150x150" src="/storehouse/Public/images/timg1.jpg">	
 												</a>
@@ -669,7 +669,7 @@
 													</a>
 												</div>
 											</li><?php } ?>
-										<?php $__FOR_START_956__=1;$__FOR_END_956__=$lenFiles;for($i=$__FOR_START_956__;$i < $__FOR_END_956__;$i+=1){ ?><li  id="ul-margin" >
+										<?php $__FOR_START_31003__=1;$__FOR_END_31003__=$lenFiles;for($i=$__FOR_START_31003__;$i < $__FOR_END_31003__;$i+=1){ ?><li  id="ul-margin" >
 												<?php if( $i == 1 ): ?><a href="<?php echo U('index');?>" data-rel="colorbox" class="cboxElement">
 														<img width="150" height="150" alt="150x150" src="/storehouse/Public/images/timg1.jpg" />	
 													</a>

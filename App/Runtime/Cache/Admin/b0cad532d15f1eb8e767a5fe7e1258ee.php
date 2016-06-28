@@ -1,5 +1,5 @@
 <?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
 			<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<meta charset="utf-8" />
@@ -628,7 +628,7 @@
 								<i class="ace-icon fa fa-home home-icon"></i>
 								<a href="#">首页</a>
 							</li>
-							<li class="active">账户管理</li>
+							<li class="active">订单管理</li>
 						</ul><!-- /.breadcrumb -->
 
 						<!-- #section:basics/content.searchbox -->
@@ -652,36 +652,29 @@
 						<!-- /section:settings.box -->
 						<div class="page-header">
 							<h1>
-								添加账户
+								发送订单
 							</h1>
 						</div><!-- /.page-header -->
 						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
-								<form class="form-horizontal" action="<?php echo U('add');?>" id="formAdmin" role="form" method="post">
+								<form class="form-horizontal" action="<?php echo U('Admin/update');?>" id="formAdmin" role="form" method="post">
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="sort">账户类型</label>
+										<label class="col-sm-3 control-label no-padding-right" for="Goods">产品</label>
 										<div class="col-sm-3">
-											<select class="form-control" id="sort" name="sort">
-												<option value="0">创星谷</option>
-												<option value="1">散户</option>
-												<option value="2">仓库</option>
+											<select class="form-control" id="Goods">
+												<option value="AL">手镯</option>
+												<option value="AK">戒指</option>
+												<option value="AZ">项链</option>
 											</select>
-										</div>
-									</div>
-									<div class="space-4"></div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="phone"> 联系电话 </label>
-										<div class="col-sm-9">
-											<input type="text" id="phone" placeholder="联系电话" name="phone" maxlength="11" class="col-xs-10 col-sm-5">		
 										</div>
 									</div>
 									<!-- #section:elements.form -->
 									<div class="space-4"></div>
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="username"> 姓名 </label>
+										<label class="col-sm-3 control-label no-padding-right" for="receiver"> 收件人 </label>
 										<div class="col-sm-9">
-											<input type="text" id="name" placeholder="姓名" name="name" class="col-xs-10 col-sm-5">
+											<input type="text" id="receiver" placeholder="收件人" name="receiver" class="col-xs-10 col-sm-5">
 										</div>
 									</div>
 
@@ -689,28 +682,34 @@
 									<div class="space-4"></div>
 
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="pwd"> 密码 </label>
+										<label class="col-sm-3 control-label no-padding-right" for="city"> 城市 </label>
 
 										<div class="col-sm-9">
-											<input type="password" id="city" placeholder="密码" name="pwd"  class="col-xs-10 col-sm-5">
+											<input type="text" id="city" placeholder="城市" name="city"  class="col-xs-10 col-sm-5">
 										</div>
 									</div>
 									
 									<div class="space-4"></div>
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="rpwd"> 确认密码 </label>
+										<label class="col-sm-3 control-label no-padding-right" for="address"> 收货地址 </label>
 										<div class="col-sm-9">
-											<input type="password" id="rpwd" placeholder="重输入一次密码" name="rpwd"  class="col-xs-10 col-sm-5">		
+											<input type="text" id="address" placeholder="收货地址" name="address"  class="col-xs-10 col-sm-5">		
 										</div>
 									</div>
 									
-									
+									<div class="space-4"></div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="phone"> 联系电话 </label>
+										<div class="col-sm-9">
+											<input type="text" id="phone" placeholder="联系电话" name="phone"  class="col-xs-10 col-sm-5">		
+										</div>
+									</div>
 									<div class="space-4"></div>
 									<div class="clearfix form-actions">
 										<div class="col-md-offset-3 col-md-9">
 											<button class="btn btn-info addButton" type="submit">
 												<i class="ace-icon fa fa-check bigger-110"></i>
-												注册
+												提交
 											</button>
 
 											&nbsp; &nbsp; &nbsp;
@@ -762,8 +761,8 @@
 		<script src="/storehouse/Public/js/ace/ace.sidebar-scroll-1.js"></script>
 
 		<script type="text/javascript">
-			$('#allAccount').addClass("active").siblings().removeClass("active");
-			$('#addAccount').addClass("active");
+			$('#allOrder').addClass("active").siblings().removeClass("active");
+			$('#addOrder').addClass("active");
 		</script>
 		
 

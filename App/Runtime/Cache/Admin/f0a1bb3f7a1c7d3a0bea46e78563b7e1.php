@@ -667,39 +667,43 @@
 										</th>
 										<th>id</th>
 										<th>姓名</th>
-										<th>类型</th>
 										<th>电话</th>
+										<th>类型</th>
 										<th>操作</th>
 									</tr>
 								</thead>
 
 								<tbody>
-									
-										<tr>
+									<form method="post" action="<?php echo U('del');?>" id="form">
+									<?php if(is_array($user)): $i = 0; $__LIST__ = $user;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$val): $mod = ($i % 2 );++$i;?><tr>
 											<td class="center">
 												<label class="pos-rel">
 													<input type="checkbox" class="uids ace" name="id[]" value="<?php echo ($val['id']); ?>"/>
 													<span class="lbl"></span>
 												</label>
 											</td>
-											<td>id</td>
-											<td>郑礼旺</td>
-											<td>超级管理员</td>
-											<td>18027824032</td>
+											<td><?php echo ($val['id']); ?></td>
+											<td><?php echo ($val['name']); ?></td>
+											<td><?php echo ($val['phone']); ?></td>
+											<td>
+												<?php switch($val["sort"]): case "0": ?>创星谷<?php break;?>
+													<?php case "1": ?>散户<?php break;?>
+													<?php case "2": ?>库员<?php break; endswitch;?>
+											</td>
 											<td>
 												<div class="action-buttons">
-													<a id="print" class="blue" href="javascript:;">
-														<i class="ace-icon fa fa-print bigger-130" title="打印"></i>
+													<a id="print" class="blue" href="<?php echo U('edit');?>?id=<?php echo ($val['id']); ?>">
+														<i class="ace-icon fa fa-edit bigger-130" title="修改"></i>
 													</a>
 													<a class="red del" val="<?php echo U('del');?>?id=<?php echo ($val['id']); ?>" href="javascript:;">
 														<i class="ace-icon fa fa-trash-o bigger-130" title="删除"></i>
 													</a>
 												</div>
 											</td>
-										</tr>
+										</tr><?php endforeach; endif; else: echo "" ;endif; ?>
 									<tr>
 										<td class="center">
-											<button id="del" class="btn btn-xs btn-danger">
+											<button id="del" class="btn btn-xs btn-danger" type="button">
 												<i class="ace-icon fa fa-trash-o bigger-110"></i>
 												删除
 											</button>
@@ -753,17 +757,46 @@
 		<script type="text/javascript">
 			$('#allAccount').addClass("active").siblings().removeClass("active");
 			$('#listAccount').addClass("active");
-			$("#print").click(function(){
-				layer.open({
-				    type: 2,
-				    title: '打印页',
-				    shadeClose: true,
-				    shade: 0.8,
-				    area: ['1358px', '900px'],
-				    content: "<?php echo U(table);?>"
-			}); 
+			$(function(){
+			$(".check-all").click(function(){
+				$(".uids").prop("checked", this.checked);
+			});
+			$(".uids").click(function(){
+				$(".uids").each(function(i){
+					if(!this.checked){
+						$(".check-all").prop("checked", false);
+						return false;
+					}else{
+						$(".check-all").prop("checked", true);
+					}
+				});
 			})
-			
+			$("#del").click(function(){
+				layer.open({
+					icon:0,
+					title: '删除列表',
+					type: 0, 
+					content: '是否删除选中列表',
+					btn: ['确认', '取消'],
+					yes: function(){
+						$('#form').submit();
+						}
+				});	
+			})
+			$(".del").click(function(){
+				var val=$(this).attr('val');
+				layer.open({
+					icon:0,
+					title: '删除列表',
+					type: 0, 
+					content: '是否删除选中列表',
+					btn: ['确认', '取消'],
+					yes: function(){
+							location.href = val;
+						}
+				});	
+			})
+		})
 		</script>
 		
 

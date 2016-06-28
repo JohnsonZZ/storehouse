@@ -652,13 +652,14 @@
 						<!-- /section:settings.box -->
 						<div class="page-header">
 							<h1>
-								添加账户
+								修改账户
 							</h1>
 						</div><!-- /.page-header -->
 						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
-								<form class="form-horizontal" action="<?php echo U('add');?>" id="formAdmin" role="form" method="post">
+								<form class="form-horizontal" action="<?php echo U('update');?>" id="formAdmin" role="form" method="post">
+									<input type="hidden" name="id" value="<?php echo ($user[id]); ?>"/>
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="sort">账户类型</label>
 										<div class="col-sm-3">
@@ -667,13 +668,21 @@
 												<option value="1">散户</option>
 												<option value="2">仓库</option>
 											</select>
+											<script>
+												var obj = document.getElementById("sort");
+												switch(<?php echo ($user['sort']); ?>){
+													case 0:obj.options[0].selected = true;break;
+													case 1:obj.options[1].selected = true;break;
+													case 2:obj.options[2].selected = true;break;
+												}
+											</script>
 										</div>
 									</div>
 									<div class="space-4"></div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="phone"> 联系电话 </label>
 										<div class="col-sm-9">
-											<input type="text" id="phone" placeholder="联系电话" name="phone" maxlength="11" class="col-xs-10 col-sm-5">		
+											<input type="text" id="phone" placeholder="联系电话" name="phone"  class="col-xs-10 col-sm-5" value="<?php echo ($user[phone]); ?>" />		
 										</div>
 									</div>
 									<!-- #section:elements.form -->
@@ -681,7 +690,7 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="username"> 姓名 </label>
 										<div class="col-sm-9">
-											<input type="text" id="name" placeholder="姓名" name="name" class="col-xs-10 col-sm-5">
+											<input type="text" id="name" placeholder="姓名" name="name" class="col-xs-10 col-sm-5" value="<?php echo ($user[name]); ?>" />
 										</div>
 									</div>
 
@@ -710,7 +719,7 @@
 										<div class="col-md-offset-3 col-md-9">
 											<button class="btn btn-info addButton" type="submit">
 												<i class="ace-icon fa fa-check bigger-110"></i>
-												注册
+												修改
 											</button>
 
 											&nbsp; &nbsp; &nbsp;
