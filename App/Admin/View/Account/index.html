@@ -69,14 +69,15 @@
 										</th>
 										<th>id</th>
 										<th>姓名</th>
-										<th>类型</th>
 										<th>电话</th>
+										<th>类型</th>
 										<th>操作</th>
 									</tr>
 								</thead>
 
 								<tbody>
-									
+									<form method="post" action="{:U('del')}" id="form">
+									<volist name="user" id="val">
 										<tr>
 											<td class="center">
 												<label class="pos-rel">
@@ -84,14 +85,20 @@
 													<span class="lbl"></span>
 												</label>
 											</td>
-											<td>id</td>
-											<td>郑礼旺</td>
-											<td>超级管理员</td>
-											<td>18027824032</td>
+											<td>{$val['id']}</td>
+											<td>{$val['name']}</td>
+											<td>{$val['phone']}</td>
+											<td>
+												<switch name="val.sort">
+													<case value="0">创星谷</case>
+													<case value="1">散户</case>
+													<case value="2">库员</case>
+												</switch>
+											</td>
 											<td>
 												<div class="action-buttons">
-													<a id="print" class="blue" href="javascript:;">
-														<i class="ace-icon fa fa-print bigger-130" title="打印"></i>
+													<a id="print" class="blue" href="{:U('edit')}?id={$val['id']}">
+														<i class="ace-icon fa fa-edit bigger-130" title="修改"></i>
 													</a>
 													<a class="red del" val="{:U('del')}?id={$val['id']}" href="javascript:;">
 														<i class="ace-icon fa fa-trash-o bigger-130" title="删除"></i>
@@ -99,9 +106,10 @@
 												</div>
 											</td>
 										</tr>
+									</volist>
 									<tr>
 										<td class="center">
-											<button id="del" class="btn btn-xs btn-danger">
+											<button id="del" class="btn btn-xs btn-danger" type="button">
 												<i class="ace-icon fa fa-trash-o bigger-110"></i>
 												删除
 											</button>
@@ -130,17 +138,46 @@
 		<script type="text/javascript">
 			$('#allAccount').addClass("active").siblings().removeClass("active");
 			$('#listAccount').addClass("active");
-			$("#print").click(function(){
-				layer.open({
-				    type: 2,
-				    title: '打印页',
-				    shadeClose: true,
-				    shade: 0.8,
-				    area: ['1358px', '900px'],
-				    content: "{:U(table)}"
-			}); 
+			$(function(){
+			$(".check-all").click(function(){
+				$(".uids").prop("checked", this.checked);
+			});
+			$(".uids").click(function(){
+				$(".uids").each(function(i){
+					if(!this.checked){
+						$(".check-all").prop("checked", false);
+						return false;
+					}else{
+						$(".check-all").prop("checked", true);
+					}
+				});
 			})
-			
+			$("#del").click(function(){
+				layer.open({
+					icon:0,
+					title: '删除列表',
+					type: 0, 
+					content: '是否删除选中列表',
+					btn: ['确认', '取消'],
+					yes: function(){
+						$('#form').submit();
+						}
+				});	
+			})
+			$(".del").click(function(){
+				var val=$(this).attr('val');
+				layer.open({
+					icon:0,
+					title: '删除列表',
+					type: 0, 
+					content: '是否删除选中列表',
+					btn: ['确认', '取消'],
+					yes: function(){
+							location.href = val;
+						}
+				});	
+			})
+		})
 		</script>
 		
 
