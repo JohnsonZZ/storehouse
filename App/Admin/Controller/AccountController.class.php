@@ -9,9 +9,16 @@ class AccountController extends ComController {
 		$this->assign('user',$user);
 		$this->display();
 	}
+	public function kuyuan(){
+		$Kuyuan = M("Kuyuan");
+		$kuyuan = $Kuyuan->order('id desc')->select(); 
+		$this->assign('kuyuan',$kuyuan);
+		$this->display();
+	}
 	public function account(){
 		$this->display();
 	}
+	
 	public function edit(){
 		$User = M("User");
 		$id = I('get.id');

@@ -99,7 +99,7 @@
 									</div>
 									
 									<div class="space-4"></div>
-									<div class="form-group">
+									<div class="form-group" id="addinput">
 										<label class="col-sm-3 control-label no-padding-right" for="rpwd"> 确认密码 </label>
 										<div class="col-sm-9">
 											<input type="password" id="rpwd" placeholder="重输入一次密码" name="rpwd"  class="col-xs-10 col-sm-5">		
@@ -141,6 +141,13 @@
 		<script type="text/javascript">
 			$('#allAccount').addClass("active").siblings().removeClass("active");
 			$('#addAccount').addClass("active");
+			$("#sort").change(function(){
+				if($(this).val()=="2"){
+					$("#addinput").after('<div id="delinput"><div class="space-4"></div><div class="form-group"><label class="col-sm-3 control-label no-padding-right"for="address">发货地址</label><div class="col-sm-9"><input type="text"id="address"placeholder="省"name="address[]"class="col-xs-5 col-sm-1"><span class="input-group-addon col-sm-1"style="padding-top:9px;padding-bottom:9px;padding-right:25px;">省</span><input type="text"id="address"placeholder="市(县)"name="address[]"class="col-xs-5 col-sm-1"><span class="input-group-addon col-sm-1"style="padding-top:9px;padding-bottom:9px;padding-right:45px;">市(县)</span><input type="text"id="address"placeholder="区(镇)"name="address[]"class="col-xs-5 col-sm-1"><span class="input-group-addon col-sm-1"style="padding-top:9px;padding-bottom:9px;padding-right:45px;">区(镇)</span><input type="text"id="address"placeholder="详细地址"name="address[]"class="col-xs-10 col-sm-5"></div></div></div>');
+				}else{
+					$("#delinput").remove();
+				}
+			})
 		</script>
 		
 

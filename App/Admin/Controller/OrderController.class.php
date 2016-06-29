@@ -15,8 +15,8 @@ class OrderController extends ComController {
 	}
 	public function update(){
 		$Order = M('Order');
-		$data['phone'] = I('post.phone');
-		if(!isPhone($data['phone'])){
+		$data['ophone'] = I('post.phone');
+		if(!isPhone($data['ophone'])){
 			$this->error('手机号码错误');
 		}
 		$data['uid'] = session('id');
@@ -107,7 +107,7 @@ class OrderController extends ComController {
 						->setCellValue("B$i", $value['name'])
 						->setCellValue("C$i", $value['buyer'])
 						->setCellValue("D$i", $value['address'])
-						->setCellValue("E$i", $value['phone']);
+						->setCellValue("E$i", $value['ophone']);
 		}
 		
 		$objPHPExcel->getActiveSheet()->setTitle('Simple');

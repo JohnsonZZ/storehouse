@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 	<head>
 		<include file="Public/header"  title="华创 | 控制台"/>
 
@@ -30,7 +30,7 @@
 								<i class="ace-icon fa fa-home home-icon"></i>
 								<a href="#">首页</a>
 							</li>
-							<li class="active">仓储管理</li>
+							<li class="active">账户管理</li>
 						</ul><!-- /.breadcrumb -->
 
 						<!-- #section:basics/content.searchbox -->
@@ -54,27 +54,9 @@
 						<!-- /section:settings.box -->
 						<div class="page-header">
 							<h1>
-								货单查询
+								查看库员
 							</h1>
 						</div><!-- /.page-header -->
-						<div class="clearfix">
-							<div class="pull-right tableTools-container">
-								<div class="dt-buttons btn-overlap btn-group">
-									<a id="excel" class="dt-button buttons-excel buttons-flash btn btn-white btn-primary btn-bold" title="Export to Excel">
-										<span>
-											<i class="fa fa-file-excel-o bigger-110 green"></i>
-											<span class="hidden">Export to Excel</span>
-										</span>
-									</a>
-									<a id="print" class="dt-button buttons-print btn btn-white btn-primary btn-bold" title="Print">
-										<span>
-											<i class="fa fa-print bigger-110 grey"></i>
-											<span class="hidden">Print</span>
-										</span>
-									</a>
-								</div>
-							</div>
-						</div>
 						<div class="box-body table-responsive">
 							<table id="simple-table" class="table table-striped table-bordered table-hover">
 								<thead>
@@ -85,20 +67,17 @@
 												<span class="lbl"></span>
 											</label>
 										</th>
-										<th>产品</th>
-										<th>接单人</th>
-										<th>联系电话</th>
-										<th>收件人</th>
-										<th>收货地址</th>
-										<th>联系电话</th>
-										<th>发货人</th>
-										<th>运单号</th>
+										<th>id</th>
+										<th>姓名</th>
+										<th>电话</th>
+										<th>类型</th>
 										<th>操作</th>
 									</tr>
 								</thead>
 
 								<tbody>
-									
+									<form method="post" action="{:U('del')}" id="form">
+									<volist name="kuyuan" id="val">
 										<tr>
 											<td class="center">
 												<label class="pos-rel">
@@ -106,43 +85,35 @@
 													<span class="lbl"></span>
 												</label>
 											</td>
-											<th>产品</th>
-											<td>张臻</td>
-											<td>18027824032</td>
-											<td>郑礼旺</td>
-											<td>肇庆学院星湖校区</td>
-											<td>18027824032</td>
-											<td>无名氏</td>
-											<td>2100000001</td>
+											<td>{$val['id']}</td>
+											<td>{$val['name']}</td>
+											<td>{$val['kphone']}</td>
+											<td>
+												<switch name="val.sort">
+													<case value="0">创星谷</case>
+													<case value="1">散户</case>
+													<case value="2">库员</case>
+												</switch>
+											</td>
 											<td>
 												<div class="action-buttons">
-													<button id="express" class="btn btn-white btn-info btn-bold">
-														<i class="ace-icon fa fa-print bigger-120 blue"></i>
-														打印快递单
-													</button>
-													<button id="pencil" class="btn btn-white btn-info btn-bold">
-														<i class="ace-icon fa fa-pencil bigger-120 blue"></i>
-														填写运单号
-													</button>
-													<button class="del btn btn-white btn-danger btn-bold">
-													<i class="ace-icon fa fa-trash-o bigger-120"></i>
-														删除订单
-													</button>
+													<a id="print" class="blue" href="{:U('edit')}?id={$val['id']}">
+														<i class="ace-icon fa fa-edit bigger-130" title="修改"></i>
+													</a>
+													<a class="red del" val="{:U('del')}?id={$val['id']}" href="javascript:;">
+														<i class="ace-icon fa fa-trash-o bigger-130" title="删除"></i>
+													</a>
 												</div>
-												
 											</td>
 										</tr>
+									</volist>
 									<tr>
 										<td class="center">
-											<button id="del" class="btn btn-xs btn-danger">
+											<button id="del" class="btn btn-xs btn-danger" type="button">
 												<i class="ace-icon fa fa-trash-o bigger-110"></i>
 												删除
 											</button>
 										</td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
 										<td></td>
 										<td></td>
 										<td></td>
@@ -165,26 +136,48 @@
 		<include file="Public/footer" />
 		<include file="Public/script" />
 		<script type="text/javascript">
-			$('#allStore').addClass("active").siblings().removeClass("active");
-			$("#express").click(function(){
+			$('#allAccount').addClass("active").siblings().removeClass("active");
+			$('#listKuyuan').addClass("active");
+			$(function(){
+			$(".check-all").click(function(){
+				$(".uids").prop("checked", this.checked);
+			});
+			$(".uids").click(function(){
+				$(".uids").each(function(i){
+					if(!this.checked){
+						$(".check-all").prop("checked", false);
+						return false;
+					}else{
+						$(".check-all").prop("checked", true);
+					}
+				});
+			})
+			$("#del").click(function(){
 				layer.open({
-				    type: 2,
-				    title: '打印页',
-				    shadeClose: true,
-				    shade: 0.8,
-				    area: ['1358px', '900px'],
-				    content: "{:U(table)}" //iframe的url
-			}); 
+					icon:0,
+					title: '删除列表',
+					type: 0, 
+					content: '是否删除选中列表',
+					btn: ['确认', '取消'],
+					yes: function(){
+						$('#form').submit();
+						}
+				});	
 			})
-			layer.config({
-			  extend: 'extend/layer.ext.js'
-			});  
-			$("#pencil").click(function(){
-				layer.prompt(function(value, index, elem){
-					$.post("{:U(addExpress)}",{express:value});
-					layer.close(index);
-					});
+			$(".del").click(function(){
+				var val=$(this).attr('val');
+				layer.open({
+					icon:0,
+					title: '删除列表',
+					type: 0, 
+					content: '是否删除选中列表',
+					btn: ['确认', '取消'],
+					yes: function(){
+							location.href = val;
+						}
+				});	
 			})
+		})
 		</script>
 		
 
