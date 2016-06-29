@@ -118,12 +118,12 @@
 		<include file="Public/script" />
 		<script>
 			$("#print").click(function(){
-				$("#zhangzhen").attr("action","{:U(table)}");
-				$("#zhangzhen").submit();
+				$("form:eq(1)").attr("action","{:U(table)}");
+				$("form:eq(1)").submit();
 			})
 			$("#excel").click(function(){
-				$("#zhangzhen").attr("action","{:U(excel)}");
-				$("#zhangzhen").submit();
+				$("form:eq(1)").attr("action","{:U(excel)}");
+				$("form:eq(1)").submit();
 			})
 		</script>
 
