@@ -26,7 +26,12 @@ class IndexController extends ComController {
 		vendor("PHPExcel.PHPExcel"); 
 		vendor("PHPExcel.PHPExcel.IOFactory");
 		$id = I('post.id');
-		$map['id'] = array('in',$id);
+		if(is_array($id)){
+			$id = implode(',',$id);
+			$map['d']  = array('in',$id);
+		}else{
+			$map['id'] = $id;
+		}
 		$Log = M('Log');	
 		$log = $Log->where($map)->select();
 		$i=1;
