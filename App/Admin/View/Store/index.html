@@ -93,12 +93,14 @@
 										<th>联系电话</th>
 										<th>发货人</th>
 										<th>运单号</th>
+										<th>订单时间</th>
 										<th>操作</th>
 									</tr>
 								</thead>
 
 								<tbody>
-									
+									<form method="post" action="{:U('del')}" id="form">
+									<volist name="order" id="val">
 										<tr>
 											<td class="center">
 												<label class="pos-rel">
@@ -106,25 +108,26 @@
 													<span class="lbl"></span>
 												</label>
 											</td>
-											<th>产品</th>
-											<td>张臻</td>
-											<td>18027824032</td>
-											<td>郑礼旺</td>
-											<td>肇庆学院星湖校区</td>
-											<td>18027824032</td>
-											<td>无名氏</td>
-											<td>2100000001</td>
+											<th>{$val['pid']}</th>
+											<td>{$val['name']}</td>
+											<td>{$val['uphone']}</td>
+											<td>{$val['buyer']}</td>
+											<td>{$val['address']}</td>
+											<td>{$val['ophone']}</td>
+											<td>{$val['kname']}</td>
+											<td>{$val['express']}</td>
+											<td>{$val['time']}</td>
 											<td>
 												<div class="action-buttons">
-													<button id="express" class="btn btn-white btn-info btn-bold">
+													<button order="{$val['id']}" class="express btn btn-white btn-info btn-bold">
 														<i class="ace-icon fa fa-print bigger-120 blue"></i>
 														打印快递单
 													</button>
-													<button id="pencil" class="btn btn-white btn-info btn-bold">
+													<button order="{$val['id']}" class="pencil btn btn-white btn-info btn-bold">
 														<i class="ace-icon fa fa-pencil bigger-120 blue"></i>
 														填写运单号
 													</button>
-													<button class="del btn btn-white btn-danger btn-bold">
+													<button val="{:U('del')}?id={$val['id']}" class="del btn btn-white btn-danger btn-bold" type="button">
 													<i class="ace-icon fa fa-trash-o bigger-120"></i>
 														删除订单
 													</button>
@@ -132,6 +135,8 @@
 												
 											</td>
 										</tr>
+									</volist>
+									</form>
 									<tr>
 										<td class="center">
 											<button id="del" class="btn btn-xs btn-danger">
@@ -139,6 +144,7 @@
 												删除
 											</button>
 										</td>
+										<td></td>
 										<td></td>
 										<td></td>
 										<td></td>
@@ -166,7 +172,8 @@
 		<include file="Public/script" />
 		<script type="text/javascript">
 			$('#allStore').addClass("active").siblings().removeClass("active");
-			$("#express").click(function(){
+			$(".express").click(function(){
+				var order = $(this).attr('order');
 				layer.open({
 				    type: 2,
 				    title: '打印页',
@@ -179,11 +186,41 @@
 			layer.config({
 			  extend: 'extend/layer.ext.js'
 			});  
-			$("#pencil").click(function(){
-				layer.prompt(function(value, index, elem){
-					$.post("{:U(addExpress)}",{express:value});
-					layer.close(index);
+			$(".pencil").click(function(){
+				var order = $(this).attr('order');
+				layer.prompt({
+					title: '输入运单号'
+					},function(value, index, elem){
+						$.post("{:U(addExpress)}",{express:value,id:order},function(data){
+							location.reload();
+						});
+						layer.close(index);
 					});
+			})
+			$("#del").click(function(){
+				layer.open({
+					icon:0,
+					title: '删除列表',
+					type: 0, 
+					content: '是否删除选中列表',
+					btn: ['确认', '取消'],
+					yes: function(){
+						$('#form').submit();
+						}
+				});	
+			})
+			$(".del").click(function(){
+				var val=$(this).attr('val');
+				layer.open({
+					icon:0,
+					title: '删除列表',
+					type: 0, 
+					content: '是否删除选中列表',
+					btn: ['确认', '取消'],
+					yes: function(){
+							location.href = val;
+						}
+				});	
 			})
 		</script>
 		

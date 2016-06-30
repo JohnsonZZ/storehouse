@@ -81,26 +81,27 @@
 										<tr>
 											<td class="center">
 												<label class="pos-rel">
-													<input type="checkbox" class="uids ace" name="id[]" value="{$val['id']}"/>
+													<input type="checkbox" class="uids ace" name="kid[]" value="{$val['kid']}"/>
 													<span class="lbl"></span>
 												</label>
 											</td>
-											<td>{$val['id']}</td>
-											<td>{$val['name']}</td>
+											<td>{$val['kid']}</td>
+											<td>{$val['kname']}</td>
 											<td>{$val['kphone']}</td>
-											<td>{$val['address']}</td>
+											<td>{$val['kaddress']}</td>
 											<td>
 												<div class="action-buttons">
-													<a id="print" class="blue" href="{:U('edit')}?id={$val['id']}">
+													<a id="print" class="blue" href="{:U('edit')}?kid={$val['kid']}">
 														<i class="ace-icon fa fa-edit bigger-130" title="修改"></i>
 													</a>
-													<a class="red del" val="{:U('del')}?id={$val['id']}" href="javascript:;">
+													<a class="red del" val="{:U('del')}?kid={$val['kid']}" href="javascript:;">
 														<i class="ace-icon fa fa-trash-o bigger-130" title="删除"></i>
 													</a>
 												</div>
 											</td>
 										</tr>
 									</volist>
+									</form>
 									<tr>
 										<td class="center">
 											<button id="del" class="btn btn-xs btn-danger" type="button">

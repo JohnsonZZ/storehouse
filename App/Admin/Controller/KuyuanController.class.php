@@ -5,7 +5,7 @@ header("Content-type:text/html;charset=utf-8");
 class KuyuanController extends ComController {
 	public function index(){
 		$Kuyuan = M("Kuyuan");
-		$kuyuan = $Kuyuan->order('id desc')->select(); 
+		$kuyuan = $Kuyuan->order('kid desc')->select(); 
 		$this->assign('kuyuan',$kuyuan);
 		$this->display();
 	}
@@ -14,9 +14,9 @@ class KuyuanController extends ComController {
 	}
 	public function edit(){
 		$Kuyuan = D("Kuyuan");
-		$id = I('get.id');
-		$kuyuan = $Kuyuan->where('id='.$id)->find(); 
-		$kuyuan['address'] = explode("-",$kuyuan['address']);
+		$kid = I('get.kid');
+		$kuyuan = $Kuyuan->where('kid='.$kid)->find(); 
+		$kuyuan['kaddress'] = explode("-",$kuyuan['kaddress']);
 		$this->assign('kuyuan',$kuyuan);
 		$this->display();
 	}
@@ -26,19 +26,19 @@ class KuyuanController extends ComController {
 			 // 如果创建失败 表示验证没有通过 输出错误提示信息
 			$this->error($Kuyuan->getError());
 		}else{
-			$data['kphone'] = I('post.phone');
+			$data['kphone'] = I('post.kphone');
 			if(!isPhone($data['kphone'])){
 				$this->error('手机号码错误');
 			}
-			$data['name'] = I('post.name');
+			$data['kname'] = I('post.kname');
 			$data['pwd'] = I('post.pwd');
 			if(!isPassword($data['pwd'])){
 				$this->error('请填写正确密码');
 			}
 			$data['salt']=base64_encode(mcrypt_create_iv(32,MCRYPT_DEV_RANDOM));
 			$data['pwd']=sha1($data['pwd'].$data['salt']);
-			$data['address'] = I('post.address');
-			$data['address'] = implode("-",$data['address']);//组合地址
+			$data['kaddress'] = I('post.kaddress');
+			$data['kaddress'] = implode("-",$data['kaddress']);//组合地址
 			$Kuyuan->add($data);
 			addlog('发放库员账号kphone='.$data['kphone']);
 			$this->success('注册成功','index');
@@ -51,14 +51,14 @@ class KuyuanController extends ComController {
 			 // 如果创建失败 表示验证没有通过 输出错误提示信息
 			$this->error($Kuyuan->getError());
 		}else{
-			$id = I('post.id');
+			$kid = I('post.kid');
 			
-			$data['kphone'] = I('post.phone');
+			$data['kphone'] = I('post.kphone');
 			if(!isPhone($data['kphone'])){//判断是否为手机号码
 				$this->error('手机号码错误');
 			}
 			
-			$data['name'] = I('post.name');
+			$data['kname'] = I('post.kname');
 			$data['pwd'] = I('post.pwd');
 			if(empty($data['pwd'])){//判断是否修改密码
 				unset($data['pwd'] );
@@ -70,10 +70,10 @@ class KuyuanController extends ComController {
 				$data['pwd']=sha1($data['pwd'].$data['salt']);
 			}
 			
-			$data['address'] = I('post.address');
-			$data['address'] = implode("-",$data['address']);
-			$Kuyuan->where('id='.$id)->save($data); 
-			addlog('修改id='.$id."库员信息");
+			$data['kaddress'] = I('post.kaddress');
+			$data['kaddress'] = implode("-",$data['kaddress']);
+			$Kuyuan->where('kid='.$kid)->save($data); 
+			addlog('修改kid='.$kid."库员信息");
 			$this->success('修改成功','index');
 		}
 	}
@@ -82,7 +82,7 @@ class KuyuanController extends ComController {
 		$lids = I('param.id');
 		if(is_array($lids)){
 			$lids = implode(',',$lids);
-			$map['id']  = array('in',$lids);
+			$map['kid']  = array('in',$lids);
 			$result = $Kuyuan->where($map)->delete();
 			if($result){
 				addlog('删除库员id='.$lids);
@@ -91,7 +91,7 @@ class KuyuanController extends ComController {
 				$this->error('删除失败');
 			}
 		}else{
-			$map['id'] = $lids;
+			$map['kid'] = $lids;
 			$result = $Kuyuan->where($map)->delete();
 			if($result){
 				addlog('删除库员id='.$lids);
