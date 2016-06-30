@@ -30,7 +30,7 @@
 								<i class="ace-icon fa fa-home home-icon"></i>
 								<a href="#">首页</a>
 							</li>
-							<li class="active">账户管理</li>
+							<li class="active">库员管理</li>
 						</ul><!-- /.breadcrumb -->
 
 						<!-- #section:basics/content.searchbox -->
@@ -70,7 +70,7 @@
 										<th>id</th>
 										<th>姓名</th>
 										<th>电话</th>
-										<th>类型</th>
+										<th>地址</th>
 										<th>操作</th>
 									</tr>
 								</thead>
@@ -88,13 +88,7 @@
 											<td>{$val['id']}</td>
 											<td>{$val['name']}</td>
 											<td>{$val['kphone']}</td>
-											<td>
-												<switch name="val.sort">
-													<case value="0">创星谷</case>
-													<case value="1">散户</case>
-													<case value="2">库员</case>
-												</switch>
-											</td>
+											<td>{$val['address']}</td>
 											<td>
 												<div class="action-buttons">
 													<a id="print" class="blue" href="{:U('edit')}?id={$val['id']}">
@@ -136,7 +130,7 @@
 		<include file="Public/footer" />
 		<include file="Public/script" />
 		<script type="text/javascript">
-			$('#allAccount').addClass("active").siblings().removeClass("active");
+			$('#allKuyuan').addClass("active").siblings().removeClass("active");
 			$('#listKuyuan').addClass("active");
 			$(function(){
 			$(".check-all").click(function(){
