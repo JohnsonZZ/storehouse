@@ -17,9 +17,11 @@ class LoginController extends Controller {
 				if($remember){
 					cookie('username',$username,604800);
 					cookie('pwd',$result['pwd'],604800);
+					cookie('id',$result['id'],604800);
 				}
 				session('username',$username);
-				cookie('pwd',$result['pwd']);
+				session('pwd',$result['pwd']);
+				session('id',$result['id']);
 				addlog('登录成功');
 				$this->redirect('Index/index');
 			} else {

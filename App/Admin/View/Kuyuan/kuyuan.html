@@ -30,7 +30,7 @@
 								<i class="ace-icon fa fa-home home-icon"></i>
 								<a href="#">首页</a>
 							</li>
-							<li class="active">账户管理</li>
+							<li class="active">库员管理</li>
 						</ul><!-- /.breadcrumb -->
 
 						<!-- #section:basics/content.searchbox -->
@@ -54,7 +54,7 @@
 						<!-- /section:settings.box -->
 						<div class="page-header">
 							<h1>
-								添加账户
+								添加库员
 							</h1>
 						</div><!-- /.page-header -->
 						<div class="row">
@@ -62,27 +62,17 @@
 								<!-- PAGE CONTENT BEGINS -->
 								<form class="form-horizontal" action="{:U('add')}" id="formAdmin" role="form" method="post">
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="sort">账户类型</label>
-										<div class="col-sm-3">
-											<select class="form-control" id="sort" name="sort">
-												<option value="0">创星谷</option>
-												<option value="1">散户</option>
-											</select>
-										</div>
-									</div>
-									<div class="space-4"></div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="phone"> 联系电话 </label>
+										<label class="col-sm-3 control-label no-padding-right" for="kphone"> 联系电话 </label>
 										<div class="col-sm-9">
-											<input type="text" id="phone" placeholder="联系电话" name="phone" maxlength="11" class="col-xs-10 col-sm-5">		
+											<input type="text" id="kphone" placeholder="联系电话" name="kphone" maxlength="11" class="col-xs-10 col-sm-5">		
 										</div>
 									</div>
 									<!-- #section:elements.form -->
 									<div class="space-4"></div>
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="username"> 姓名 </label>
+										<label class="col-sm-3 control-label no-padding-right" for="kname"> 姓名 </label>
 										<div class="col-sm-9">
-											<input type="text" id="name" placeholder="姓名" name="name" class="col-xs-10 col-sm-5">
+											<input type="text" id="kname" placeholder="姓名" name="kname" class="col-xs-10 col-sm-5">
 										</div>
 									</div>
 
@@ -104,7 +94,19 @@
 											<input type="password" id="rpwd" placeholder="重输入一次密码" name="rpwd"  class="col-xs-10 col-sm-5">		
 										</div>
 									</div>
-									
+									<div class="space-4"></div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="kaddress"> 发货地址 </label>
+										<div class="col-sm-9">
+											<input type="text" placeholder="省" name="kaddress[]" class="col-xs-5 col-sm-1">
+											<span class="input-group-addon col-sm-1" style="padding-top:9px;padding-bottom:9px;padding-right:25px;">省</span>	
+											<input type="text" placeholder="市(县)" name="kaddress[]" class="col-xs-5 col-sm-1">
+											<span class="input-group-addon col-sm-1" style="padding-top:9px;padding-bottom:9px;padding-right:45px;">市(县)</span>	
+											<input type="text" placeholder="区(镇)" name="kaddress[]" class="col-xs-5 col-sm-1">
+											<span class="input-group-addon col-sm-1" style="padding-top:9px;padding-bottom:9px;padding-right:45px;">区(镇)</span>
+											<input type="text" placeholder="详细地址" name="kaddress[]" class="col-xs-10 col-sm-5">	
+										</div>
+									</div>
 									
 									<div class="space-4"></div>
 									<div class="clearfix form-actions">
@@ -138,8 +140,9 @@
 		<include file="Public/footer" />
 		<include file="Public/script" />
 		<script type="text/javascript">
-			$('#allAccount').addClass("active").siblings().removeClass("active");
-			$('#addAccount').addClass("active");
+			$('#allKuyuan').addClass("active").siblings().removeClass("active");
+			$('#addKuyuan').addClass("active");
+			
 		</script>
 		
 

@@ -8,7 +8,7 @@
 function addlog($log,$account=false){
 	$Model = M('log');
 	if(!$account){
-		$data['user'] = session('account');
+		$data['user'] = session('username');
 		
 	}else{
 		$data['user'] = $account;

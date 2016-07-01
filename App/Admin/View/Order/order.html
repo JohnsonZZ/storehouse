@@ -60,34 +60,23 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
-								<form class="form-horizontal" action="{:U('Admin/update')}" id="formAdmin" role="form" method="post">
+								<form class="form-horizontal" action="{:U('update')}" id="formAdmin" role="form" method="post">
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="Goods">产品</label>
+										<label class="col-sm-3 control-label no-padding-right" for="pid">产品</label>
 										<div class="col-sm-3">
-											<select class="form-control" id="Goods">
-												<option value="AL">手镯</option>
-												<option value="AK">戒指</option>
-												<option value="AZ">项链</option>
+											<select class="form-control" id="pid" name="pid">
+												<option value="1">手镯</option>
+												<option value="2">戒指</option>
+												<option value="3">项链</option>
 											</select>
 										</div>
 									</div>
 									<!-- #section:elements.form -->
 									<div class="space-4"></div>
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="receiver"> 收件人 </label>
+										<label class="col-sm-3 control-label no-padding-right" for="buyer"> 收件人 </label>
 										<div class="col-sm-9">
-											<input type="text" id="receiver" placeholder="收件人" name="receiver" class="col-xs-10 col-sm-5">
-										</div>
-									</div>
-
-									<!-- /section:elements.form -->
-									<div class="space-4"></div>
-
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="city"> 城市 </label>
-
-										<div class="col-sm-9">
-											<input type="text" id="city" placeholder="城市" name="city"  class="col-xs-10 col-sm-5">
+											<input type="text" id="buyer" placeholder="收件人" name="buyer" class="col-xs-10 col-sm-5">
 										</div>
 									</div>
 									
@@ -95,7 +84,13 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="address"> 收货地址 </label>
 										<div class="col-sm-9">
-											<input type="text" id="address" placeholder="收货地址" name="address"  class="col-xs-10 col-sm-5">		
+											<input type="text" id="address" placeholder="省" name="address[]"  class="col-xs-5 col-sm-1">
+											<span class="input-group-addon col-sm-1" style="padding-top:9px;padding-bottom:9px;padding-right:25px;">省</span>	
+											<input type="text" id="address" placeholder="市(县)" name="address[]"  class="col-xs-5 col-sm-1">
+											<span class="input-group-addon col-sm-1" style="padding-top:9px;padding-bottom:9px;padding-right:45px;">市(县)</span>	
+											<input type="text" id="address" placeholder="区(镇)" name="address[]"  class="col-xs-5 col-sm-1">
+											<span class="input-group-addon col-sm-1" style="padding-top:9px;padding-bottom:9px;padding-right:45px;">区(镇)</span>
+											<input type="text" id="address" placeholder="详细地址" name="address[]"  class="col-xs-10 col-sm-5">	
 										</div>
 									</div>
 									
@@ -103,7 +98,7 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="phone"> 联系电话 </label>
 										<div class="col-sm-9">
-											<input type="text" id="phone" placeholder="联系电话" name="phone"  class="col-xs-10 col-sm-5">		
+											<input type="text" id="phone" placeholder="联系电话" name="phone" maxlength="11" class="col-xs-10 col-sm-5">		
 										</div>
 									</div>
 									<div class="space-4"></div>

@@ -68,14 +68,12 @@
 											<select class="form-control" id="sort" name="sort">
 												<option value="0">创星谷</option>
 												<option value="1">散户</option>
-												<option value="2">仓库</option>
 											</select>
 											<script>
 												var obj = document.getElementById("sort");
 												switch({$user['sort']}){
 													case 0:obj.options[0].selected = true;break;
 													case 1:obj.options[1].selected = true;break;
-													case 2:obj.options[2].selected = true;break;
 												}
 											</script>
 										</div>
@@ -84,7 +82,7 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="phone"> 联系电话 </label>
 										<div class="col-sm-9">
-											<input type="text" id="phone" placeholder="联系电话" name="phone" maxlength="11" class="col-xs-10 col-sm-5" value="{$user[phone]}" />		
+											<input type="text" id="phone" placeholder="联系电话" name="phone" maxlength="11" class="col-xs-10 col-sm-5" value="{$user[uphone]}" />		
 										</div>
 									</div>
 									<!-- #section:elements.form -->
@@ -103,7 +101,7 @@
 										<label class="col-sm-3 control-label no-padding-right" for="pwd"> 密码 </label>
 
 										<div class="col-sm-9">
-											<input type="password" id="city" placeholder="密码" name="pwd"  class="col-xs-10 col-sm-5">
+											<input type="password" id="pwd" placeholder="密码" name="pwd"  class="col-xs-10 col-sm-5">
 										</div>
 									</div>
 									
