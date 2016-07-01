@@ -97,11 +97,11 @@
 								<tbody>
 								<form method="post" id="form">
 									<volist name="order" id="val">
-										<input type="hidden" name="sid[]" value="{$val['id']}"/>
+										<input type="hidden" name="sid[]" value="{$val['oid']}"/>
 										<tr>
 											<td class="center">
 												<label class="pos-rel">
-													<input type="checkbox" class="uids ace" name="id[]" value="{$val['id']}"/>
+													<input type="checkbox" class="uids ace" name="id[]" value="{$val['oid']}"/>
 													<span class="lbl"></span>
 												</label>
 											</td>
@@ -112,10 +112,10 @@
 											<td>{$val['ophone']}</td>
 											<td>
 												<div class="action-buttons">
-													<a id="print" class="blue" href="{:U('edit')}?id={$val['id']}">
+													<a id="print" class="blue" href="{:U('edit')}?id={$val['oid']}">
 														<i class="ace-icon fa fa-edit bigger-130" title="打印"></i>
 													</a>
-													<a class="red del" val="{:U('del')}?id={$val['id']}" href="javascript:;">
+													<a class="red del" val="{:U('del')}?id={$val['oid']}" href="javascript:;">
 														<i class="ace-icon fa fa-trash-o bigger-130" title="删除"></i>
 													</a>
 												</div>

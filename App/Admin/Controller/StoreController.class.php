@@ -6,7 +6,7 @@ class StoreController extends ComController {
     public function index(){
 		$Order = M('Order');
 		$order= $Order
-					->field('hc_order.id,pid,buyer,ophone,address,express,time,hc_user.name,hc_user.uphone,hc_kuyuan.kname')
+					->field('hc_order.oid,pid,buyer,ophone,address,express,time,hc_user.name,hc_user.uphone,hc_kuyuan.kname')
 					->join('LEFT JOIN hc_user ON hc_order.uid = hc_user.id')
 					->join('LEFT JOIN hc_kuyuan ON hc_kuyuan.kid = hc_order.kid')
 					->select();
@@ -19,19 +19,19 @@ class StoreController extends ComController {
 	public function addExpress(){
 		$data['express'] = I('post.express');
 		$data['kid'] = session('id');
-		$data['id'] = I('post.id');
+		$data['oid'] = I('post.id');
 		
 		$Order = M('Order');
-		$Order->where('id='.$data['id'])->save($data); 
+		$Order->where('oid='.$data['oid'])->save($data); 
 		
-		$this->ajaxReturn($data['id']);
+		$this->ajaxReturn($data['oid']);
 	}
 	public function del(){
 		$Order = M('Order');
 		$lids = I('param.id');
 		if(is_array($lids)){
 			$lids = implode(',',$lids);
-			$map['id']  = array('in',$lids);
+			$map['oid']  = array('in',$lids);
 			$result = $Order->where($map)->delete();
 			if($result){
 				addlog('删除订单'.$lids);
@@ -40,7 +40,7 @@ class StoreController extends ComController {
 				$this->error('删除失败');
 			}
 		}else{
-			$map['id'] = $lids;
+			$map['oid'] = $lids;
 			$result = $Order->where($map)->delete();
 			if($result){
 				addlog('删除订单'.$lids);
@@ -51,16 +51,16 @@ class StoreController extends ComController {
 		}
 	}
 	public function table(){
-		$id = I('post.id');
-		if(is_array($id)){
-			$id = implode(',',$id);
-			$map['hc_order.id']  = array('in',$id);
+		$oid = I('post.id');
+		if(is_array($oid)){
+			$oid = implode(',',$oid);
+			$map['hc_order.oid']  = array('in',$oid);
 		}else{
-			$map['hc_order.id'] = $id;
+			$map['hc_order.oid'] = $oid;
 		}
 		$Order = M('Order');
 		$order= $Order
-					->field('hc_order.id,pid,buyer,ophone,address,express,time,hc_user.name,hc_user.uphone,hc_kuyuan.kname')
+					->field('hc_order.oid,pid,buyer,ophone,address,express,time,hc_user.name,hc_user.uphone,hc_kuyuan.kname')
 					->join('LEFT JOIN hc_user ON hc_order.uid = hc_user.id')
 					->join('LEFT JOIN hc_kuyuan ON hc_kuyuan.kid = hc_order.kid')
 					->where($map)
@@ -68,19 +68,22 @@ class StoreController extends ComController {
 		$this->assign('order',$order);
 		$this->display();
 	}
+	public function dayin(){
+		$this->display();
+	}
 	public function excel(){
 		vendor("PHPExcel.PHPExcel"); 
 		vendor("PHPExcel.PHPExcel.IOFactory");
-		$id = I('post.id');
-		if(is_array($id)){
-			$id = implode(',',$id);
-			$map['hc_order.id']  = array('in',$id);
+		$oid = I('post.id');
+		if(is_array($oid)){
+			$oid = implode(',',$oid);
+			$map['hc_order.oid']  = array('in',$oid);
 		}else{
-			$map['hc_order.id'] = $id;
+			$map['hc_order.oid'] = $oid;
 		}
 		$Order = M('Order');
 		$order= $Order
-					->field('hc_order.id,pid,buyer,ophone,address,express,time,hc_user.name,hc_user.uphone,hc_kuyuan.kname')
+					->field('hc_order.oid,pid,buyer,ophone,address,express,time,hc_user.name,hc_user.uphone,hc_kuyuan.kname')
 					->join('LEFT JOIN hc_user ON hc_order.uid = hc_user.id')
 					->join('LEFT JOIN hc_kuyuan ON hc_kuyuan.kid = hc_order.kid')
 					->where($map)
