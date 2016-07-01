@@ -33,7 +33,7 @@ class LoginController extends Controller {
 	}
 	public function quit(){
 		session(null);
-		cookie(null);
+		cookie(null,'hc_');
 		$this->redirect('index');
 	}
 

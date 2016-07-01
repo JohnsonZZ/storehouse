@@ -192,6 +192,7 @@
 				layer.prompt({
 					title: '输入运单号'
 					},function(value, index, elem){
+						layer.msg('订单信息正在写入...', {icon: 16});
 						$.post("{:U(addExpress)}",{express:value,id:order},function(data){
 							location.reload();
 						});
