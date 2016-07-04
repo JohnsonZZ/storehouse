@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<include file="Public/header"  title="华创 | 控制台"/>
+
+	</head>
+
+	<body class="no-skin">
+		<include file="Public/nav" />
+
+		<!-- /section:basics/navbar.layout -->
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+			<include file="Public/sidebar" />
+			
+	
+			<!-- /section:basics/sidebar -->
+			<div class="main-content">
+				<div class="main-content-inner">
+					<!-- #section:basics/content.breadcrumbs -->
+					<div class="breadcrumbs" id="breadcrumbs">
+						<script type="text/javascript">
+							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+						</script>
+
+						<ul class="breadcrumb">
+							<li>
+								<i class="ace-icon fa fa-home home-icon"></i>
+								<a href="#">首页</a>
+							</li>
+							<li class="active">仓储管理</li>
+						</ul><!-- /.breadcrumb -->
+
+						<!-- #section:basics/content.searchbox -->
+						<div class="nav-search" id="nav-search">
+							<form class="form-search">
+								<span class="input-icon">
+									<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+									<i class="ace-icon fa fa-search nav-search-icon"></i>
+								</span>
+							</form>
+						</div><!-- /.nav-search -->
+
+						<!-- /section:basics/content.searchbox -->
+					</div>
+
+					<!-- /section:basics/content.breadcrumbs -->
+					<div class="page-content">
+						<div class="page-header">
+							<h1>
+								个人中心
+							</h1>
+						</div><!-- /.page-header -->
+
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+								
+
+								<div>
+									<div id="user-profile-1" class="user-profile row">
+										
+										<div class="col-xs-12 col-sm-12">
+											<div class="center">
+												<span class="btn btn-app btn-sm btn-light no-hover">
+													
+													
+												<i class="ace-icon fa fa-shopping-cart bigger-170"></i>
+												<span class="line-height-1 smaller-90 blue"> 1,411 </span>
+
+												</span>
+
+												
+
+												<span class="btn btn-app btn-sm btn-primary no-hover">
+													<i class="ace-icon fa fa-envelope bigger-170"></i>
+
+													<span class="line-height-1 smaller-90"> 55 </span>
+												</span>
+											</div>
+
+											<div class="space-12"></div>
+
+											<!-- #section:pages/profile.info -->
+											<div class="profile-user-info profile-user-info-striped">
+												<div class="profile-info-row">
+													<div class="profile-info-name"> 姓名 </div>
+
+													<div class="profile-info-value">
+														<span class="editable" id="username">{$kname}</span>
+													</div>
+												</div>
+
+											
+
+												<div class="profile-info-row">
+													<div class="profile-info-name"> 联系方式</div>
+
+													<div class="profile-info-value">
+														<span class="editable" id="signup">{$kphone}</span>
+													</div>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<!-- PAGE CONTENT ENDS -->
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+					</div><!-- /.page-content -->
+				</div>
+			</div><!-- /.main-content -->
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+			</a>
+		</div><!-- /.main-container -->
+
+		<!-- basic scripts -->
+		<include file="Public/footer" />
+		<include file="Public/script" />
+		<script type="text/javascript">
+			
+		</script>
+		
+
+
+	</body>
+</html>
