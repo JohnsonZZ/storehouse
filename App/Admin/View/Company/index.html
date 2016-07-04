@@ -68,7 +68,7 @@
 													</label>
 												</th>
 												<th class="col-xs-3">公司</th>
-												<th class="col-xs-7">分类  &ensp;(点击查看分类产品)</th>
+												<th class="col-xs-7">分类</th>
 												<th class="col-xs-1">
 													操作
 												</th>
@@ -76,24 +76,23 @@
 										</thead>
 
 										<tbody>
-											<foreach item="val" name="company">
+											<foreach item="val" name="list">
 												<tr>
 													<td class="center col-xs-1">
 														<label class="pos-rel">
-															<input type="checkbox" class="ace checkbox" />
+															<input type="checkbox" class="ace checkbox" name="cid[]" value="{$val.cid}"/>
 															<span class="lbl"></span>
 														</label>
 													</td>
 													<td>{$val.company}</td>
-													<input type="hideen" value='{$val.sid}' name="sortid"/>
-													<td><a href="#" title="sort">{$val.sort}</a></td>
+													<td>{$val.sort}</td>
 													<td>
 														<div class="hidden-sm hidden-xs action-buttons">
-																<a class="green" href="{:U('edit')}?id={$val.id}" >
+																<a class="green" href="{:U('edit')}?cid={$val.cid}" >
 																	<i class="ace-icon fa fa-pencil bigger-130" title="修改"></i>
 																</a>
 									
-																<a class="red del" val="{:U('del')}?id={$val.id}" >
+																<a class="red del" val="{:U('del')}?cid={$val.cid}" >
 																	<i class="ace-icon fa fa-trash-o bigger-130" title="删除"></i>
 																</a>
 														</div>
