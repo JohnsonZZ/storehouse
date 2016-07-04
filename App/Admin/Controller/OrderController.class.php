@@ -24,10 +24,10 @@ class OrderController extends ComController {
 		$data['buyer'] = I('post.buyer');
 		$data['address'] = I('post.address');
 		$data['address'] = implode("-",$data['address']);
-		$id = I('post.id');
+		$oid = I('post.id');
 		if($id){
-			$Order->where('id='.$id)->save($data); 
-			addlog('修改id='.$id."单号信息");
+			$Order->where('oid='.$oid)->save($data); 
+			addlog('修改id='.$oid."单号信息");
 			$this->success('修改成功','index');
 		}else{
 			$Order->add($data);
@@ -36,8 +36,8 @@ class OrderController extends ComController {
 		}
 	}
 	public function edit(){
-		$id = I('get.id');
-		$order = M('Order')->field('id,pid,buyer,address,phone')->where('id='.$id)->find();
+		$oid = I('get.id');
+		$order = M('Order')->field('oid,pid,buyer,address,ophone')->where('oid='.$oid)->find();
 		$order['address'] = explode("-",$order['address']);
 		$this->assign('order',$order);
 		$this->display();
@@ -47,7 +47,7 @@ class OrderController extends ComController {
 		$lids = I('param.id');
 		if(is_array($lids)){
 			$lids = implode(',',$lids);
-			$map['id']  = array('in',$lids);
+			$map['oid']  = array('in',$lids);
 			$result = $Order->where($map)->delete();
 			if($result){
 				addlog('删除订单'.$lids);
@@ -56,7 +56,7 @@ class OrderController extends ComController {
 				$this->error('删除失败');
 			}
 		}else{
-			$map['id'] = $lids;
+			$map['oid'] = $lids;
 			$result = $Order->where($map)->delete();
 			if($result){
 				addlog('删除订单'.$lids);
@@ -67,10 +67,10 @@ class OrderController extends ComController {
 		}
 	}
 	public function table(){
-		$id = I('post.sid');
-		$id = implode(',',$id);
+		$oid = I('post.sid');
+		$oid = implode(',',$oid);
 		$Model = new \Think\Model();
-		$sql = "select hc_order.*,hc_user.name from hc_order, hc_user where hc_order.uid = hc_user.id AND hc_order.id in ($id)";
+		$sql = "select hc_order.*,hc_user.name from hc_order, hc_user where hc_order.uid = hc_user.id AND hc_order.oid in ($oid)";
 		$order = $Model->query($sql);
 		$this->assign('order',$order);
 		$this->display();
@@ -78,10 +78,10 @@ class OrderController extends ComController {
 	public function excel(){
 		vendor("PHPExcel.PHPExcel"); 
 		vendor("PHPExcel.PHPExcel.IOFactory");
-		$id = I('post.sid');
-		$id = implode(',',$id);
+		$oid = I('post.sid');
+		$oid = implode(',',$oid);
 		$Model = new \Think\Model();
-		$sql = "select hc_order.*,hc_user.name from hc_order, hc_user where hc_order.uid = hc_user.id AND hc_order.id in ($id)";
+		$sql = "select hc_order.*,hc_user.name from hc_order, hc_user where hc_order.uid = hc_user.id AND hc_order.oid in ($oid)";
 		$order = $Model->query($sql);
 		$i=1;
 		$objPHPExcel = new \PHPExcel();  		

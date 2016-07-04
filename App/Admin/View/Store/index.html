@@ -99,16 +99,17 @@
 								</thead>
 
 								<tbody>
-									<form method="post" action="{:U('del')}" id="form">
+									<form method="post" id="form">
 									<volist name="order" id="val">
+										<input type="hidden" name="id[]" value="{$val['oid']}"/>
 										<tr>
 											<td class="center">
 												<label class="pos-rel">
-													<input type="checkbox" class="uids ace" name="id[]" value="{$val['id']}"/>
+													<input type="checkbox" class="uids ace" name="id[]" value="{$val['oid']}"/>
 													<span class="lbl"></span>
 												</label>
 											</td>
-											<th>{$val['pid']}</th>
+											<td>{$val['pid']}</td>
 											<td>{$val['name']}</td>
 											<td>{$val['uphone']}</td>
 											<td>{$val['buyer']}</td>
@@ -119,15 +120,15 @@
 											<td>{$val['time']}</td>
 											<td>
 												<div class="action-buttons">
-													<button order="{$val['id']}" class="express btn btn-white btn-info btn-bold">
+													<button order="{$val['oid']}" class="express btn btn-white btn-info btn-bold" type="button">
 														<i class="ace-icon fa fa-print bigger-120 blue"></i>
 														打印快递单
 													</button>
-													<button order="{$val['id']}" class="pencil btn btn-white btn-info btn-bold">
+													<button order="{$val['oid']}" class="pencil btn btn-white btn-info btn-bold" type="button">
 														<i class="ace-icon fa fa-pencil bigger-120 blue"></i>
 														填写运单号
 													</button>
-													<button val="{:U('del')}?id={$val['id']}" class="del btn btn-white btn-danger btn-bold" type="button">
+													<button val="{:U('del')}?id={$val['oid']}" class="del btn btn-white btn-danger btn-bold" type="button">
 													<i class="ace-icon fa fa-trash-o bigger-120"></i>
 														删除订单
 													</button>
@@ -180,7 +181,7 @@
 				    shadeClose: true,
 				    shade: 0.8,
 				    area: ['1358px', '900px'],
-				    content: "{:U(table)}" //iframe的url
+				    content: "{:U(dayin)}" //iframe的url
 			}); 
 			})
 			layer.config({
@@ -191,6 +192,7 @@
 				layer.prompt({
 					title: '输入运单号'
 					},function(value, index, elem){
+						layer.msg('订单信息正在写入...', {icon: 16});
 						$.post("{:U(addExpress)}",{express:value,id:order},function(data){
 							location.reload();
 						});
@@ -205,7 +207,8 @@
 					content: '是否删除选中列表',
 					btn: ['确认', '取消'],
 					yes: function(){
-						$('#form').submit();
+						$("form:eq(1)").attr("action","{:U(del)}");
+						$('form:eq(1)').submit();
 						}
 				});	
 			})
@@ -221,6 +224,15 @@
 							location.href = val;
 						}
 				});	
+			})
+			$("#print").click(function(){
+				$("form:eq(1)").attr("action","{:U(table)}");
+				$("form:eq(1)").attr("target","_blank");
+				$("form:eq(1)").submit();
+			})
+			$("#excel").click(function(){
+				$("form:eq(1)").attr("action","{:U(excel)}");
+				$("form:eq(1)").submit();
 			})
 		</script>
 		
