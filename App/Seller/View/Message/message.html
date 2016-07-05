@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<include file="Public/header"  title="华创 | 控制台"/>
+
+	</head>
+
+	<body class="no-skin">
+		<include file="Public/nav" />
+
+		<!-- /section:basics/navbar.layout -->
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+			<include file="Public/sidebar" />
+			
+	
+			<!-- /section:basics/sidebar -->
+			<div class="main-content">
+				<div class="main-content-inner">
+					<!-- #section:basics/content.breadcrumbs -->
+					<div class="breadcrumbs" id="breadcrumbs">
+						<script type="text/javascript">
+							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+						</script>
+
+						<ul class="breadcrumb">
+							<li>
+								<i class="ace-icon fa fa-home home-icon"></i>
+								<a href="#">首页</a>
+							</li>
+							<li class="active">消息管理</li>
+						</ul><!-- /.breadcrumb -->
+
+						<!-- #section:basics/content.searchbox -->
+						<div class="nav-search" id="nav-search">
+							<form class="form-search">
+								<span class="input-icon">
+									<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+									<i class="ace-icon fa fa-search nav-search-icon"></i>
+								</span>
+							</form>
+						</div><!-- /.nav-search -->
+
+						<!-- /section:basics/content.searchbox -->
+					</div>
+
+					<!-- /section:basics/content.breadcrumbs -->
+					<div class="page-content">
+						<!-- #section:settings.box -->
+						
+
+						<!-- /section:settings.box -->
+						<div class="page-header">
+							<h1>
+								查看消息
+								<small>
+									紧急情况致电：18027824032
+								</small>
+							</h1>
+							
+						</div><!-- /.page-header -->
+						<div class="col-xs-12">
+							<!-- #section:pages/inbox -->
+							<div class="tabbable">
+								<ul id="inbox-tabs" class="inbox-tabs nav nav-tabs padding-16 tab-size-bigger tab-space-1">
+									<!-- #section:pages/inbox.compose-btn -->
+									<li class="li-new-mail pull-right">
+										<a href="{:U('Message/message')}" class="btn-new-mail">
+											<span class="btn btn-purple no-border">
+												<i class="ace-icon fa fa-envelope bigger-130"></i>
+												<span class="bigger-110">发送消息</span>
+											</span>
+										</a>
+									</li><!-- /.li-new-mail -->
+
+									<!-- /section:pages/inbox.compose-btn -->
+									<li class="active">
+										<a data-toggle="tab" href="#inbox" data-target="inbox">
+											<i class="blue ace-icon fa fa-inbox bigger-130"></i>
+											<span class="bigger-110">收件箱</span>
+										</a>
+									</li>
+									
+								</ul>
+
+							</div>
+
+							<div id="id-message-item-navbar" class="message-navbar clearfix">
+								<div class="message-bar">
+									<div class="message-toolbar">
+										<div class="inline position-relative align-left">
+											<button type="button" class="btn-white btn-primary btn btn-xs dropdown-toggle" data-toggle="dropdown">
+												<span class="bigger-110">操作</span>
+
+												<i class="ace-icon fa fa-caret-down icon-on-right"></i>
+											</button>
+
+											<ul class="dropdown-menu dropdown-lighter dropdown-caret dropdown-125">
+												<li>
+													<a href="#">
+														<i class="ace-icon fa fa-mail-reply blue"></i>&nbsp; 回复
+													</a>
+												</li>
+
+												
+												<li class="divider"></li>
+
+												<li>
+													<a href="#">
+														<i class="ace-icon fa fa-trash-o red bigger-110"></i>&nbsp; 删除
+													</a>
+												</li>
+											</ul>
+										</div>
+
+										<button type="button" class="btn btn-xs btn-white btn-primary">
+											<i class="ace-icon fa fa-trash-o bigger-125 orange"></i>
+											<span class="bigger-110">删除</span>
+										</button>
+									</div>
+								</div>
+
+								<div>
+									<div class="messagebar-item-left">
+										<a href="{:U('Message/index')}" class="btn-back-message-list">
+											<i class="ace-icon fa fa-arrow-left blue bigger-110 middle"></i>
+											<b class="bigger-110 middle">返回</b>
+										</a>
+									</div>
+
+									<div class="messagebar-item-right">
+										<i class="ace-icon fa fa-clock-o bigger-110 orange"></i>
+										<span class="grey">今天, 7:15 pm</span>
+									</div>
+								</div>
+							</div>
+
+							
+							<!-- /section:pages/inbox.navbar -->
+							<div class="message-list-container">
+								<!-- #section:pages/inbox.message-list -->
+								<div class="message-content" id="id-message-content">
+									<!-- #section:pages/inbox.message-header -->
+									<div class="message-header clearfix">
+										<div class="pull-left">
+											<span class="blue bigger-125">信件功能暂未启用，敬请期待。 </span>
+
+											<div class="space-4"></div>
+
+											<i class="ace-icon fa fa-star orange2"></i>
+
+											&nbsp;
+											
+											&nbsp;
+											<a href="#" class="sender">超级管理员</a>
+
+											&nbsp;
+											<i class="ace-icon fa fa-clock-o bigger-110 orange middle"></i>
+											<span class="time grey">今天, 7:15 pm</span>
+										</div>
+
+										<div class="pull-right action-buttons">
+											<a href="#">
+												<i class="ace-icon fa fa-reply green icon-only bigger-130"></i>
+											</a>
+
+											<a href="#">
+												<i class="ace-icon fa fa-mail-forward blue icon-only bigger-130"></i>
+											</a>
+
+											<a href="#">
+												<i class="ace-icon fa fa-trash-o red icon-only bigger-130"></i>
+											</a>
+										</div>
+									</div>
+
+									<!-- /section:pages/inbox.message-header -->
+									<div class="hr hr-double"></div>
+
+									<!-- #section:pages/inbox.message-body -->
+									<div class="message-body ace-scroll" style="position: relative;">
+										<div class="scroll-content">
+											敬请期待哦！
+										</div>
+									</div>
+
+									<!-- /section:pages/inbox.message-body -->
+									<div class="hr hr-double"></div>
+
+								</div>
+
+								<!-- /section:pages/inbox.message-list -->
+							</div>
+
+								<!-- #section:pages/inbox.message-footer -->
+							<div class="message-footer clearfix hide">
+								<div class="pull-left"> 151 messages total </div>
+
+								<div class="pull-right">
+									<div class="inline middle"> page 1 of 16 </div>
+
+									&nbsp; &nbsp;
+									<ul class="pagination middle">
+										<li class="disabled">
+											<span>
+												<i class="ace-icon fa fa-step-backward middle"></i>
+											</span>
+										</li>
+
+										<li class="disabled">
+											<span>
+												<i class="ace-icon fa fa-caret-left bigger-140 middle"></i>
+											</span>
+										</li>
+
+										<li>
+											<span>
+												<input value="1" maxlength="3" type="text">
+											</span>
+										</li>
+
+										<li>
+											<a href="#">
+												<i class="ace-icon fa fa-caret-right bigger-140 middle"></i>
+											</a>
+										</li>
+
+										<li>
+											<a href="#">
+												<i class="ace-icon fa fa-step-forward middle"></i>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="message-footer message-footer-style2 clearfix">
+								<div class="pull-left"> 紧急情况致电：18027824032 </div>
+
+								
+							</div>
+
+														<!-- /section:pages/inbox.message-footer -->
+						</div>
+					</div><!-- /.tabbable -->
+
+										<!-- /section:pages/inbox -->
+				</div>
+			</div><!-- /.page-content -->
+		</div>
+		
+
+		<!-- basic scripts -->
+		<include file="Public/footer" />
+		<include file="Public/script" />
+		<script type="text/javascript">
+			$('#allMessage').addClass("active").siblings().removeClass("active");
+			$('#listMessage').addClass("active");
+			$("#print").click(function(){
+				layer.open({
+				    type: 2,
+				    title: '打印页',
+				    shadeClose: true,
+				    shade: 0.8,
+				    area: ['1358px', '900px'],
+				    content: "{:U(table)}"
+			}); 
+			})
+			
+		</script>
+		
+
+
+	</body>
+</html>

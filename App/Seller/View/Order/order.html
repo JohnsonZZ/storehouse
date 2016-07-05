@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<include file="Public/header"  title="华创 | 控制台"/>
+
+	</head>
+
+	<body class="no-skin">
+		<include file="Public/nav" />
+
+		<!-- /section:basics/navbar.layout -->
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+			<include file="Public/sidebar" />
+			
+	
+			<!-- /section:basics/sidebar -->
+			<div class="main-content">
+				<div class="main-content-inner">
+					<!-- #section:basics/content.breadcrumbs -->
+					<div class="breadcrumbs" id="breadcrumbs">
+						<script type="text/javascript">
+							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+						</script>
+
+						<ul class="breadcrumb">
+							<li>
+								<i class="ace-icon fa fa-home home-icon"></i>
+								<a href="#">首页</a>
+							</li>
+							<li class="active">订单管理</li>
+						</ul><!-- /.breadcrumb -->
+
+						<!-- #section:basics/content.searchbox -->
+						<div class="nav-search" id="nav-search">
+							<form class="form-search">
+								<span class="input-icon">
+									<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+									<i class="ace-icon fa fa-search nav-search-icon"></i>
+								</span>
+							</form>
+						</div><!-- /.nav-search -->
+
+						<!-- /section:basics/content.searchbox -->
+					</div>
+
+					<!-- /section:basics/content.breadcrumbs -->
+					<div class="page-content">
+						<!-- #section:settings.box -->
+						
+
+						<!-- /section:settings.box -->
+						<div class="page-header">
+							<h1>
+								发送订单
+							</h1>
+						</div><!-- /.page-header -->
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+								<form class="form-horizontal" action="{:U('update')}" id="formAdmin" role="form" method="post">
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="pid">产品</label>
+										<div class="col-sm-3">
+											<select class="form-control" id="pid" name="pid">
+												<option value="1">手镯</option>
+												<option value="2">戒指</option>
+												<option value="3">项链</option>
+											</select>
+										</div>
+									</div>
+									<!-- #section:elements.form -->
+									<div class="space-4"></div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="buyer"> 收件人 </label>
+										<div class="col-sm-9">
+											<input type="text" id="buyer" placeholder="收件人" name="buyer" class="col-xs-10 col-sm-5">
+										</div>
+									</div>
+									
+									<div class="space-4"></div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="address"> 收货地址 </label>
+										<div class="col-sm-9">
+											<input type="text" id="address" placeholder="省" name="address[]"  class="col-xs-5 col-sm-1">
+											<span class="input-group-addon col-sm-1" style="padding-top:9px;padding-bottom:9px;padding-right:25px;">省</span>	
+											<input type="text" id="address" placeholder="市(县)" name="address[]"  class="col-xs-5 col-sm-1">
+											<span class="input-group-addon col-sm-1" style="padding-top:9px;padding-bottom:9px;padding-right:45px;">市(县)</span>	
+											<input type="text" id="address" placeholder="区(镇)" name="address[]"  class="col-xs-5 col-sm-1">
+											<span class="input-group-addon col-sm-1" style="padding-top:9px;padding-bottom:9px;padding-right:45px;">区(镇)</span>
+											<input type="text" id="address" placeholder="详细地址" name="address[]"  class="col-xs-10 col-sm-5">	
+										</div>
+									</div>
+									
+									<div class="space-4"></div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="phone"> 联系电话 </label>
+										<div class="col-sm-9">
+											<input type="text" id="phone" placeholder="联系电话" name="phone" maxlength="11" class="col-xs-10 col-sm-5">		
+										</div>
+									</div>
+									<div class="space-4"></div>
+									<div class="clearfix form-actions">
+										<div class="col-md-offset-3 col-md-9">
+											<button class="btn btn-info addButton" type="submit">
+												<i class="ace-icon fa fa-check bigger-110"></i>
+												提交
+											</button>
+
+											&nbsp; &nbsp; &nbsp;
+											<button class="btn" type="reset">
+												<i class="ace-icon fa fa-undo bigger-110"></i>
+												重置
+											</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					
+					</div><!-- /.page-content -->
+				</div>
+			</div><!-- /.main-content -->
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+			</a>
+		</div><!-- /.main-container -->
+
+		<!-- basic scripts -->
+		<include file="Public/footer" />
+		<include file="Public/script" />
+		<script type="text/javascript">
+			$('#allOrder').addClass("active").siblings().removeClass("active");
+			$('#addOrder').addClass("active");
+		</script>
+		
+
+
+	</body>
+</html>
