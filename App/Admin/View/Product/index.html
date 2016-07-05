@@ -96,8 +96,15 @@
 													<span class="lbl"></span>
 												</label>
 											</th>
-											<th>图片</th>
-											<th>内容</th>								
+											<th class="center">产品名</th>
+											<th class="center">公司</th>
+											<th class="center">分类</th>
+											<th class="center">出厂价</th>
+											<th class="center">建议售价</th>
+											<th class="center">产品总量</th>
+											<th class="center">售出数量</th>	
+											<th class="center">售出总价</th>	
+											<th class="center">时间</th>
 											<th>
 												操作
 											</th>
@@ -105,23 +112,31 @@
 									</thead>
 
 									<tbody>
-										 <foreach item="val" name="goods" >
+										 <foreach item="val" name="product" >
 											<tr>
 												<td class="center">
 													<label class="pos-rel">
-														<input type="checkbox" class="uids ace" name="id[]" value="{$val['id']}"/>
+														<input type="checkbox" class="ace pid" name="pid[]" value="{$val['pid']}"/>
 														<span class="lbl"></span>
 													</label>
 												</td>
-												<td>{$val.href}</td>
-												<td>{$val.content}</td>
+												<td class="center product-name">{$val.name}<div class="product-name-div" ><img class="product-name-img" src="__PUBLIC__/upload/image/{$val.photo}"  height="200" width="200"> </div></td>
+												
+												<td class="center">{$val.company}</td>
+												<td class="center">{$val.sort}</td>
+												<td class="center">{$val.price}</td>
+												<td class="center">{$val.aprice}</td>
+												<td class="center">{$val.psum}</td>
+												<td class="center">{$val.ssum}</td>
+												<td class="center">{$val.sprice}</td>
+												<td class="center">{$val.time}</td>
 												<td>
 													<div class="hidden-sm hidden-xs action-buttons">
-														<a class="blue" href="{:U('edit')}?id={$val.id}">
+														<a class="blue" href="{:U('edit')}?pid={$val.pid}">
 															<i class="ace-icon fa fa-pencil bigger-130" title="修改"></i>
 														</a>
 
-														<a class="red del" val="{:U('del')}?id={$val['id']}" href="javascript:;">
+														<a class="red del" val="{:U('del')}?pid={$val['pid']}" href="javascript:;">
 															<i class="ace-icon fa fa-trash-o bigger-130" title="删除"></i>
 														</a>
 													</div>
@@ -134,10 +149,7 @@
 													<i class="ace-icon fa fa-trash-o bigger-110"></i>
 													删除
 												</button>
-											</td>
-											<td></td>
-											<td></td>
-											<td></td>
+											</td>											
 										</tr>
 									</tbody>
 								</table>
@@ -159,45 +171,52 @@
 			$('#allProduct').addClass("active").siblings().removeClass("active");
 			$('#listProduct').addClass("active");
 			$(function(){
-			$(".check-all").click(function(){
-				$(".uids").prop("checked", this.checked);
-			});
-			$(".uids").click(function(){
-				$(".uids").each(function(i){
-					if(!this.checked){
-						$(".check-all").prop("checked", false);
-						return false;
-					}else{
-						$(".check-all").prop("checked", true);
-					}
+				$(".check-all").click(function(){
+					$(".pid").prop("checked", this.checked);
 				});
-			})
-			$("#del").click(function(){
-				layer.open({
-					icon:0,
-					title: '删除列表',
-					type: 0, 
-					content: '是否删除选中列表',
-					btn: ['确认', '取消'],
-					yes: function(){
-						$('#form').submit();
+				$(".pid").click(function(){
+					$(".pid").each(function(i){
+						if(!this.checked){
+							$(".check-all").prop("checked", false);
+							return false;
+						}else{
+							$(".check-all").prop("checked", true);
 						}
-				});	
+					});
+				});
+				$("#del").click(function(){
+					layer.open({
+						icon:0,
+						title: '删除列表',
+						type: 0, 
+						content: '是否删除选中列表',
+						btn: ['确认', '取消'],
+						yes: function(){
+							$('#form').submit();
+							}
+					});	
+				});
+				$(".del").click(function(){
+					var val=$(this).attr('val');
+					layer.open({
+						icon:0,
+						title: '删除列表',
+						type: 0, 
+						content: '是否删除选中列表',
+						btn: ['确认', '取消'],
+						yes: function(){
+								location.href = val;
+							}
+					});	
+				});
+				$('.product-name').hover(function(){
+					$('.product-name-img').show();
+					},
+					function(){
+					$('.product-name-img').hide();		
+					}
+				);
 			})
-			$(".del").click(function(){
-				var val=$(this).attr('val');
-				layer.open({
-					icon:0,
-					title: '删除列表',
-					type: 0, 
-					content: '是否删除选中列表',
-					btn: ['确认', '取消'],
-					yes: function(){
-							location.href = val;
-						}
-				});	
-			})
-		})
 		</script>
 	</body>
 </html>

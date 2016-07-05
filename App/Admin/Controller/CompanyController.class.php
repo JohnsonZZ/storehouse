@@ -21,7 +21,6 @@ class CompanyController extends ComController {
 				}
 			}
 		}
-		dump($_SERVER['HTTP_HOST']);
 		$this->assign('list',$list);
 		$this->display();
 	}
@@ -143,25 +142,28 @@ class CompanyController extends ComController {
 		if( is_array($cid) ){
 			$cid = implode(',',$cid);
 			$map['cid']  = array('in',$cid);
+			$company = $Company -> field('name') -> where($map) -> select();
+			$company = implode(',',$company);
 			$result1 = $Company -> where($map) -> delete();
-			$result2 = $Sort -> where($map) -> delete();
-			//$result = $Sort -> where($map) -> delete();					   //暂时没有删除公司分类			
+			$result2 = $Sort -> where($map) -> delete();		
 		}
 		else{
+			$company = $Company -> field('company') -> where('cid='.$cid) -> find();
 			$result1 = $Company -> where('cid='.$cid) -> delete();
 			$result2 = $Sort -> where('cid='.$cid) -> delete();
-			//$result = $Sort -> where('cid='.$cid) -> delete();				
+				
 		}
 		if($result1){
 			if($result2){
-			$this->success('成功删除公司及其分类', 'index');
+				addlog('成功删除公司及其分类：'.$company['company']);
+			$this->success('成功删除公司及其分类：'.$company['company'], 'index');
 			}else{
-				addlog("删除公司成功，分类删除失败");
-				$this->success('成功删除公司，但分类删除失败', 'index');
+				addlog("删除公司成功，分类删除失败：".$company['company']);
+				$this->success('成功删除公司，但分类删除失败：'.$company['company'], 'index');
 				}
 		} else {
-			addlog("删除公司及其分类失败");
-			$this->error('删除公司及其分类失败');
+			addlog("删除公司及其分类失败：".$company['company']);
+			$this->error('删除公司及其分类失败：'.$company['company']);
 		}		
 	}
 }

@@ -62,28 +62,79 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
-								<form class="form-horizontal" role="form"  action="{:U('update')}"  id="Goodsform" method="post" enctype="multipart/form-data">
+								<form class="form-horizontal" role="form"  action="{:U('update')}"  id="productform" method="post" enctype="multipart/form-data">
+									<input type="hidden" name="pid" value="{$product.pid}" />
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="cid">公司名</label>
+										<div class="col-sm-9">
+											<select id="cid" name="cid" class="col-xs-10 col-sm-5">
+												<option value="0" class="cid" >选择公司</option>
+												<foreach item="val" name="company" >
+													<option value="{$val.cid}"  class="company">{$val.company}</option>
+												</foreach>	
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="sid"> 分类 </label>
+										<div class="col-sm-9">
+											<select id="sid" name="sid" class="col-xs-10 col-sm-5">
+												<option value="0">选择分类</option>
+												<foreach item="val" name="sort" >
+													<option value="{$val.sid}" >{$val.sort}</option>
+												</foreach>	
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="name"> 产品名 </label>
+										<div class="col-sm-9">
+											<input type="text" id="name" placeholder="product name" name="name" class="col-xs-10 col-sm-5" value="{$product.name}" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="brief"> 简介 </label>
+										<div class="col-sm-9">
+											<input type="text" id="brief" placeholder="brief" name="brief" class="col-xs-10 col-sm-5"  value="{$product.brief}" >
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="price"> 出厂价 </label>
+										<div class="col-sm-9">
+											<input type="text" id="price" placeholder="price" name="price" class="col-xs-10 col-sm-5"  value="{$product.price}" >
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="aprice"> 建议售价 </label>
+										<div class="col-sm-9">
+											<input type="text" id="aprice" placeholder="aprice" name="aprice" class="col-xs-10 col-sm-5"  value="{$product.aprice}" >
+											
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="psum"> 产品总数 </label>
+										<div class="col-sm-9">
+											<input type="text" id="psum" placeholder="psum" name="psum" class="col-xs-10 col-sm-5"  value="{$product.psum}" >
+										</div>
+									</div>																	
 									<!-- #section:elements.form -->
-									<input type="hidden" name="id" value="{$goods.id}" />
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right " for="href"> 原图 </label>
-										<div class="col-sm-9">
-											<img src="__PUBLIC__/upload/image/goods/{$goods['href']}"   id="oldimg"  width="60px" height="60px">
+										<label class="col-sm-3 control-label no-padding-right " for="photo"> 旧简图 </label>
+										<div class="col-sm-9">				
+											<img src="__PUBLIC__/upload/image/{$product.photo}"  style="border:1px solid #d5d5d5;" height="100" width="100" class="fr" />
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right " for="href"> 图片 </label>
-										<div class="col-sm-9">
-											<input type="file" id="href" placeholder="输入名称" name="href" class="col-xs-10 col-sm-5">
+										<label class="col-sm-3 control-label no-padding-right " for=""> 简图 </label>
+										<div class="col-sm-9">				
+											<input type="file" id="photo" name="photo" class="col-xs-10 col-sm-5 " >
+											
 										</div>
 									</div>
-									<!-- /section:elements.form -->
-									<div class="space-4"></div>
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="content">  </label>
-
+										<label class="col-sm-3 control-label no-padding-right" for="content"> 内容 </label>
 										<div class="col-sm-9">
-											 <textarea id="content" name="content" type="text/plain">{$goods['content']}
+											 <textarea id="content" name="content" type="text/plain"  value="{$product.content}" >
 											</textarea>
 										</div>
 									</div>
@@ -133,7 +184,7 @@
 			$('#addProduct').addClass("active");
 			var ue = UE.getEditor('content',{ initialFrameWidth: 800 ,initialFrameHeight: 500});
 			var html;
-			$('#href').fileinput({
+			$('#photo').fileinput({
                 language: 'zh', //设置语言
                 allowedFileExtensions : ['jpg', 'png','gif'],//接收的文件后缀,
                 showUpload: false, //是否显示上传按钮
@@ -142,17 +193,47 @@
 				maxFileSize: 2048,
             });
 			$("#addButton").click(function(){
-				var href = $('#href').val();
+				/*if(photo.length==0){
+					layer.msg("图不能为空");
+					return false;
+				}
 				ue.ready(function(){ 				
-					$('#content').value = ue.getContent();
+					 $('#content').value = ue.getContent();		
 				});
+				
 				if(!ue.hasContents()){
 					layer.msg("内容不能为空");
 					return false;
-				}
-				$('#Goodsform').submit();
+				}*/
+				var price = $('#price').val();
+				var aprice = $('#aprice').val();
+				var psum = $('#psum').val();
+				price =parseFloat(price);
+				aprice =parseFloat(aprice);
+				psum =parseFloat(psum);
+				$('#price').val(price);
+				$('#aprice').val(aprice);
+				$('#psum').val(psum);
+				$('#productform').submit();
 				
 			});
+			$(function(){
+				var cid = $('#cid').children();
+				var sid = $('#sid').children();
+				cid.each(function(){
+					if($(this).val()  == "{$product.cid}"){
+						$(this).prop("selected",true);
+					}							
+				});	
+				sid.each(function(){
+					if($(this).val()  == "{$product.sid}"){
+						$(this).prop("selected",true);
+					}							
+				});				
+						
+			})
+			
+			
 		</script>
 		
 
