@@ -9,7 +9,7 @@ class StoreController extends ComController {
 					->field('hc_order.oid,pid,buyer,ophone,address,express,time,hc_user.name,hc_user.uphone,hc_kuyuan.kname')
 					->join('LEFT JOIN hc_user ON hc_order.uid = hc_user.id')
 					->join('LEFT JOIN hc_kuyuan ON hc_kuyuan.kid = hc_order.kid')
-					->select();
+					->order('time desc')->select();
 		$this->assign('order',$order);
 		$this->display();
 	}
