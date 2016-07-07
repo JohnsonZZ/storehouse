@@ -1,6 +1,6 @@
 <?php
-namespace Admin\Controller;
-use Admin\Controller\ComController;
+namespace Seller\Controller;
+use Seller\Controller\ComController;
 header("Content-type:text/html;charset=utf-8");
 class CompanyController extends ComController {
     public function index(){
@@ -142,9 +142,8 @@ class CompanyController extends ComController {
 		if( is_array($cid) ){
 			$cid = implode(',',$cid);
 			$map['cid']  = array('in',$cid);
-			$company = $Company -> field('company') -> where($map) -> select();
-			$company_array = array_column($company, 'company');
-			$company['company'] = implode(',',$company_array);
+			$company = $Company -> field('name') -> where($map) -> select();
+			$company = implode(',',$company);
 			$result1 = $Company -> where($map) -> delete();
 			$result2 = $Sort -> where($map) -> delete();		
 		}

@@ -87,9 +87,9 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="name"> 产品名 </label>
+										<label class="col-sm-3 control-label no-padding-right" for="product"> 产品名 </label>
 										<div class="col-sm-9">
-											<input type="text" id="name" placeholder="product name" name="name" class="col-xs-10 col-sm-5">
+											<input type="text" id="product" placeholder="product name" name="product" class="col-xs-10 col-sm-5">
 										</div>
 									</div>
 									<div class="form-group">
@@ -188,7 +188,7 @@
 			$("#addButton").click(function(){
 				var cid = $('#cid').val();
 				var sid = $('#sid').val();
-				var name = $('#name').val();
+				var product = $('#product').val();
 				var brief = $('#brief').val();
 				var price = $('#price').val();
 				var aprice = $('#aprice').val();
@@ -209,7 +209,7 @@
 					layer.msg("请选择分类！");
 					return false;
 				}
-				if(name == ''){
+				if(product == ''){
 					layer.msg("请填写产品名！");
 					return false;
 				}

@@ -4,13 +4,18 @@ use Seller\Controller\ComController;
 header("Content-type:text/html;charset=utf-8");
 class OrderController extends ComController {
     public function index(){
-		$Model = new \Think\Model();
-		$sql = "select hc_order.*,hc_user.name from hc_order, hc_user where hc_order.uid = hc_user.id";
-		$order = $Model->query($sql);
+		$Order = M('Order');
+		$order = $Order -> field('hc_order.*,product,name') ->join('hc_user ON hc_order.uid = hc_user.id','LEFT') 
+											   ->join('hc_product ON hc_order.pid = hc_product.pid','LEFT') ->select();										   
 		$this->assign('order',$order);
 		$this->display();
 	}
 	public function order(){
+		$Product = M('Product');
+		$map = I('get.pid');
+		$product = $Product -> field('pid,product') -> select();
+		$this -> assign('map',$map);
+		$this -> assign('product',$product);
 		$this->display();
 	}
 	public function update(){
@@ -25,7 +30,7 @@ class OrderController extends ComController {
 		$data['address'] = I('post.address');
 		$data['address'] = implode("-",$data['address']);
 		$oid = I('post.id');
-		if($id){
+		if($oid){
 			$Order->where('oid='.$oid)->save($data); 
 			addlog('修改id='.$oid."单号信息");
 			$this->success('修改成功','index');

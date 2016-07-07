@@ -1,12 +1,13 @@
 <?php
 namespace Admin\Controller;
-use Think\Controller;
+use Admin\Controller\ComController;
 header("Content-type:text/html;charset=utf-8");
-class ProductController extends Controller {
+class ProductController extends ComController {
     public function index(){
 		$Sort = M('Sort');
 		$Company = M('Company');
 		$Product = M('Product');
+		$count = $Product-> count();
 		$Page = new \Think\Page($count,10); // 实例化分页类 传入总记录数和每页显示的记录数(10)
 		$product = $Product-> join('hc_company ON hc_company.cid = hc_product.cid','LEFT') 
 							-> join('hc_sort ON hc_sort.sid = hc_product.sid','LEFT') 
@@ -51,7 +52,7 @@ class ProductController extends Controller {
 		//添加
 		$data['cid'] = I('post.cid');
 		$data['sid'] = I('post.sid');
-		$data['name'] = I('post.name');
+		$data['product'] = I('post.product');
 		$data['brief'] = I('post.brief');
 		$data['price'] = I('post.price');
 		$data['aprice'] = I('post.aprice');
@@ -82,7 +83,7 @@ class ProductController extends Controller {
 			$oldproduct = $Product -> where('pid='.$pid) ->find();
 			$data['cid'] = empty($data['cid']) ? $oldproduct['cid'] : $data['cid'];
 			$data['sid'] = empty($data['cid']) ? $oldproduct['sid'] : $data['sid'];
-			$data['name'] = empty($data['name']) ? $oldproduct['name'] : $data['name'];
+			$data['product'] = empty($data['product']) ? $oldproduct['product'] : $data['product'];
 			$data['brief'] = empty($data['brief']) ? $oldproduct['brief'] : $data['brief'];
 			$data['price'] = empty($data['price']) ? $oldproduct['price'] : $data['price'];
 			$data['aprice'] = empty($data['aprice']) ? $oldproduct['aprice'] : $data['aprice'];
@@ -96,19 +97,19 @@ class ProductController extends Controller {
 				if(isset($data['photo'])){
 					unlink($file);//成功后删除之前的图片
 				}
-				addlog('修改'.$data['name'].'产品');
-				$this->success('修改'.$data['name'].'成功', 'index');
+				addlog('修改'.$data['product'].'产品');
+				$this->success('修改'.$data['product'].'成功', 'index');
 			} else {
-				$this->error('修改'.$data['name'].'失败');
+				$this->error('修改'.$data['product'].'失败');
 			}	
 		}
 		else{		
 			$result = $Product->add($data);		
 			if($result){
-				addlog('增加'.$data['name'].'产品');
-				$this->success('新增'.$data['name'].'成功', 'add');
+				addlog('增加'.$data['product'].'产品');
+				$this->success('新增'.$data['product'].'成功', 'add');
 			} else {
-				$this->error('新增'.$data['name'].'失败');
+				$this->error('新增'.$data['product'].'失败');
 			}
 		}	
 	}
@@ -118,19 +119,19 @@ class ProductController extends Controller {
 		if( is_array($pid) ){
 			$pid = implode(',',$pid);
 			$map['pid']  = array('in',$pid);
-			$product = $Product -> field('name') -> where($map) -> select();
+			$product = $Product -> field('product') -> where($map) -> select();
 			$product = implode(',',$product);
 			$result = $Product -> where($map) -> delete();
 		}
 		else{
-			$product = $Product -> field('name') -> where('pid='.$pid) -> find();
+			$product = $Product -> field('product') -> where('pid='.$pid) -> find();
 			$result = $Product -> where('pid='.$pid) -> delete();
 		}
 		if($result){
-			addlog('删除产品成功：'.$product['name']);
-			$this->success('成功删除产品：'.$product['name'], 'index');
+			addlog('删除产品成功：'.$product['product']);
+			$this->success('成功删除产品：'.$product['product'], 'index');
 		} else {
-			addlog('删除产品失败：'.$product['name']);
+			addlog('删除产品失败：'.$product['product']);
 			$this->error('删除产品失败：');
 		}		
 	}
