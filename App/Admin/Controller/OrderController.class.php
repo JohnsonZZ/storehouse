@@ -27,11 +27,11 @@ class OrderController extends ComController {
 		$oid = I('post.id');
 		if($id){
 			$Order->where('oid='.$oid)->save($data); 
-			addlog('修改id='.$oid."单号信息");
+			addlog('修改id='.$oid."单号信息",3);
 			$this->success('修改成功','index');
 		}else{
 			$Order->add($data);
-			addlog('发单成功');
+			addlog('发单成功',3);
 			$this->success('发单成功','index');
 		}
 	}
@@ -50,19 +50,21 @@ class OrderController extends ComController {
 			$map['oid']  = array('in',$lids);
 			$result = $Order->where($map)->delete();
 			if($result){
-				addlog('删除订单'.$lids);
-				$this->success('删除成功');
+				addlog('删除订单成功'.$lids,3);
+				$this->success('删除订单成功');
 			} else {
-				$this->error('删除失败');
+				addlog('删除订单失败'.$lids,3);
+				$this->error('删除订单失败');
 			}
 		}else{
 			$map['oid'] = $lids;
 			$result = $Order->where($map)->delete();
 			if($result){
-				addlog('删除订单'.$lids);
-				$this->success('删除成功');
+				addlog('删除订单成功'.$lids,3);
+				$this->success('删除订单成功');
 			} else {
-				$this->error('删除失败');
+				addlog('删除订单失败'.$lids,3);
+				$this->error('删除订单失败');
 			}
 		}
 	}

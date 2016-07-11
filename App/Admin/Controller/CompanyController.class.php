@@ -65,10 +65,10 @@ class CompanyController extends ComController {
 					$list['sort'] =  $sort[$i];
 					$result = $Sort -> where($map) -> save($list);		
 					if($result){
-						addlog('修改'.$data['company'].'公司成功');
+						addlog('修改'.$data['company'].'公司成功',3);
 						$this->success('修改'.$data['company'].'公司成功', 'index');
 					} else {
-						addlog('修改'.$data['company'].'公司失败');
+						addlog('修改'.$data['company'].'公司失败',3);
 						$this->error('修改'.$data['company'].'公司失败');
 					}						
 				}				
@@ -85,10 +85,10 @@ class CompanyController extends ComController {
 						$result2 = $Sort -> where('sid='.$sid[$j]) -> delete();					
 					}
 					if($result1 &&  $result2){		
-						addlog('修改'.$data['company'].'公司成功');
+						addlog('修改'.$data['company'].'公司成功',3);
 						$this->success('修改'.$data['company'].'公司成功', 'index');					
 					} else {
-						addlog('修改'.$data['company'].'公司失败');
+						addlog('修改'.$data['company'].'公司失败',3);
 						$this->error('修改'.$data['company'].'公司失败');
 					}	
 			}else if($sidlen < $sortlen){	
@@ -104,10 +104,10 @@ class CompanyController extends ComController {
 						$result2 = $Sort -> data($m) -> add();		
 					}
 					if($result1 &&  $result2){
-						addlog('修改'.$data['company'].'公司成功');
+						addlog('修改'.$data['company'].'公司成功',3);
 						$this->success('修改'.$data['company'].'公司成功', 'index');
 					} else {
-						addlog('修改'.$data['company'].'公司失败');
+						addlog('修改'.$data['company'].'公司失败',3);
 						$this->error('修改'.$data['company'].'公司失败');
 					}	
 			}			
@@ -121,16 +121,16 @@ class CompanyController extends ComController {
 			$result2 = $Sort -> data($map) -> add();
 			if($result1){
 				if($result2){
-					addlog('成功添加'.$data['company'].'公司和其分类');
+					addlog('成功添加'.$data['company'].'公司和其分类',3);
 					$this->success('成功添加'.$data['company'].'公司和其分类', 'index');
 					}
 				else {
-					addlog('成功添加'.$data['company'].'公司,但分类添加失败');
+					addlog('成功添加'.$data['company'].'公司,但分类添加失败',3);
 					$this->success('成功添加'.$data['company'].'公司,但分类添加失败');
 				}
 			} 
 			else{
-				addlog('添加'.$data['company'].'公司失败');
+				addlog('添加'.$data['company'].'公司失败',3);
 				$this->error('添加'.$data['company'].'公司失败');
 			}
 		}		
@@ -156,14 +156,14 @@ class CompanyController extends ComController {
 		}
 		if($result1){
 			if($result2){
-				addlog('成功删除公司及其分类：'.$company['company']);
+				addlog('成功删除公司及其分类：'.$company['company'],3);
 			$this->success('成功删除公司及其分类：'.$company['company'], 'index');
 			}else{
-				addlog("删除公司成功，分类删除失败：".$company['company']);
+				addlog("删除公司成功，分类删除失败：".$company['company'],3);
 				$this->success('成功删除公司，但分类删除失败：'.$company['company'], 'index');
 				}
 		} else {
-			addlog("删除公司及其分类失败：".$company['company']);
+			addlog("删除公司及其分类失败：".$company['company'],3);
 			$this->error('删除公司及其分类失败：'.$company['company']);
 		}		
 	}

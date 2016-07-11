@@ -37,7 +37,8 @@ class AdminController extends Controller {
 		$data['pwd'] = sha1($data['pwd'].$data['salt']);
 		$Admin -> create($data);
 		$result = $Admin ->add();
-		   $this -> success('注册成功', 'Index/index',2);
+			addlog('注册超级管理员'.$data['username'],3);
+		    $this -> success('注册成功', 'Index/index',2);
 	
 	}
 }

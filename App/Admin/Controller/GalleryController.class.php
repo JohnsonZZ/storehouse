@@ -15,7 +15,7 @@ class GalleryController extends ComController {
 	public function image()
 	{
 		$where = I('get.folder');
-		$files = array();	
+		$files = array();	x
 		$lenFiles = array();
 		if(is_dir('Public/upload/image/'.$where)){	
 			$files = scandir('Public/upload/image/' . $where);
@@ -35,9 +35,12 @@ class GalleryController extends ComController {
 		$path = 'Public/upload/image/'.$where. '/' . $file;
 		$delete = unlink($path);
 		if($delete){
+			addlog('删除图片成功',3);
 			 $this -> success('删除图片成功');			
 		}
-		else{$this -> error('删除图片失败');}
+		else{
+			addlog('删除图片失败',3);
+			$this -> error('删除图片失败');}
 	}	
 	public function delFolder(){
 	$folder = I('get.folder');
@@ -50,9 +53,12 @@ class GalleryController extends ComController {
 		}	
 	$delete = rmdir($path);
 	if($delete){
+		 addlog('删除文件夹失败',3);
 		 $this -> success('删除文件夹成功');			
 	}
-	else{$this -> error('删除文件夹失败');}
+	else{
+		addlog('删除文件夹失败',3);
+		$this -> error('删除文件夹失败');}
 	}	
 }
 ?>

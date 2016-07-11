@@ -97,18 +97,20 @@ class ProductController extends ComController {
 				if(isset($data['photo'])){
 					unlink($file);//成功后删除之前的图片
 				}
-				addlog('修改'.$data['product'].'产品');
+				addlog('修改'.$data['product'].'产品成功',3);
 				$this->success('修改'.$data['product'].'成功', 'index');
 			} else {
+				addlog('修改'.$data['product'].'产品失败',3);
 				$this->error('修改'.$data['product'].'失败');
 			}	
 		}
 		else{		
 			$result = $Product->add($data);		
 			if($result){
-				addlog('增加'.$data['product'].'产品');
+				addlog('增加'.$data['product'].'产品',3);
 				$this->success('新增'.$data['product'].'成功', 'add');
 			} else {
+				addlog('增加'.$data['product'].'产品失败',3);
 				$this->error('新增'.$data['product'].'失败');
 			}
 		}	
@@ -128,10 +130,10 @@ class ProductController extends ComController {
 			$result = $Product -> where('pid='.$pid) -> delete();
 		}
 		if($result){
-			addlog('删除产品成功：'.$product['product']);
+			addlog('删除产品成功：'.$product['product'],3);
 			$this->success('成功删除产品：'.$product['product'], 'index');
 		} else {
-			addlog('删除产品失败：'.$product['product']);
+			addlog('删除产品失败：'.$product['product'],3);
 			$this->error('删除产品失败：');
 		}		
 	}

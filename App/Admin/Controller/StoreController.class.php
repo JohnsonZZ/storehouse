@@ -34,19 +34,21 @@ class StoreController extends ComController {
 			$map['oid']  = array('in',$lids);
 			$result = $Order->where($map)->delete();
 			if($result){
-				addlog('删除订单'.$lids);
-				$this->success('删除成功');
+				addlog('删除订单'.$lids.'成功',3);
+				$this->success('删除订单成功');
 			} else {
-				$this->error('删除失败');
+				addlog('删除订单'.$lids.'失败',3);
+				$this->error('删除订单失败');
 			}
 		}else{
 			$map['oid'] = $lids;
 			$result = $Order->where($map)->delete();
 			if($result){
-				addlog('删除订单'.$lids);
-				$this->success('删除成功');
+				addlog('删除订单'.$lids.'成功',3);
+				$this->success('删除订单成功');
 			} else {
-				$this->error('删除失败');
+				addlog('删除订单'.$lids.'失败',3);
+				$this->error('删除订单失败');
 			}
 		}
 	}

@@ -24,8 +24,8 @@ class LoginController extends Controller {
 				session('username',$result['kname']);
 				session('pwd',$result['pwd']);
 				session('id',$result['kid']);
-				addlog('登录成功');
-				$this->redirect('Store/index');
+				addlog('登录成功',2);
+				$this->redirect('Index/index');
 			} else {
 				$this->error('密码错误');
 			}

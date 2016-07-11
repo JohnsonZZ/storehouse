@@ -22,7 +22,8 @@ class LoginController extends Controller {
 				session('username',$username);
 				session('pwd',$result['pwd']);
 				session('id',$result['id']);
-				addlog('登录成功');
+				session('phone','123');
+				addlog('登录成功',3);
 				$this->redirect('Index/index');
 			} else {
 				$this->error('密码错误');
@@ -36,5 +37,4 @@ class LoginController extends Controller {
 		cookie(null,'hc_');
 		$this->redirect('index');
 	}
-
 }

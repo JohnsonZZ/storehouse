@@ -81,18 +81,28 @@
 									<form id="zhangzhen" method="post" action="" target="_blank">
 										<thead>
 											<tr>
-												<th>用户</th>
-												<th>IP</th>
-												<th class="logcontent">日志内容</th>
-												<th>时间</th>
+												<th class="col-xs-1">用户</th>
+												<th class="col-xs-1">分类</th>
+												<th class="col-xs-2">IP</th>
+												<th class="logcontent col-xs-3">日志内容</th>
+												<th class="col-xs-1">时间</th>
 											</tr>
 										</thead>
 
 										<tbody>
-											<foreach name="log" item="val">
+											<foreach name="log" item="val" key="k">
 												<input type="hidden"  name="id[]" value="{$val['id']}">
 												<tr>
-													<td>{$val['user']}</td>
+													<td >{$val['user']}</td>
+													<td id="sort{$k}" ></td>
+													<script>
+														switch({$val['sort']}){
+														case 0: document.getElementById('sort{$k}').innerHTML = "创星谷";break;
+														case 1: document.getElementById('sort{$k}').innerHTML = "散户";break;
+														case 2: document.getElementById('sort{$k}').innerHTML = "仓库";break;
+														case 3: document.getElementById('sort{$k}').innerHTML = "超级管理员";break;
+														}														
+													</script>
 													<td>{$val['ip']}</td>
 													<td>{$val['log']}</td>
 													<td>{$val['time']}</td>

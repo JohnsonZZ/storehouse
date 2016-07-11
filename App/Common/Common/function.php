@@ -5,7 +5,11 @@
 	* @param  string $account （可选）用户名。
 	* @return 无返回值
 	*/
-function addlog($log,$account=false){
+	//0创星谷 
+	//1散户 
+	//2仓库 
+	//3超级管理员
+function addlog($log,$sort,$account=false){
 	$Model = M('log');
 	if(!$account){
 		$data['user'] = session('username');
@@ -14,7 +18,9 @@ function addlog($log,$account=false){
 		$data['user'] = $account;
 	}
 	$data['ip'] = $_SERVER["REMOTE_ADDR"];
+	$data['phone'] = session('phone');
 	$data['log'] = $log;
+	$data['sort'] = $sort;
 	$Model->data($data)->add();
 }
 
