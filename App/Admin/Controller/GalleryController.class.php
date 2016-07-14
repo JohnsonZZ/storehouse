@@ -15,7 +15,7 @@ class GalleryController extends ComController {
 	public function image()
 	{
 		$where = I('get.folder');
-		$files = array();	x
+		$files = array();	
 		$lenFiles = array();
 		if(is_dir('Public/upload/image/'.$where)){	
 			$files = scandir('Public/upload/image/' . $where);

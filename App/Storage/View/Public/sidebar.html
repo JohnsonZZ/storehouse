@@ -47,7 +47,36 @@
 
 						<b class="arrow"></b>
 					</li>
-					
+					<li id="allProduct">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-list"></i>
+							<span class="menu-text"> 公司产品 </span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li id="listProduct">
+								<a href="{:U('Product/index')}">
+									<i class="menu-icon fa fa-caret-right"></i>
+									销售列表
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li id="addProduct">
+								<a href="{:U('Product/add')}">
+									<i class="menu-icon fa fa-caret-right"></i>
+									添加产品
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+						</ul>
+					</li>
 					<li id="allStore">
 						<a href="{:U('Store/index')}">
 							<i class="menu-icon fa fa-calendar"></i>
