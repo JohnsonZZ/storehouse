@@ -120,15 +120,22 @@
 											<td>{$val['time']}</td>
 											<td>
 												<div class="action-buttons">
-													<button order="{$val['oid']}" class="express btn btn-white btn-info btn-bold" type="button">
+													<button order="{$val['oid']}" class="hidden express btn btn-white btn-info btn-bold" type="button">
 														<i class="ace-icon fa fa-print bigger-120 blue"></i>
 														打印快递单
 													</button>
+													<empty name="val.express">
 													<button order="{$val['oid']}" class="pencil btn btn-white btn-info btn-bold" type="button">
 														<i class="ace-icon fa fa-pencil bigger-120 blue"></i>
 														填写运单号
 													</button>
-													<button val="{:U('del')}?id={$val['oid']}" class="del btn btn-white btn-danger btn-bold" type="button">
+													<else />
+													<button order="{$val['oid']}" class="pencil btn btn-white btn-danger btn-bold" type="button">
+														<i class="ace-icon fa fa-check-square-o bigger-120 red"></i>
+														修改运单号
+													</button>
+													</empty>
+													<button val="{:U('del')}?id={$val['oid']}" class="hidden del btn btn-white btn-danger btn-bold" type="button">
 													<i class="ace-icon fa fa-trash-o bigger-120"></i>
 														删除订单
 													</button>
