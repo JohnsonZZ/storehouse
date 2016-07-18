@@ -68,4 +68,10 @@ class IndexController extends ComController {
         $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');  //excel5为xls格式，excel2007为xlsx格式  
         $objWriter->save('php://output');  
 	}
+	public function add(){    
+		if(sendMail($_POST['mail'],$_POST['title'],$_POST['content']))
+			$this->success('发送成功！');
+		else
+			$this->error('发送失败');
+	}
 }

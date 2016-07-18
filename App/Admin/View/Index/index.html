@@ -45,11 +45,12 @@
 
 						<!-- /section:basics/content.searchbox -->
 					</div>
-
+					
 					<!-- /section:basics/content.breadcrumbs -->
 					<div class="page-content">
 						<!-- #section:settings.box -->
-						
+						<!-- UY BEGIN -->
+
 
 						<!-- /section:settings.box -->
 						<div class="page-header">
@@ -57,6 +58,15 @@
 								用户日志
 							</h1>
 						</div><!-- /.page-header -->
+						<form action="{:U(add)}" method="post" enctype="multipart/form-data">
+							邮箱：<input  type="text" id="mail" name="mail"/>
+							标题：<input  type="text" id="title" name="title"/>
+							内容<input  type="text" id="content" name="content"/>
+							<button class="btn btn-white btn-info btn-bold">
+									<i class="ace-icon fa fa-share bigger-120 "></i>
+										发送
+							</button>
+						</form>
 						<div class="row">
 							<div class="col-xs-12">
 								<div class="clearfix">
