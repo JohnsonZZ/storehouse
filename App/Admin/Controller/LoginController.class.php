@@ -22,7 +22,6 @@ class LoginController extends Controller {
 				session('username',$username);
 				session('pwd',$result['pwd']);
 				session('id',$result['id']);
-				session('phone','123');
 				addlog('登录成功',3);
 				$this->redirect('Index/index');
 			} else {

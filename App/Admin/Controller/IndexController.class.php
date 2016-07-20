@@ -4,6 +4,7 @@ use Admin\Controller\ComController;
 header("Content-type:text/html;charset=utf-8");
 class IndexController extends ComController {
     public function index(){
+		
 		$Log = M('Log');	
 		$count = $Log->count(); // 查询满足要求的总记录数
 		$Page = new \Think\Page($count,15); // 实例化分页类 传入总记录数和每页显示的记录数(10)

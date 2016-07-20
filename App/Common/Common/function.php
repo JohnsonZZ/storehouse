@@ -76,7 +76,16 @@
 		}
 		return !$repeat;
 	}
-
+	/**
+	 * 验证成功不刷新
+	 */
+	function checkVerify($code, $id = ''){
+		$config = array(
+					'reset' => false // 验证成功后是否重置，这里才是有效的。
+					);
+		$verify = new \Think\Verify($config);
+		return $verify->check($code, $id);
+	}
 	/**
      * 字符串截取，支持中文和其他编码
      * @static
@@ -112,7 +121,20 @@
 		return $slice;
 	}
 	/**
+     * 邮箱中间字符串以*隐藏
+     * @param string $str 需要转换的字符串
+     * @return string
+     */
+	 function hideStar($str) {
+		$email_array = explode("@", $str);
+		$email = substr($email_array[0], 0, 2).str_repeat('*',strlen($email_array[0])-4).substr($email_array[0],-2).'@'.$email_array[1];
+		return $email;
+	 }
+	/**
 	 * 邮件发送函数
+	 * @param string $to 收件人
+	 * @param string $title 标题
+	 * @param string $content 内容
 	 */
     function sendMail($to, $title, $content) {
      
@@ -124,7 +146,7 @@
         $mail->Username = 'best_log@163.com'; //你的邮箱名
         $mail->Password = 'zhang123'; //邮箱密码
         $mail->From = 'best_log@163.com'; //发件人地址（也就是你的邮箱地址）
-        $mail->FromName = '这不是辣鸡'; //发件人姓名
+        $mail->FromName = '肇庆市华创信息科技公司'; //发件人姓名
         $mail->AddAddress($to,"尊敬的客户");
         $mail->WordWrap = 50; //设置每行字符长度
         $mail->IsHTML(TRUE); // 是否HTML格式邮件
