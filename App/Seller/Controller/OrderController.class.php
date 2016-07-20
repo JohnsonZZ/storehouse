@@ -20,6 +20,7 @@ class OrderController extends ComController {
 	}
 	public function update(){
 		$Order = M('Order');
+		$Product = M('Product');
 		$data['ophone'] = I('post.phone');
 		if(!isPhone($data['ophone'])){
 			$this->error('手机号码错误');
@@ -28,16 +29,44 @@ class OrderController extends ComController {
 		$data['pid'] = I('post.pid');
 		$data['buyer'] = I('post.buyer');
 		$data['address'] = I('post.address');
+		$data['__hash__'] = I('post.__hash__');
 		$data['address'] = implode("-",$data['address']);
 		$oid = I('post.id');
 		if($oid){
-			$Order->where('oid='.$oid)->save($data); 
-			addlog('修改id='.$oid."单号信息",session('sort'));
-			$this->success('修改成功','index');
+			$check = $Order -> autoCheckToken($data);
+			if($check){
+				$Order->where('oid='.$oid)->save($data); 
+				addlog('修改id='.$oid."单号信息成功",session('sort'));
+				$this->success('修改成功','index');
+			}else{
+				addlog('修改id='.$oid."单号信息失败",session('sort'));
+				$this->error('修改失败，表单令牌验证失败','index');		
+			}
 		}else{
-			$Order->add($data);
-			addlog('发单成功',session('sort'));
-			$this->success('发单成功','index');
+			$check = $Order -> autoCheckToken($_POST);
+			if($check){
+				$result = $Order->add($data);
+				if($result){
+					$count = $Product-> where('pid='.$data['pid']) -> find();
+					if($count['psum']>=1){
+						$Product -> where('pid='.$data['pid']) ->setDec('psum');
+						addlog('发单成功',session('sort'));
+						$this->success('发单成功','index');
+					}
+					if($count['psum'] <= 0){
+						addlog('缺货,发单失败',session('sort'));
+						$this->error('发单失败');				
+					}
+					}else{
+						addlog('添加订单失败',session('sort'));
+						$this->error('添加订单失败，发单失败');	
+					}
+				}
+			else{
+				addlog('发单失败，表单令牌验证失败',session('sort'));
+				$this->error('发单失败，表单令牌验证失败');	
+			}			
+			
 		}
 	}
 	public function edit(){

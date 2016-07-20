@@ -30,7 +30,7 @@
 								<i class="ace-icon fa fa-home home-icon"></i>
 								<a href="#">首页</a>
 							</li>
-							<li class="active">控制台</li>
+							<li class="active">产品列表</li>
 						</ul><!-- /.breadcrumb -->
 
 						<!-- #section:basics/content.searchbox -->
@@ -88,55 +88,25 @@
 								<table id="simple-table" class="table table-striped table-bordered table-hover">
 									<thead >
 										<tr >
-											<th class="center col-sm-1" rowspan="1" colspan="1">
-												<label class="pos-rel">
-													<input type="checkbox" class="ace check-all" value=""/>
-													<span class="lbl"></span>
-												</label>
-											</th>
 											<th class="center col-sm-2">产品名</th>
 											<th class="center col-sm-1">公司</th>
 											<th class="center col-sm-1">分类</th>
 											<th class="center col-sm-1">产品总量</th>
 											<th class="center col-sm-1">时间</th>
-											<th class="col-sm-1">
-												操作
-											</th>
 										</tr>
 									</thead>
 
 									<tbody>
 										 <foreach item="val" name="product" >
 											<tr>
-												<td class="center">
-													<label class="pos-rel">
-														<input type="checkbox" class="ace pid" name="pid[]" value="{$val['pid']}"/>
-														<span class="lbl"></span>
-													</label>
-												</td>
-												<td class="center product-name">{$val.product}<div class="product-name-div" ><img class="product-name-img" src="__PUBLIC__/upload/image/{$val.photo}"  height="200" width="200"> </div></td>
+												<td class="center "><div  class="product-name">{$val.product}<div class="product-name-div" ><img class="product-name-img" src="__PUBLIC__/upload/image/{$val.photo}"  height="200" width="200"> </div></div></td>
 												
 												<td class="center">{$val.company}</td>
 												<td class="center">{$val.sort}</td>
 												<td class="center">{$val.psum}</td>
 												<td class="center">{$val.time}</td>
-												<td>
-													<div class="action-buttons">
-														<a class="blue" href="{:U('edit')}?pid={$val.pid}">
-															<i class="ace-icon fa fa-pencil bigger-130" title="修改"></i>
-														</a>
-													</div>
-												</td>
 											</tr>
 										</foreach>	
-										<tr>
-											<td class="center">
-												<button id="del" class="btn btn-xs btn-danger">
-													<i class="ace-icon fa fa-trash-o bigger-110"></i>
-													删除
-												</button>
-											</td>											
-										</tr>
 									</tbody>
 								</table>
 								</div>

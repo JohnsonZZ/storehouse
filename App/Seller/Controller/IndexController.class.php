@@ -7,10 +7,12 @@ class IndexController extends ComController {
 		$Log = M('Log');	
 		$map['sort'] = session('sort');	
 		$map['phone'] = session('phone');	
+		//dump($map);die();
 		$count = $Log-> where($map) -> count(); // 查询满足要求的总记录数
 		$Page = new \Think\Page($count,15); // 实例化分页类 传入总记录数和每页显示的记录数(10)
 		$log = M('Log')-> where($map) -> order('time desc') ->limit($Page->firstRow . ',' . $Page->listRows)-> select();
 		$Page->setConfig('header','');
+		//dump($log);die();
 		$show = $Page->show(); // 分页显示输出
 		$this->assign('page', $show); // 赋值分页输出
 		$this->assign('log',$log);

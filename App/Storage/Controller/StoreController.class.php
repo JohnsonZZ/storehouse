@@ -6,8 +6,9 @@ class StoreController extends ComController {
     public function index(){
 		$Order = M('Order');
 		$order= $Order
-					->field('hc_order.oid,pid,buyer,ophone,address,express,time,hc_user.name,hc_user.uphone,hc_kuyuan.kname')
+					->field('hc_order.oid,hc_order.pid,hc_product.product,buyer,ophone,address,express,hc_order.time,hc_user.name,hc_user.uphone,hc_kuyuan.kname')
 					->join('LEFT JOIN hc_user ON hc_order.uid = hc_user.id')
+					->join('LEFT JOIN hc_product ON hc_order.pid = hc_product.pid')
 					->join('LEFT JOIN hc_kuyuan ON hc_kuyuan.kid = hc_order.kid')
 					->order('time desc')->select();
 		$this->assign('order',$order);

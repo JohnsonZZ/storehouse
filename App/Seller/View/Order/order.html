@@ -139,7 +139,7 @@
 			return true;
 			}
 		$(function(){
-			var pid = "{$map}" 
+			var pid = "{$map}" ;
 			if( pid != '')
 			{
 				var pids = $('#pid').children();
@@ -153,7 +153,8 @@
 		$('#allOrder').addClass("active").siblings().removeClass("active");
 		$('#addOrder').addClass("active");
 		$('#addButton').click(function(){
-			var pid = $('.pid').val();
+			var pid = $('#pid').val();
+			console.log(pid);
 			var buyer = $('#buyer').val();
 			var province = $('.province').val();
 			var city = $('.city').val();
