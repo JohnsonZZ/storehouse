@@ -4,6 +4,7 @@ use Storage\Controller\ComController;
 header("Content-type:text/html;charset=utf-8");
 class IndexController extends ComController {
     public function index(){
+
 		$Log = M('Log');	
 		$map['sort'] = 2;	
 		$map['phone'] = session('phone');	
