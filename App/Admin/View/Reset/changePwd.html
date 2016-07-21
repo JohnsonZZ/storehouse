@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<include file="Public/header"  title="登录 | 华创控制台"/>
+	</head>
+	<body class="login-layout">
+		<div class="main-container">
+			<div class="main-content mt200">
+				<div class="row">
+					<div class="col-sm-10 col-sm-offset-1">
+						<div class="login-container">
+							<div class="center">
+								<h1>
+									<i class="ace-icon fa fa-key red"></i>
+									<span class="red">找回</span>
+									<span class="white" id="id-text2">密码</span>
+								</h1>
+								
+							</div>
+
+							<div class="space-6"></div>
+
+							<div class="position-relative">
+								
+								<div id="forgot-box" class="forgot-box widget-box no-border visible">
+									<div class="widget-body">
+										<div class="widget-main">
+											<h4 class="header red lighter bigger">
+												<i class="ace-icon fa fa-key"></i>
+												重置密码
+											</h4>
+
+											<div class="space-6"></div>
+											<p>
+												密码由数字、英文组合(长度6-10)、不能重复
+											</p>
+
+											<form class="form-horizontal" method="post" action="{:U('Reset/resetPwd')}">
+												<fieldset>
+													<input type="hidden" name="id" value="{$id}" />
+													<div class="form-group" id="div-pwd">
+														<label class="col-sm-3 control-label no-padding-right" for="form-input-readonly"> 新密码 </label>
+														<div class="col-xs-12 col-sm-9">
+															<span class="block input-icon input-icon-right">
+																<input type="password" id="pwd" name="pwd" maxlength="10" class="form-control" placeholder="新密码" />
+																<i class="ace-icon fa"></i>
+															</span>
+														</div>
+													</div>
+													
+													<div class="form-group" id="div-rpwd">
+														<label class="col-sm-3 control-label no-padding-right" for="form-input-readonly"> 确认密码 </label>
+														<div class="col-xs-12 col-sm-9">
+															<span class="block input-icon input-icon-right">
+																<input type="password" id="rpwd" name="rpwd" maxlength="10" class="form-control" placeholder="确认密码" />
+																<i class="ace-icon fa"></i>
+															</span>
+														</div>
+													</div>
+													<div class="clearfix">
+														<button type="submit" id="c-btn" class="width-30 pull-right btn btn-sm btn-danger disabled">
+															<i class="ace-icon fa fa-check"></i>
+															<span class="bigger-100">确认</span>
+														</button>
+													</div>
+												</fieldset>
+											</form>
+										</div><!-- /.widget-main -->
+
+									</div><!-- /.widget-body -->
+								</div><!-- /.forgot-box -->
+								<div id="email-box" class="forgot-box widget-box no-border ">
+									<div class="widget-body">
+										<div class="widget-main">
+											<h4 class="header red lighter bigger">
+												<i class="ace-icon fa fa-key"></i>
+												重置密码
+											</h4>
+
+											<div class="space-6"></div>
+											<p>
+												已经将邮件发送至<span id="email"></span>
+											</p>
+											
+											<p>
+												请注意查收。(如收不到，请检查垃圾箱。)
+											</p>
+											
+											<p>
+												如有疑问请联系管理员。
+											</p>
+											
+										</div><!-- /.widget-main -->
+
+									</div><!-- /.widget-body -->
+								</div><!-- /.forgot-box -->
+
+							</div><!-- /.position-relative -->
+						</div>
+					</div><!-- /.col -->
+				</div>
+			</div><!-- /.main-content -->
+		</div><!-- /.main-container -->
+		<!-- basic scripts -->
+		<!-- inline scripts related to this page -->
+
+	</body>
+	<script src="__PUBLIC__/js/jquery/jquery.js"></script>
+	<script>
+		$("#pwd").change(function(){
+			$.post("{:U('Reset/checkPwd')}",{"pwd":$(this).val()},function(flag){
+				var iTag = $("#pwd").siblings();
+				if(flag){
+					$('#div-pwd').removeClass("has-error").addClass("has-success");
+					iTag.removeClass("fa-times-circle").addClass("fa-check-circle");
+				}else{
+					$('#div-pwd').removeClass("has-success").addClass("has-error");
+					iTag.removeClass("fa-check-circle").addClass("fa-times-circle");
+					$("#c-btn").addClass("disabled");
+				}
+			});
+		})
+		$("#rpwd").change(function(){
+			var pwd = $("#pwd").val();
+			var rpwd = $(this).val();
+			var iTag = $("#rpwd").siblings();
+			if(pwd == rpwd){
+				$('#div-rpwd').removeClass("has-error").addClass("has-success");
+				iTag.removeClass("fa-times-circle").addClass("fa-check-circle");
+				$("#c-btn").removeClass("disabled");
+			}else{
+				$('#div-rpwd').removeClass("has-success").addClass("has-error");
+				iTag.removeClass("fa-check-circle").addClass("fa-times-circle");
+				$("#c-btn").addClass("disabled");
+			}
+		})
+		
+	</script>
+</html>

@@ -1,5 +1,5 @@
 <?php
-namespace Admin\Controller;
+namespace Seller\Controller;
 use Think\Controller;
 header("Content-type:text/html;charset=utf-8");
 class ResetController extends Controller {

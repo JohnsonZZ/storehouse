@@ -1,5 +1,5 @@
 <?php
-namespace Admin\Controller;
+namespace Storage\Controller;
 use Think\Controller;
 header("Content-type:text/html;charset=utf-8");
 class ResetController extends Controller {
@@ -7,16 +7,16 @@ class ResetController extends Controller {
 		$this->display();
 	}	
 	public function sendEmail(){
-		$uphone = I('post.phone');
-		$result = M('User')->where("uphone = '$uphone'")->find();
-		$key = md5($result['uemail'].time());
+		$kphone = I('post.phone');
+		$result = M('Kuyuan')->where("kphone = '$kphone'")->find();
+		$key = md5($result['kemail'].time());
 		S("key",$key,10000);
 		$http_url = "<br/>请点击链接重置您的密码。<br/> 
-			<a href='http://127.0.0.1/storehouse/Reset/changePwd.html?key=".$key."&id=".$result['id']."' target= 
-		'_blank'>http://127.0.0.1/storehouse/Reset/changePwd.html?key=".$key."&id=".$result['id']."</a><br/> 
+			<a href='http://127.0.0.1/storehouse/Reset/changePwd.html?key=".$key."&id=".$result['kid']."' target= 
+		'_blank'>http://127.0.0.1/storehouse/Reset/changePwd.html?key=".$key."&id=".$result['kid']."</a><br/> 
 			如果以上链接无法点击，请将它复制到你的浏览器地址栏中进入访问，该链接半小时内有效。"; 
-		sendMail($result['uemail'],'重置密码链接',$http_url);
-		$uemail = hideStar($result['uemail']);
+		sendMail($result['kemail'],'重置密码链接',$http_url);
+		$uemail = hideStar($result['kemail']);
 		$this->ajaxReturn($uemail);
 	}
 	public function verify(){
@@ -28,12 +28,11 @@ class ResetController extends Controller {
 		$verify->entry();
 	}
 	public function checkPhone(){
-		$uphone = I('post.phone');
-			if(!isPhone($uphone)){//判断是否是手机号码
+		$kphone = I('post.phone');
+			if(!isPhone($kphone)){//判断是否是手机号码
 				$this->ajaxReturn(false);
 		}
-		$User = M('User');
-		$result = $User->where("uphone = '$uphone'")->find();
+		$result = M('Kuyuan')->where("kphone = '$kphone'")->find();
 		if($result){
 			$this->ajaxReturn(true);
 		}else{
@@ -64,16 +63,16 @@ class ResetController extends Controller {
 		}
 	}
 	public function resetPwd(){
-		$User = M("User"); // 实例化User对象
+		$Kuyuan = M('Kuyuan'); // 实例化User对象
 		 // 手动进行令牌验证
-		if (!$User->create()){
-			$this->error($User->getError());
+		if (!$Kuyuan->create()){
+			$this->error($Kuyuan->getError());
 		}else{
-			$id = I('post.id');
+			$kid = I('post.id');
 			$data['pwd'] = I('post.pwd');
 			$data['salt']=base64_encode(mcrypt_create_iv(32,MCRYPT_DEV_RANDOM));
 			$data['pwd']=sha1($data['pwd'].$data['salt']);
-			$result = $User->where("id = '$id'")->save($data); 
+			$result = $Kuyuan->where("kid = '$kid'")->save($data); 
 			if($result){
 				S('key',null);
 				$this->success('重置成功，请重新登录！','../Login/index');
