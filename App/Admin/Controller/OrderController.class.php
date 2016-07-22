@@ -4,17 +4,23 @@ use Admin\Controller\ComController;
 header("Content-type:text/html;charset=utf-8");
 class OrderController extends ComController {
     public function index(){
-		$Model = new \Think\Model();
-		$sql = "select hc_order.*,hc_user.name from hc_order, hc_user where hc_order.uid = hc_user.id";
-		$order = $Model->query($sql);
+		$Order = M('Order');
+		$order = $Order -> field('hc_order.*,product,name') ->join('hc_user ON hc_order.uid = hc_user.id','LEFT') 
+											   ->join('hc_product ON hc_order.pid = hc_product.pid','LEFT') ->select();										   
 		$this->assign('order',$order);
 		$this->display();
 	}
 	public function order(){
+		$Product = M('Product');
+		$map = I('get.pid');
+		$product = $Product -> field('pid,product') -> select();
+		$this -> assign('map',$map);
+		$this -> assign('product',$product);
 		$this->display();
 	}
 	public function update(){
 		$Order = M('Order');
+		$Product = M('Product');
 		$data['ophone'] = I('post.phone');
 		if(!isPhone($data['ophone'])){
 			$this->error('手机号码错误');
@@ -23,16 +29,44 @@ class OrderController extends ComController {
 		$data['pid'] = I('post.pid');
 		$data['buyer'] = I('post.buyer');
 		$data['address'] = I('post.address');
+		$data['__hash__'] = I('post.__hash__');
 		$data['address'] = implode("-",$data['address']);
 		$oid = I('post.id');
-		if($id){
-			$Order->where('oid='.$oid)->save($data); 
-			addlog('修改id='.$oid."单号信息",3);
-			$this->success('修改成功','index');
+		if($oid){
+			$check = $Order -> autoCheckToken($data);
+			if($check){
+				$Order->where('oid='.$oid)->save($data); 
+				addlog('修改id='.$oid."单号信息成功",session('sort'));
+				$this->success('修改成功','index');
+			}else{
+				addlog('修改id='.$oid."单号信息失败",session('sort'));
+				$this->error('修改失败，表单令牌验证失败','index');		
+			}
 		}else{
-			$Order->add($data);
-			addlog('发单成功',3);
-			$this->success('发单成功','index');
+			$check = $Order -> autoCheckToken($_POST);
+			if($check){
+				$result = $Order->add($data);
+				if($result){
+					$count = $Product-> where('pid='.$data['pid']) -> find();
+					if($count['psum']>=1){
+						$Product -> where('pid='.$data['pid']) ->setDec('psum');
+						addlog('发单成功',session('sort'));
+						$this->success('发单成功','index');
+					}
+					if($count['psum'] <= 0){
+						addlog('缺货,发单失败',session('sort'));
+						$this->error('发单失败');				
+					}
+					}else{
+						addlog('添加订单失败',session('sort'));
+						$this->error('添加订单失败，发单失败');	
+					}
+				}
+			else{
+				addlog('发单失败，表单令牌验证失败',session('sort'));
+				$this->error('发单失败，表单令牌验证失败');	
+			}			
+			
 		}
 	}
 	public function edit(){
@@ -50,21 +84,19 @@ class OrderController extends ComController {
 			$map['oid']  = array('in',$lids);
 			$result = $Order->where($map)->delete();
 			if($result){
-				addlog('删除订单成功'.$lids,3);
-				$this->success('删除订单成功');
+				addlog('删除订单'.$lids,session('sort'));
+				$this->success('删除成功');
 			} else {
-				addlog('删除订单失败'.$lids,3);
-				$this->error('删除订单失败');
+				$this->error('删除失败');
 			}
 		}else{
 			$map['oid'] = $lids;
 			$result = $Order->where($map)->delete();
 			if($result){
-				addlog('删除订单成功'.$lids,3);
-				$this->success('删除订单成功');
+				addlog('删除订单'.$lids,session('sort'));
+				$this->success('删除成功');
 			} else {
-				addlog('删除订单失败'.$lids,3);
-				$this->error('删除订单失败');
+				$this->error('删除失败');
 			}
 		}
 	}

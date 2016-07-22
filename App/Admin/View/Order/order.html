@@ -65,9 +65,10 @@
 										<label class="col-sm-3 control-label no-padding-right" for="pid">产品</label>
 										<div class="col-sm-3">
 											<select class="form-control" id="pid" name="pid">
-												<option value="1">手镯</option>
-												<option value="2">戒指</option>
-												<option value="3">项链</option>
+												<option value="0" class="pid" >选择产品</option>
+												<foreach item="val" name="product" >
+													<option value="{$val.pid}"  class="pid">{$val.product}</option>
+												</foreach>	
 											</select>
 										</div>
 									</div>
@@ -84,13 +85,13 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="address"> 收货地址 </label>
 										<div class="col-sm-9">
-											<input type="text" id="address" placeholder="省" name="address[]"  class="col-xs-5 col-sm-1">
+											<input type="text" id="address" placeholder="省" name="address[]"  class="col-xs-5 col-sm-1 province">
 											<span class="input-group-addon col-sm-1" style="padding-top:9px;padding-bottom:9px;padding-right:25px;">省</span>	
-											<input type="text" id="address" placeholder="市(县)" name="address[]"  class="col-xs-5 col-sm-1">
+											<input type="text" id="address" placeholder="市(县)" name="address[]"  class="col-xs-5 col-sm-1 city ">
 											<span class="input-group-addon col-sm-1" style="padding-top:9px;padding-bottom:9px;padding-right:45px;">市(县)</span>	
-											<input type="text" id="address" placeholder="区(镇)" name="address[]"  class="col-xs-5 col-sm-1">
+											<input type="text" id="address" placeholder="区(镇)" name="address[]"  class="col-xs-5 col-sm-1 town">
 											<span class="input-group-addon col-sm-1" style="padding-top:9px;padding-bottom:9px;padding-right:45px;">区(镇)</span>
-											<input type="text" id="address" placeholder="详细地址" name="address[]"  class="col-xs-10 col-sm-5">	
+											<input type="text" id="address" placeholder="详细地址" name="address[]"  class="col-xs-10 col-sm-5 detail">	
 										</div>
 									</div>
 									
@@ -104,11 +105,10 @@
 									<div class="space-4"></div>
 									<div class="clearfix form-actions">
 										<div class="col-md-offset-3 col-md-9">
-											<button class="btn btn-info addButton" type="submit">
+											<button class="btn btn-info addButton" id="addButton" type="button">
 												<i class="ace-icon fa fa-check bigger-110"></i>
 												提交
 											</button>
-
 											&nbsp; &nbsp; &nbsp;
 											<button class="btn" type="reset">
 												<i class="ace-icon fa fa-undo bigger-110"></i>
@@ -133,11 +133,61 @@
 		<include file="Public/footer" />
 		<include file="Public/script" />
 		<script type="text/javascript">
-			$('#allOrder').addClass("active").siblings().removeClass("active");
-			$('#addOrder').addClass("active");
+		function istell(str){
+			var result=str.match(/\d{3}-\d{8}|\d{4}-\d{7}/);
+			if(result==null) return false;
+			return true;
+			}
+		$(function(){
+			var pid = "{$map}" ;
+			if( pid != '')
+			{
+				var pids = $('#pid').children();
+				pids.each(function(){
+					if($(this).val()  == pid ){
+						$(this).prop("selected",true);
+					}							
+				});	
+			}	
+		});
+		$('#allOrder').addClass("active").siblings().removeClass("active");
+		$('#addOrder').addClass("active");
+		$('#addButton').click(function(){
+			var pid = $('#pid').val();
+			console.log(pid);
+			var buyer = $('#buyer').val();
+			var province = $('.province').val();
+			var city = $('.city').val();
+			var town = $('.town').val();
+			var detail = $('.detail').val();
+			var phone = $('#phone').val();				
+			if(pid == 0){
+				layer.msg('请选择产品！')
+				return false;
+			}
+			if(buyer == ''){
+				layer.msg('请填写收件人！')
+				return false;
+			}
+			if(province == ''){
+				layer.msg('请填写省份！')
+				return false;
+			}
+			if(city == ''){
+				layer.msg('请填写市(县)！')
+				return false;
+			}
+			if(town == ''){
+				layer.msg('请填写区(镇)！')
+				return false;
+			}
+			if(detail == ''){
+				layer.msg('请填写详细地址！')
+				return false;
+			}
+			$('#formAdmin').submit();
+		});
+			
 		</script>
-		
-
-
 	</body>
 </html>

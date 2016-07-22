@@ -13,3 +13,4 @@ class MessageController extends ComController {
 		$this->display();
 	}
 }
+
