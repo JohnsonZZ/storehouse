@@ -9,10 +9,13 @@ class StoreController extends ComController {
 					->field('hc_order.oid,pid,buyer,ophone,address,express,time,hc_user.name,hc_user.uphone,hc_kuyuan.kname')
 					->join('LEFT JOIN hc_user ON hc_order.uid = hc_user.id')
 					->join('LEFT JOIN hc_kuyuan ON hc_kuyuan.kid = hc_order.kid')
+					->order('oid desc')
 					->select();
 		// $Model = new \Think\Model();
 		// $sql = "select hc_order.*,hc_user.name,hc_kuyuan.kname from hc_order, hc_user where hc_order.uid = hc_user.id AND hc_kuyuan.kid = hc_order.kid";
 		// $order = $Model->query($sql);
+		$maxid = $Order->max('oid');
+		$this->assign('maxid',$maxid);
 		$this->assign('order',$order);
 		$this->display();
 	}
@@ -52,6 +55,11 @@ class StoreController extends ComController {
 			}
 		}
 	}
+	public function getOrder(){
+		$maxid = I('post.maxid');
+		$num = M('Order')->where("oid>".$maxid)->count();
+		$this->ajaxReturn($num);
+	}
 	public function table(){
 		$oid = I('post.id');
 		if(is_array($oid)){
@@ -73,6 +81,7 @@ class StoreController extends ComController {
 	public function dayin(){
 		$this->display();
 	}
+	
 	public function excel(){
 		vendor("PHPExcel.PHPExcel"); 
 		vendor("PHPExcel.PHPExcel.IOFactory");
