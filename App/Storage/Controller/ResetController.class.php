@@ -12,8 +12,8 @@ class ResetController extends Controller {
 		$key = md5($result['kemail'].time());
 		S("key",$key,10000);
 		$http_url = "<br/>请点击链接重置您的密码。<br/> 
-			<a href='http://127.0.0.1/storehouse/Reset/changePwd.html?key=".$key."&id=".$result['kid']."' target= 
-		'_blank'>http://127.0.0.1/storehouse/Reset/changePwd.html?key=".$key."&id=".$result['kid']."</a><br/> 
+			<a href='http://storage.cxg-e.com/Reset/changePwd.html?key=".$key."&id=".$result['kid']."' target= 
+		'_blank'>http://storage.cxg-e.com/Reset/changePwd.html?key=".$key."&id=".$result['kid']."</a><br/> 
 			如果以上链接无法点击，请将它复制到你的浏览器地址栏中进入访问，该链接半小时内有效。"; 
 		sendMail($result['kemail'],'重置密码链接',$http_url);
 		$uemail = hideStar($result['kemail']);
