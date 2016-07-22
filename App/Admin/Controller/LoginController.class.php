@@ -21,6 +21,7 @@ class LoginController extends Controller {
 				}
 				session('username',$username);
 				session('pwd',$result['pwd']);
+				session('phone','管理员并不需要');
 				session('id',$result['id']);
 				addlog('登录成功',3);
 				$this->redirect('Index/index');
