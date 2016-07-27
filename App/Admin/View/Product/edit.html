@@ -89,7 +89,7 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="product"> 产品名 </label>
 										<div class="col-sm-9">
-											<input type="text" id="product" placeholder="product name" name="product" class="col-xs-10 col-sm-5" value="{$product.name}" />
+											<input type="text" id="product" placeholder="product name" name="product" class="col-xs-10 col-sm-5" value="{$product.product}" />
 										</div>
 									</div>
 									<div class="form-group">
@@ -134,7 +134,7 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="content"> 内容 </label>
 										<div class="col-sm-9">
-											 <textarea id="content" name="content" type="text/plain"  value="{$product.content}" >
+											 <textarea id="content" name="content" type="text/plain"  >{$product.content}
 											</textarea>
 										</div>
 									</div>
