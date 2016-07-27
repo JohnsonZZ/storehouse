@@ -1,0 +1,191 @@
+<!DOCTYPE>
+<head>
+<include file="Public/header"  title="创星谷-首页"/>
+</head>
+<body>
+	<div class="wrap">
+		<include file="Public/menu" />
+	    <div class="header_slide">
+			<div class="header_bottom_left">				
+				<div class="categories">
+					<ul>
+						<h3>所有商品分类</h3>
+						<li><a href="{:U('Goods/index/cate/')}">家居日用</a></li>
+						<li><a href="#">家电数码</a></li>
+						<li><a href="#">服饰配件</a></li>
+						<li><a href="#">美容护肤</a></li>
+						<li><a href="#">运动户外</a></li>
+						<li><a href="#">其他</a></li>
+					</ul>
+				</div>					
+	  	    </div>
+			<div class="header_bottom_right">		
+				<script type="text/javascript" src="__PUBLIC__/js/jquery/jquery.flexslider-min.js"></script>			     
+				<div class="flexslider">
+					<ul class="slides">
+						<li><img src="__PUBLIC__/images/slide-1-image.jpg" /></li>
+						<li><img src="__PUBLIC__/images/slide-2-image.jpg" /></li>
+						<li><img src="__PUBLIC__/images/slide-3-image.jpg" /></li>
+						<li><img src="__PUBLIC__/images/slide-4-image.jpg" /></li>
+					</ul>
+				  	<div class="clear"></div>					       
+				</div>
+			</div>
+		   <div class="clear"></div>
+		</div>
+		<div class="main">
+			<div class="content">
+				<div class="content_top">
+					<div class="heading">
+						<h3>新入产品</h3>
+					</div>
+					<div class="see">
+						<p><a href="#">更多产品</a></p>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div class="row">
+				<volist name="goods" id="val">
+				<div class="col-md-3 col-sm-6 images-box">
+					<a href="{:U('Goods/preview/pid/'.$val['pid'])}"><img src="__PUBLIC__/upload/image/{$val.photo}" alt="" /></a>
+					<h2>{$val.product} </h2>
+					<div class="price-details">
+				       <div class="price-number">
+							<p>厂家：<span class="rupees">{$val.company}</span></p>
+					    </div>
+					    <div class="add-cart">								
+							<h4><a href="tencent://message/?uin=465629989&Site=121ask.com&Menu=yes">洽谈</a></h4>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				</volist>
+				<div class="col-md-3 col-sm-6 images-box">
+					<a href="preview.html"><img src="__PUBLIC__/images/feature-pic2.jpg" alt="" /></a>
+					<h2>尔康电视 </h2>
+					<div class="price-details">
+				       <div class="price-number">
+							<p>厂家：<span class="rupees">肇庆市华创信息科技有限公司</span></p>
+					    </div>
+					    <div class="add-cart">								
+							<h4><a href="preview.html">洽谈</a></h4>
+						</div>
+						<div class="clear"></div>
+					</div>
+					 
+				</div>
+				<div class="col-md-3 col-sm-6 images-box">
+					<a href="preview.html"><img src="__PUBLIC__/images/feature-pic3.jpg" alt="" /></a>
+					<h2>尔康电视 </h2>
+					<div class="price-details">
+				       <div class="price-number">
+							<p>厂家：<span class="rupees">肇庆市华创信息科技有限公司</span></p>
+					    </div>
+					    <div class="add-cart">								
+							<h4><a href="preview.html">洽谈</a></h4>
+						</div>
+						<div class="clear"></div>
+					</div>
+					 
+				</div>
+				<div class="col-md-3 col-sm-6 images-box">
+					<a href="preview.html"><img src="__PUBLIC__/images/feature-pic4.jpg" alt="" /></a>
+					<h2>尔康电视 </h2>
+					<div class="price-details">
+				       <div class="price-number">
+							<p>厂家：<span class="rupees">肇庆市华创信息科技有限公司</span></p>
+					    </div>
+					    <div class="add-cart">								
+							<h4><a href="preview.html">洽谈</a></h4>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				
+			</div>
+			<div class="content">
+				<div class="content_bottom">
+					<div class="heading">
+					<h3>合作企业</h3>
+					</div>
+					<div class="see">
+						<p><a href="#">查看更多</a></p>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3 images-box">
+					<a href="preview.html"><img src="__PUBLIC__/images/feature-pic1.jpg" alt="" /></a>
+					<h2>尔康电视 </h2>
+					<div class="price-details">
+				       <div class="price-number">
+							<p>厂家：<span class="rupees">肇庆市华创信息科技有限公司</span></p>
+					    </div>
+					    <div class="add-cart">								
+							<h4><a href="preview.html">洽谈</a></h4>
+						</div>
+						<div class="clear"></div>
+					</div>
+					 
+				</div>
+				<div class="col-md-3 images-box">
+					<a href="preview.html"><img src="__PUBLIC__/images/feature-pic2.jpg" alt="" /></a>
+					<h2>尔康电视 </h2>
+					<div class="price-details">
+				       <div class="price-number">
+							<p>厂家：<span class="rupees">肇庆市华创信息科技有限公司</span></p>
+					    </div>
+					    <div class="add-cart">								
+							<h4><a href="preview.html">洽谈</a></h4>
+						</div>
+						<div class="clear"></div>
+					</div>
+					 
+				</div>
+				<div class="col-md-3 images-box">
+					<a href="preview.html"><img src="__PUBLIC__/images/feature-pic3.jpg" alt="" /></a>
+					<h2>尔康电视 </h2>
+					<div class="price-details">
+				       <div class="price-number">
+							<p>厂家：<span class="rupees">肇庆市华创信息科技有限公司</span></p>
+					    </div>
+					    <div class="add-cart">								
+							<h4><a href="preview.html">洽谈</a></h4>
+						</div>
+						<div class="clear"></div>
+					</div>
+					 
+				</div>
+				<div class="col-md-3 images-box">
+					<a href="preview.html"><img src="__PUBLIC__/images/feature-pic4.jpg" alt="" /></a>
+					<h2>尔康电视 </h2>
+					<div class="price-details">
+				       <div class="price-number">
+							<p>厂家：<span class="rupees">肇庆市华创信息科技有限公司</span></p>
+					    </div>
+					    <div class="add-cart">								
+							<h4><a href="preview.html">洽谈</a></h4>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		
+	</div>
+	
+	<include file="Public/footer"/>
+	<include file="Public/script" />
+	<script>
+		$(".flexslider").flexslider({
+			slideshowSpeed: 4000, //展示时间间隔ms
+			animationSpeed: 400, //滚动时间ms
+			touch: true, //是否支持触屏滑动
+			controlNav: false,
+		});   
+	</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE>
+<head>
+<include file="Public/header"  title="创星谷-产品简介"/>
+</head>
+<body>
+	<div class="wrap">
+		
+		<include file="Public/menu" />
+		<div class="content">
+			<ol class="breadcrumb" style="font-size:12px;">
+				<li><a href="#">首页</a></li>
+				<li><a href="#">家居日常</a></li>
+				<li class="active">{$goods.product}</li>
+			</ol>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="section group">
+				<div class="cont-desc col-md-3">
+					<div class="product-details">	
+						<div class="slides_container">
+							<a href="#" target="_blank"><img src="__PUBLIC__/images/5791cd6da9651.png" alt=" " /></a>
+						</div>
+					</div>
+				</div>
+				<div class="desc col-md-8">
+					<h2>{$goods.product}</h2>
+					<p>{$goods.brief}</p>					
+					<div class="price">
+						<p>价格: <span>咨询客服</span></p>
+					</div>
+					<div class="share-desc">
+						<div class="share">
+							<p>分享:</p>
+							<div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a></div>
+							<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+						</div>
+						<div class="button">客服<a href="tencent://message/?uin=465629989&Site=121ask.com&Menu=yes"> 
+							<img border="0" SRC='http://wpa.qq.com/pa?p=1:465629989:4' alt="点击这里给我发消息"> 
+						</a> </div>					
+						<div class="clear"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<ul class="nav nav-tabs">
+			<li role="presentation" class="active"><a href="#">产品详情</a></li>
+		</ul>
+		<div class="desc-box">
+			{$goods.content}
+		</div>
+	</div>
+	<include file="Public/footer" />
+	<include file="Public/script" />
+</body>
+<script src="__BOOTSTRAP__/js/bootstrap.js"></script>
+
+</html>
