@@ -26,6 +26,7 @@ switch($modelName){
 	case 'store' : define('BIND_MODULE','Admin');break;
 	case 'storage' : define('BIND_MODULE','Storage');break;
 	case 'seller' : define('BIND_MODULE','Seller');break;
+	case 'shop' : define('BIND_MODULE','Home');break;
 	default : define('BIND_MODULE','Home');break; 
 }
 
