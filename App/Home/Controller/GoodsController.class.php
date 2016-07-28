@@ -6,7 +6,7 @@ class GoodsController extends Controller {
 		$Product = M('Product');
 		$goods = M('Product')
 					->field('pid,product,photo,company')
-					->join('LEFT JOIN hc_company ON hc_product.pid = hc_company.cid')
+					->join('LEFT JOIN hc_company ON hc_product.cid = hc_company.cid')
 					->select();
 		$this->assign("goods",$goods);
         $this->display();
@@ -16,7 +16,7 @@ class GoodsController extends Controller {
 		$Product = M('Product');
 		$goods = M('Product')
 					->field('pid,product,photo,brief,content,company')
-					->join('LEFT JOIN hc_company ON hc_product.pid = hc_company.cid')
+					->join('LEFT JOIN hc_company ON hc_product.cid = hc_company.cid')
 					->where('pid='.$pid)
 					->find();
 		$this->assign("goods",$goods);
