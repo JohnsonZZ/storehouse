@@ -10,12 +10,12 @@
 				<div class="categories">
 					<ul>
 						<h3>所有商品分类</h3>
-						<li><a href="{:U('Goods/index/cate/')}">家居日用</a></li>
-						<li><a href="#">家电数码</a></li>
-						<li><a href="#">服饰配件</a></li>
-						<li><a href="#">美容护肤</a></li>
-						<li><a href="#">运动户外</a></li>
-						<li><a href="#">其他</a></li>
+						<li><a href="{:U('Goods/index')}">家居日用</a></li>
+						<li><a href="{:U('Goods/index')}">家电数码</a></li>
+						<li><a href="{:U('Goods/index')}">服饰配件</a></li>
+						<li><a href="{:U('Goods/index')}">美容护肤</a></li>
+						<li><a href="{:U('Goods/index')}">运动户外</a></li>
+						<li><a href="{:U('Goods/index')}">其他</a></li>
 					</ul>
 				</div>					
 	  	    </div>
@@ -40,7 +40,7 @@
 						<h3>新入产品</h3>
 					</div>
 					<div class="see">
-						<p><a href="#">更多产品</a></p>
+						<p><a href="{:U('Goods/index')}">更多产品</a></p>
 					</div>
 					<div class="clear"></div>
 				</div>
@@ -48,7 +48,7 @@
 			<div class="row">
 				<volist name="goods" id="val">
 				<div class="col-md-3 col-sm-6 images-box">
-					<a href="{:U('Goods/preview/pid/'.$val['pid'])}"><img src="__PUBLIC__/upload/image/{$val.photo}" alt="" /></a>
+					<a href="{:U('Goods/preview/pid/'.$val['pid'])}"><img src="__PUBLIC__/upload/image/{$val.photo}" class="img-responsive" alt="{$val.product}" /></a>
 					<h2>{$val.product} </h2>
 					<div class="price-details">
 				       <div class="price-number">
@@ -61,117 +61,34 @@
 					</div>
 				</div>
 				</volist>
-				<div class="col-md-3 col-sm-6 images-box">
-					<a href="preview.html"><img src="__PUBLIC__/images/feature-pic2.jpg" alt="" /></a>
-					<h2>尔康电视 </h2>
-					<div class="price-details">
-				       <div class="price-number">
-							<p>厂家：<span class="rupees">肇庆市华创信息科技有限公司</span></p>
-					    </div>
-					    <div class="add-cart">								
-							<h4><a href="preview.html">洽谈</a></h4>
-						</div>
-						<div class="clear"></div>
-					</div>
-					 
-				</div>
-				<div class="col-md-3 col-sm-6 images-box">
-					<a href="preview.html"><img src="__PUBLIC__/images/feature-pic3.jpg" alt="" /></a>
-					<h2>尔康电视 </h2>
-					<div class="price-details">
-				       <div class="price-number">
-							<p>厂家：<span class="rupees">肇庆市华创信息科技有限公司</span></p>
-					    </div>
-					    <div class="add-cart">								
-							<h4><a href="preview.html">洽谈</a></h4>
-						</div>
-						<div class="clear"></div>
-					</div>
-					 
-				</div>
-				<div class="col-md-3 col-sm-6 images-box">
-					<a href="preview.html"><img src="__PUBLIC__/images/feature-pic4.jpg" alt="" /></a>
-					<h2>尔康电视 </h2>
-					<div class="price-details">
-				       <div class="price-number">
-							<p>厂家：<span class="rupees">肇庆市华创信息科技有限公司</span></p>
-					    </div>
-					    <div class="add-cart">								
-							<h4><a href="preview.html">洽谈</a></h4>
-						</div>
-						<div class="clear"></div>
-					</div>
-				</div>
-				
 			</div>
 			<div class="content">
 				<div class="content_bottom">
 					<div class="heading">
-					<h3>合作企业</h3>
+					<h3>推荐产品</h3>
 					</div>
 					<div class="see">
-						<p><a href="#">查看更多</a></p>
+						<p><a href="{:U('Goods/index')}">查看更多</a></p>
 					</div>
 					<div class="clear"></div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-3 images-box">
-					<a href="preview.html"><img src="__PUBLIC__/images/feature-pic1.jpg" alt="" /></a>
-					<h2>尔康电视 </h2>
+				<volist name="rand" id="val">
+				<div class="col-md-3 col-sm-6 images-box">
+					<a href="{:U('Goods/preview/pid/'.$val['pid'])}"><img src="__PUBLIC__/upload/image/{$val.photo}" alt="{$val.product}" /></a>
+					<h2>{$val.product} </h2>
 					<div class="price-details">
 				       <div class="price-number">
-							<p>厂家：<span class="rupees">肇庆市华创信息科技有限公司</span></p>
+							<p>厂家：<span class="rupees">{$val.company}</span></p>
 					    </div>
 					    <div class="add-cart">								
-							<h4><a href="preview.html">洽谈</a></h4>
-						</div>
-						<div class="clear"></div>
-					</div>
-					 
-				</div>
-				<div class="col-md-3 images-box">
-					<a href="preview.html"><img src="__PUBLIC__/images/feature-pic2.jpg" alt="" /></a>
-					<h2>尔康电视 </h2>
-					<div class="price-details">
-				       <div class="price-number">
-							<p>厂家：<span class="rupees">肇庆市华创信息科技有限公司</span></p>
-					    </div>
-					    <div class="add-cart">								
-							<h4><a href="preview.html">洽谈</a></h4>
-						</div>
-						<div class="clear"></div>
-					</div>
-					 
-				</div>
-				<div class="col-md-3 images-box">
-					<a href="preview.html"><img src="__PUBLIC__/images/feature-pic3.jpg" alt="" /></a>
-					<h2>尔康电视 </h2>
-					<div class="price-details">
-				       <div class="price-number">
-							<p>厂家：<span class="rupees">肇庆市华创信息科技有限公司</span></p>
-					    </div>
-					    <div class="add-cart">								
-							<h4><a href="preview.html">洽谈</a></h4>
-						</div>
-						<div class="clear"></div>
-					</div>
-					 
-				</div>
-				<div class="col-md-3 images-box">
-					<a href="preview.html"><img src="__PUBLIC__/images/feature-pic4.jpg" alt="" /></a>
-					<h2>尔康电视 </h2>
-					<div class="price-details">
-				       <div class="price-number">
-							<p>厂家：<span class="rupees">肇庆市华创信息科技有限公司</span></p>
-					    </div>
-					    <div class="add-cart">								
-							<h4><a href="preview.html">洽谈</a></h4>
+							<h4><a href="tencent://message/?uin=465629989&Site=121ask.com&Menu=yes">洽谈</a></h4>
 						</div>
 						<div class="clear"></div>
 					</div>
 				</div>
-				
+				</volist>
 			</div>
 		</div>
 		
@@ -185,7 +102,8 @@
 			animationSpeed: 400, //滚动时间ms
 			touch: true, //是否支持触屏滑动
 			controlNav: false,
-		});   
+		});
+		$("#index").addClass("active");
 	</script>
 </body>
 </html>
