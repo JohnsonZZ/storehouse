@@ -16,7 +16,6 @@ class IndexController extends Controller {
 					->limit(4)
 					->select();
 		$this->assign("goods",$goods);
-		dump($goods);exit;
 		$this->assign("rand",$rand);
         $this->display();
 	}
