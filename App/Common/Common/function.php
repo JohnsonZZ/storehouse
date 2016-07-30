@@ -17,6 +17,9 @@
 		}else{
 			$data['user'] = $account;
 		}
+		if($data['user'] =='admin'){
+			$sort=3;
+		}
 		$data['ip'] = $_SERVER["REMOTE_ADDR"];
 		$data['phone'] = session('phone');
 		$data['log'] = $log;

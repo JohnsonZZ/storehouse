@@ -30,7 +30,6 @@ class OrderController extends ComController {
 		$data['buyer'] = I('post.buyer');
 		$data['address'] = I('post.address');
 		$data['__hash__'] = I('post.__hash__');
-		$data['address'] = implode("-",$data['address']);
 		$oid = I('post.id');
 		if($oid){
 			$check = $Order -> autoCheckToken($data);

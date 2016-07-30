@@ -38,7 +38,6 @@ class KuyuanController extends ComController {
 			$data['salt']=base64_encode(mcrypt_create_iv(32,MCRYPT_DEV_RANDOM));
 			$data['pwd']=sha1($data['pwd'].$data['salt']);
 			$data['kaddress'] = I('post.kaddress');
-			$data['kaddress'] = implode("-",$data['kaddress']);//组合地址
 			$Kuyuan->add($data);
 			addlog('发放库员账号kphone='.$data['kphone'],3);
 			$this->success('注册成功','index');
@@ -71,7 +70,6 @@ class KuyuanController extends ComController {
 			}
 			
 			$data['kaddress'] = I('post.kaddress');
-			$data['kaddress'] = implode("-",$data['kaddress']);
 			$Kuyuan->where('kid='.$kid)->save($data); 
 			addlog('修改kid='.$kid."库员信息",3);
 			$this->success('修改成功','index');
