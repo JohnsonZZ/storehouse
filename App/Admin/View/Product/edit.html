@@ -80,9 +80,7 @@
 										<div class="col-sm-9">
 											<select id="sid" name="sid" class="col-xs-10 col-sm-5">
 												<option value="0">选择分类</option>
-												<foreach item="val" name="sort" >
-													<option value="{$val.sid}" >{$val.sort}</option>
-												</foreach>	
+												{$category}
 											</select>
 										</div>
 									</div>
@@ -192,8 +190,7 @@
                 browseClass: "btn btn-primary", //按钮样式 
 				maxFileSize: 2048,
             });
-			$("#addButton").click(function(){
-				
+			$("#addButton").click(function(){				
 				var price = $('#price').val();
 				var aprice = $('#aprice').val();
 				var psum = $('#psum').val();
@@ -203,8 +200,7 @@
 				$('#price').val(price);
 				$('#aprice').val(aprice);
 				$('#psum').val(psum);
-				$('#productform').submit();
-				
+				$('#productform').submit();				
 			});
 			$(function(){
 				var cid = $('#cid').children();
@@ -220,7 +216,19 @@
 					}							
 				});				
 						
-			})
+			});
+			
+			$(function(){
+				$('#cid').change(function(){				
+					var cid = $(this).val();
+					$.post("{:U('upsort')}",{ cid : cid }, function(data){
+						if(data){
+							$('#sid').empty();
+							$('#sid').append("<option value='0' >选择分类</option>" + data); 
+						}				
+					});	
+				});
+			});
 			
 			
 		</script>

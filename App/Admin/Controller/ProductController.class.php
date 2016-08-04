@@ -1,62 +1,62 @@
 <?php
 namespace Admin\Controller;
 use Admin\Controller\ComController;
+use Vendor\Tree;
 header("Content-type:text/html;charset=utf-8");
 class ProductController extends ComController {
     public function index(){
-		$Sort = M('Sort');
 		$Company = M('Company');
 		$Product = M('Product');
 		$count = $Product-> count();
 		$Page = new \Think\Page($count,10); // 实例化分页类 传入总记录数和每页显示的记录数(10)
-		$product = $Product-> join('hc_company ON hc_company.cid = hc_product.cid','LEFT') 
-							-> join('hc_sort ON hc_sort.sid = hc_product.sid','LEFT') 
+		$product = $Product -> join('hc_company ON hc_company.cid = hc_product.cid','LEFT') 
+							-> join('hc_category ON hc_category.sid = hc_product.tid','LEFT') 
 							->order('time desc') 
 							->limit($Page->firstRow . ',' . $Page->listRows)-> select();
 		$Page->setConfig('header','');
 		$show = $Page->show(); // 分页显示输出
-		$this->assign('page', $show); // 赋值分页输出
-		$this->assign('product',$product);
-		$this->display();
-	}
-	
+		$this -> assign('page', $show); // 赋值分页输出
+		$this -> assign('product',$product);
+		$this -> display();
+	}	
 	public function edit(){
-		$Product = M('Product');
-		$Company = M('Company');
-		$Sort = M('Sort');
+		$Product  = M('Product');
+		$Company  = M('Company');
+		$Category = M('Category');
 		$data['pid'] = I('get.pid');
 		$product = $Product-> where($data) -> join('hc_company ON hc_company.cid = hc_product.cid','LEFT') 
-										   -> join('hc_sort ON hc_sort.sid = hc_product.sid','LEFT') ->find();
-										
+										   -> find();
+		$sort = $Category  -> where('sid='. $product['sid']) -> find();
+		$category = $Category ->field('sid,prid,sort')->order('o asc')->select();
 		$company = $Company -> select();
-		$sort = $Sort -> select();
+		$tree = new Tree($category);
+		$str = "<option value=\$sid \$selected>&nbsp;&nbsp;\$spacer\$sort</option>"; //生成的形式
+		$parent =  "<option value=" . $product['sid'] . ">"  .  $sort['sort']  .  "</option>";  	
+		$category = $tree->get_tree($product['sid'],$str, $product['tid']);			
+		$category = $parent . $category;
+		$this -> assign('category',$category);
 		$this -> assign('company',$company);
-		$this -> assign('sort',$sort);
 		$this -> assign('product',$product);
 		$this -> display();		
-	}
-	
+	}	
 	public function add(){
 		$Company = M('Company');
-		$Sort = M('Sort');
-		$company = $Company -> select();
-		$sort = $Sort -> select();
+		//$Category = M('Category');
+		$company = $Company ->select();	
 		$this -> assign('company',$company);
-		$this -> assign('sort',$sort);
 		$this -> display();		
-	}
-	
+	}	
 	public function update(){
 		$Product = M('Product');
 		$pid = I('post.pid');		
 		//添加
 		$data['cid'] = I('post.cid');
-		$data['sid'] = I('post.sid');
+		$data['tid'] = I('post.sid');
 		$data['product'] = I('post.product');
 		$data['brief'] = I('post.brief');
-		$data['price'] = I('post.price');
-		$data['aprice'] = I('post.aprice');
-		$data['psum'] = I('post.psum') ? I('post.psum') : 10000;	
+		$data['price'] = floatval(I('post.price'));
+		$data['aprice'] = floatval(I('post.aprice'));
+		$data['psum'] = I('post.psum') ? floatval(I('post.psum')): 10000;	
 		$data['content'] = $_POST['content'];
 		if(!empty($_FILES)){
 			$upload = new \Think\Upload();// 实例化上传类
@@ -74,15 +74,13 @@ class ProductController extends ComController {
 			else if($pid){ 
 				$data['photo'] = '' ;
 			}
-			else	{$this->error('图片上传失败');}
-			
+			else	{$this->error('图片上传失败');}			
 		}
-		if($pid){
-			
+		if($pid){			
 			//空的话为原来的值
 			$oldproduct = $Product -> where('pid='.$pid) ->find();
 			$data['cid'] = empty($data['cid']) ? $oldproduct['cid'] : $data['cid'];
-			$data['sid'] = empty($data['cid']) ? $oldproduct['sid'] : $data['sid'];
+			$data['kid'] = empty($data['kid']) ? $oldproduct['kid'] : $data['kid'];
 			$data['product'] = empty($data['product']) ? $oldproduct['product'] : $data['product'];
 			$data['brief'] = empty($data['brief']) ? $oldproduct['brief'] : $data['brief'];
 			$data['price'] = empty($data['price']) ? $oldproduct['price'] : $data['price'];
@@ -136,5 +134,22 @@ class ProductController extends ComController {
 			addlog('删除产品失败：'.$product['product'],3);
 			$this->error('删除产品失败：');
 		}		
+	}	
+	public function upsort(){   //更新类
+		$Category = M('Category');
+		$map['cid'] = I('post.cid');
+		$sid = M('Company') -> field('sid') -> where($map) -> find();
+		$sort = $Category  -> where('sid='. $sid['sid']) -> find();
+		$category = $Category ->field('sid,prid,sort')->order('o asc') ->select();
+		$tree = new Tree($category);
+		$str = "<option value=\$sid \$selected>&nbsp;&nbsp;\$spacer\$sort</option>"; //生成的形式
+		$parent =  "<option value=" . $sid['sid'] . ">"  .  $sort['sort']  .  "</option>";  
+		$category = $tree->get_tree($sid['sid'],$str,0);
+		$category = $parent . $category;
+		$this->ajaxReturn($category);		
 	}
+	
+	
+	
+	
 }

@@ -88,10 +88,10 @@
 													<td>{$val.sort}</td>
 													<td>
 														<div class="action-buttons">
-																<a class="green" href="{:U('edit')}?cid={$val.cid}" >
+																<a class="green" href="{:U('edit')}?cid={$val.cid}&sid={$val.sid}" >
 																	<i class="ace-icon fa fa-pencil bigger-130" title="修改"></i>
 																</a>
-									
+																<input type="hidden"  name="sid" value="{$val.sid}"/>
 																<a class="red del" val="{:U('del')}?cid={$val.cid}" >
 																	<i class="ace-icon fa fa-trash-o bigger-130" title="删除"></i>
 																</a>

@@ -18,4 +18,6 @@ class ComController extends Controller {
 			$this->redirect('Login/index');
 		}
     }
+	
+	
 }
