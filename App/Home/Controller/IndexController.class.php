@@ -8,6 +8,7 @@ class IndexController extends Controller {
 					->field('pid,product,photo,hc_company.company')
 					->join('LEFT JOIN hc_company ON hc_product.cid = hc_company.cid')
 					->limit(4)
+					->order('pid desc')
 					->select();
 		$rand = M('Product')
 					->field('pid,product,photo,company')
