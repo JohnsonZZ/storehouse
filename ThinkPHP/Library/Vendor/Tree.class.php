@@ -86,9 +86,9 @@ class Tree {
 		$child = $this->get_child($myid);
 		$total = !empty($child) ? count($child) : 0;
 		if($total > 0){
-			foreach($child as $sid=>$value){
-				$ids[] = $sid;
-				$ids = array_merge($ids,$this->get_all_childids($sid));
+			foreach($child as $id=>$value){
+				$ids[] = $id;
+				$ids = array_merge($ids,$this->get_all_childids($id));
 			}
 		}
 		return $ids;

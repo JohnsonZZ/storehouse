@@ -3,7 +3,7 @@ namespace Home\Controller;
 use Think\Controller;
 class IndexController extends Controller {
     public function index(){
-		$Product = M('Product');
+		$category = M('Category')->where('prid=0')->select();
 		$goods = M('Product')
 					->field('pid,product,photo,hc_company.company')
 					->join('LEFT JOIN hc_company ON hc_product.cid = hc_company.cid')
@@ -15,6 +15,7 @@ class IndexController extends Controller {
 					->order('rand()')
 					->limit(4)
 					->select();
+		$this->assign("category",$category);
 		$this->assign("goods",$goods);
 		$this->assign("rand",$rand);
         $this->display();
