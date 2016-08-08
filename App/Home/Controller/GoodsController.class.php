@@ -18,7 +18,8 @@ class GoodsController extends Controller {
 					}
 			}
 		}
-		$map['tid'] = implode(',',$sid);
+		$tid = implode(',',$sid);
+		$map['tid'] = array('in',$tid);
 		$count = M('Product')->where($map)->count();
 		$Page = new \Think\Page($count, 21); // 实例化分页类 传入总记录数和每页显示的记录数(10)
 		$Page->setConfig('prev', '上一页');
