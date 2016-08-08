@@ -369,7 +369,7 @@ body {
 	margin: 0% 0 0% 2.6%;
 }
 .desc h2 {
-	padding-top:10px;
+	padding-top:20px;
     font-size: 1.1em;
     color: #CD1F25;
     font-weight: normal;
@@ -389,7 +389,7 @@ body {
 
 .price p {
 	font-size: 0.8125em;
-	padding:10 0 20 0;
+	padding:10 0 10 0;
 	color: #666;
 	vertical-align: top;
 	
