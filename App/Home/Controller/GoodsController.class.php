@@ -10,7 +10,7 @@ class GoodsController extends Controller {
 		if($category){
 			foreach($category as $firstCate){
 				$sid[] = $firstCate['sid'];
-				$firstId = $Category->field('sid')->where('prid='.$sid[1])->select();
+				$firstId = $Category->field('sid')->where('prid='.$firstCate['sid'])->select();
 					if($firstId){
 						foreach($firstId as $secondCate){
 							$sid[] = $secondCate['sid'];
