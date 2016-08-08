@@ -15,8 +15,18 @@ class ProductController extends ComController {
 							->limit($Page->firstRow . ',' . $Page->listRows)-> select();
 		$Page->setConfig('header','');
 		$show = $Page->show(); // 分页显示输出
+		
+		$Category = D('category');
+		$category = $Category->field('sid,prid,sort,o')->order('o asc')->select();
+		$tree = new Tree($category);
+		
+		$str = "<option value=\$sid \$selected>\$spacer\$sort</option>"; //生成的形式
+		$category = $tree->get_tree(0,$str, 0);
+		
 		$this -> assign('page', $show); // 赋值分页输出
 		$this -> assign('product',$product);
+		$this -> assign('category',$category);//分类输出
+		
 		$this -> display();
 	}	
 	public function edit(){
