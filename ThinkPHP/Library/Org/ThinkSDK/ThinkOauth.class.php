@@ -93,6 +93,7 @@ abstract class ThinkOauth{
 		//设置SDK类型
 		$class = get_class($this);
 		$this->Type = strtoupper(substr($class, 0, strlen($class)-3));
+		dump($this->Type);
 		//下面三句是我添加的。  
 		$typeArr = explode('\\',$this->Type);  
 		$typeLen = count($typeArr);  
