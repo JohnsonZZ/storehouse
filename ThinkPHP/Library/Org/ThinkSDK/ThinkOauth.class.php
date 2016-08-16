@@ -91,13 +91,13 @@ abstract class ThinkOauth{
 	 */
 	public function __construct($token = null){
 		//设置SDK类型
-		$class = get_class($this);
-		$this->Type = strtoupper(substr($class, 0, strlen($class)-3));
-		dump($this->Type);
-		//下面三句是我添加的。  
-		$typeArr = explode('\\',$this->Type);  
+		$class = get_class($this);//得到class名字，空间命名 ORG\THINKSDK\SDK\SINASDK;
+		$this->Type = strtoupper(substr($class, 0, strlen($class)-3)); 
+		
+		$typeArr = explode('\\',$this->Type); //分组 
 		$typeLen = count($typeArr);  
-		$this->Type = $typeArr[$typeLen-1];  
+		$this->Type = $typeArr[$typeLen-1];  //$this->Type = SINA
+		
 		//获取应用配置
 		$config = C("THINK_SDK_{$this->Type}");
 		if(empty($config['APP_KEY']) || empty($config['APP_SECRET'])){
@@ -130,7 +130,7 @@ abstract class ThinkOauth{
 		if(!empty($config['CALLBACK']))
 			$this->Callback = $config['CALLBACK'];
 		else
-			throw new Exception('请配置回调页面地址');
+			E('请配置回调页面地址');
 	}
 	
 	/**
@@ -151,7 +151,7 @@ abstract class ThinkOauth{
 			if(is_array($_param)){
 				$params = array_merge($params, $_param);
 			} else {
-				throw new Exception('AUTHORIZE配置不正确！');
+				E('AUTHORIZE配置不正确！');
 			}
 		}
 		return $this->GetRequestCodeURL . '?' . http_build_query($params);
@@ -227,7 +227,7 @@ abstract class ThinkOauth{
 				$opts[CURLOPT_POSTFIELDS] = $params;
 				break;
 			default:
-				throw new Exception('不支持的请求方式！');
+				E('不支持的请求方式！');
 		}
 		
 		/* 初始化并执行curl请求 */
@@ -236,7 +236,7 @@ abstract class ThinkOauth{
 		$data  = curl_exec($ch);
 		$error = curl_error($ch);
 		curl_close($ch);
-		if($error) throw new Exception('请求发生错误：' . $error);
+		if($error) E('请求发生错误：' . $error);
 		return  $data;
 	}
 	
