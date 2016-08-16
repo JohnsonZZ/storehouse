@@ -10,6 +10,8 @@
 // +----------------------------------------------------------------------
 // | ThinkOauth.class.php 2013-02-25
 // +----------------------------------------------------------------------
+namespace Org\ThinkSDK;
+use Org\ThinkSDK\sdk\SinaSDK;
 abstract class ThinkOauth{
 	/**
 	 * oauth版本
@@ -91,11 +93,14 @@ abstract class ThinkOauth{
 		//设置SDK类型
 		$class = get_class($this);
 		$this->Type = strtoupper(substr($class, 0, strlen($class)-3));
-
+		//下面三句是我添加的。  
+		$typeArr = explode('\\',$this->Type);  
+		$typeLen = count($typeArr);  
+		$this->Type = $typeArr[$typeLen-1];  
 		//获取应用配置
 		$config = C("THINK_SDK_{$this->Type}");
 		if(empty($config['APP_KEY']) || empty($config['APP_SECRET'])){
-			throw new Exception('请配置您申请的APP_KEY和APP_SECRET');
+			E('请配置您申请的APP_KEY和APP_SECRET');
 		} else {
 			$this->AppKey    = $config['APP_KEY'];
 			$this->AppSecret = $config['APP_SECRET'];
@@ -110,12 +115,8 @@ abstract class ThinkOauth{
      */
     public static function getInstance($type, $token = null) {
     	$name = ucfirst(strtolower($type)) . 'SDK';
-    	require_once "sdk/{$name}.class.php";
-    	if (class_exists($name)) {
-    		return new $name($token);
-    	} else {
-    		halt(L('_CLASS_NOT_EXIST_') . ':' . $name);
-    	}
+    	$path="\Org\ThinkSDK\sdk\\$name";//注意这里与下面一句来实例化类的方式。  
+		return new $path($token);  
     }
 
 	/**

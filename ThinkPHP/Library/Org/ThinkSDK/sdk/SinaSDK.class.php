@@ -10,8 +10,9 @@
 // +----------------------------------------------------------------------
 // | SinaSDK.class.php 2013-02-25
 // +----------------------------------------------------------------------
-
-class SinaSDK extends ThinkOauth{
+namespace Org\ThinkSDK\sdk;
+use Org\ThinkSDK;
+class SinaSDK extends \Org\ThinkSDK\ThinkOauth{
 	/**
 	 * 获取requestCode的api接口
 	 * @var string
