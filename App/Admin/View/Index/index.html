@@ -14,7 +14,6 @@
 				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
 			</script>
 			<include file="Public/sidebar" />
-			
 	
 			<!-- /section:basics/sidebar -->
 			<div class="main-content">
@@ -30,7 +29,9 @@
 								<i class="ace-icon fa fa-home home-icon"></i>
 								<a href="{:U('Index/index')}">首页</a>
 							</li>
-							<li class="active">控制台</li>
+							<li class="active">
+								<a href="{:U('login?type=sina')}">新浪微博用户登录</a>
+							</li>
 						</ul><!-- /.breadcrumb -->
 
 						<!-- #section:basics/content.searchbox -->
