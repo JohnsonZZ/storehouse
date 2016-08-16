@@ -10,8 +10,10 @@
 // +----------------------------------------------------------------------
 // | QqSDK.class.php 2013-02-25
 // +----------------------------------------------------------------------
+namespace Org\ThinkSDK\sdk;
+use Org\ThinkSDK;
 
-class QqSDK extends ThinkOauth{
+class QqSDK extends \Org\ThinkSDK\ThinkOauth{
 	/**
 	 * 获取requestCode的api接口
 	 * @var string
