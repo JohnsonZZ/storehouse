@@ -60,7 +60,7 @@ class SinaSDK extends \Org\ThinkSDK\ThinkOauth{
 			unset($data['uid']);
 			return $data;
 		} else
-			throw new Exception("获取新浪微博ACCESS_TOKEN出错：{$data['error']}");
+			E("获取新浪微博ACCESS_TOKEN出错：{$data['error']}");
 	}
 	
 	/**
@@ -72,7 +72,7 @@ class SinaSDK extends \Org\ThinkSDK\ThinkOauth{
 		if(isset($data['openid']))
 			return $data['openid'];
 		else
-			throw new Exception('没有获取到新浪微博用户ID！');
+			E('没有获取到新浪微博用户ID！');
 	}
 	
 }
