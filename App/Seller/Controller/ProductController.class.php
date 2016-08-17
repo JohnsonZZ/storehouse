@@ -4,7 +4,7 @@ use Seller\Controller\ComController;
 header("Content-type:text/html;charset=utf-8");
 class ProductController extends ComController {
     public function index(){
-		$Sort = M('Sort');
+		
 		$Company = M('Company');
 		$Product = M('Product');
 		$count = $Product -> count();
