@@ -215,6 +215,15 @@ body {
 .see p a:hover{
 	color: #E4292F;
 }
+.cate-header {
+    border: 1px solid #D4D4D4;
+    margin-bottom: 5px;
+}
+
+.cate-select {
+    border: none;
+}
+
 .images-box{
 	text-align: center;
 	padding: 1.5%;
