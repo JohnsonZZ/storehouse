@@ -61,6 +61,23 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<div class="clearfix">
+										<div class="box-header pull-left">
+											  <form class="form-inline" action="" method="get" id="search-form">
+												<select name="category" class="form-control" id="search-sort">
+													<option value="0">请选择..</option>
+													{$category}
+												</select>
+												<select name="field" class="form-control">
+													<option value="0">请选择..</option>
+												</select>
+												<div class="input-group" style="width: 150px;">
+												  <input type="text" name="table_search" class="form-control pull-right" placeholder="搜索">
+												  <div class="input-group-btn">
+													<button type="submit" class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+												  </div>
+												</div>
+											  </form>
+										</div>
 										<div class="pull-right tableTools-container">
 											<div class="dt-buttons btn-overlap btn-group">
 												<a id="Excel" class="dt-button buttons-excel buttons-flash btn btn-white btn-primary btn-bold" title="Export to Excel">
@@ -148,6 +165,9 @@
 					}
 				);
 			})*/
+			$("#search-sort").change(function(){
+					$('#search-form').submit();
+				});
 		</script>
 	</body>
 </html>
