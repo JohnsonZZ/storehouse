@@ -151,6 +151,13 @@
 		<script type="text/javascript">
 			$('#allOrder').addClass("active").siblings().removeClass("active");
 			$('#addOrder').addClass("active");
+			$('#province').val("{$order[address][0]}").change();
+			$('#city').val("{$order[address][1]}").change();
+			$('#town').val("{$order[address][2]}").change();
+			$('#address').val($('#province').val()+'-'+$('#city').val()+'-'+$('#town').val()+'-'+$('#detail').val());
+			$('#detail').change(function(){
+				$('#address').val($('#province').val()+'-'+$('#city').val()+'-'+$('#town').val()+'-'+$('#detail').val());
+			})
 		</script>
 		
 
