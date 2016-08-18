@@ -1,0 +1,58 @@
+<!DOCTYPE>
+<head>
+<include file="Public/header"  title="创星谷-分销产品"/>
+</head>
+<body>
+	<div class="wrap">
+		<include file="Public/menu" />
+	    <div class="header_slide">
+			<div class="header_bottom_left">				
+				<div class="categories">
+					<ul>
+						<h3>所有商品分类</h3>
+						<li><a href="{:U('Goods/index')}?sid=1">金银珠宝</a></li>
+						<li><a href="{:U('Goods/index')}?sid=6">家装系列</a></li>
+						<li><a href="{:U('Goods/index')}?sid=8">手工艺品</a></li>
+						<li><a href="{:U('Goods/index')}?sid=99">家居日用</a></li>
+						<li><a href="{:U('Goods/index')}?sid=99">服饰配件</a></li>
+						<li><a href="{:U('Goods/index')}?sid=99">美容护肤</a></li>
+						<li><a href="{:U('Goods/index')}?sid=99">运动户外</a></li>
+						<li><a href="{:U('Goods/index')}?sid=99">其他</a></li>
+					</ul>
+				</div>					
+	  	    </div>
+			<div class="header_bottom_right">		
+				<div class="row">
+				{$message}
+				<volist name="goods" id="val">
+				<div class="col-md-4 images-box">
+					<a href="{:U('Goods/preview/pid/'.$val['pid'])}"><img src="__PUBLIC__/upload/image/{$val.photo}" alt="" /></a>
+					<h2>{$val.product} </h2>
+					<div class="price-details">
+				       <div class="price-number">
+							<p>厂家：<span class="rupees">{$val.company}</span></p>
+					    </div>
+					    <div class="add-cart">								
+							<h4><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=465629989&site=qq&menu=yes">洽谈</a></h4>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				</volist>
+				</div>
+				<ul class="pagination pull-right">
+					{$page}
+				</ul>
+			</div>
+		   <div class="clear"></div>
+		</div>
+	</div>
+	<include file="Public/footer"/>
+	<include file="Public/script" />
+	<script>
+		$('#search-sort').change(function(){
+			$('#cate-sid').submit();
+		})
+	</script>
+</body>
+</html>

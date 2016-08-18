@@ -1,15 +1,15 @@
 <div class="header_top">
-			<div class="logo">
-				<a href="index.html"><img src="__PUBLIC__/images/logo.png" alt=""></a>
-			</div>
-			<div class="cart">
-				<p>欢迎来到创星谷供销平台! 
-					<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=465629989&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:465629989:51" alt="点击这里给我发消息" title="点击这里给我发消息"/></a>
-				</p>
-			</div>
-			
-	     	<div class="clear"></div>
+		<div class="logo">
+			<a href="index.html"><img src="__PUBLIC__/images/logo.png" alt=""></a>
 		</div>
+		<div class="cart">
+			<p>欢迎来到创星谷供销平台! 
+				<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=465629989&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:465629989:51" alt="点击这里给我发消息" title="点击这里给我发消息"/></a>
+			</p>
+		</div>
+			
+	<div class="clear"></div>
+</div>
 <div class="header_bottom">
 	<div class="menu">
 		<ul>
@@ -19,10 +19,36 @@
 		</ul>
 		<div class="clear"></div>
 	</div>
-	<div class="search_box">
-		<form>
-			<input type="text" value="搜索" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '搜索';}"><input type="submit" value="">
-		</form>
-	</div>
+	<form method="get" action="{:U('Search/index')}">
+		<div class="search_box">
+			<div class="input-group input-group-sm">
+				<div class="input-group-btn">
+					<button type="button" id="table-name" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">产品 <span class="caret"></span></button>
+					<ul class="dropdown-menu">
+						<li id="li-product"><a href="#">产品</a></li>
+						<li id="li-company"><a href="#">公司</a></li>
+					</ul>
+				</div><!-- /btn-group -->
+				
+				<input type="hidden" id="datatable" name="datatable" value="product" />
+				<script>
+					document.getElementById('li-product').onclick=function (){ 
+						document.getElementById('datatable').value="product";
+						document.getElementById('table-name').innerHTML='产品<span class="caret"></span>';
+					};
+					document.getElementById('li-company').onclick=function (){ 
+						document.getElementById('datatable').value="company";
+						document.getElementById('table-name').innerHTML='公司<span class="caret"></span>';
+					};
+				</script>
+				<input type="text" name="search-keyword" class="form-control" aria-label="..." />
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+				</span>
+				
+			</div><!-- /input-group -->
+			
+		</div>
+	</form>
 	<div class="clear"></div>
 </div>
