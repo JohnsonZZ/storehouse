@@ -70,9 +70,12 @@ class OrderController extends ComController {
 	}
 	public function edit(){
 		$oid = I('get.id');
+		$Product = M('Product');
+		$product = $Product -> field('pid,product') -> select();
 		$order = M('Order')->field('oid,pid,buyer,address,ophone')->where('oid='.$oid)->find();
 		$order['address'] = explode("-",$order['address']);
 		$this->assign('order',$order);
+		$this->assign('product',$product);
 		$this->display();
 	}
 	public function del(){

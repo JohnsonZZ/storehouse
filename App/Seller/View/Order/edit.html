@@ -66,9 +66,13 @@
 										<label class="col-sm-3 control-label no-padding-right" for="pid">产品</label>
 										<div class="col-sm-3">
 											<select class="form-control" id="pid" name="pid">
-												<option value="1">手镯</option>
-												<option value="2">戒指</option>
-												<option value="3">项链</option>
+												<foreach item="val" name="product" >
+													<if condition="$order[pid] eq $val[pid]">
+														<option value="{$val.pid}"  selected="selected" class="pid">{$val.product}</option>
+													<else />
+														<option value="{$val.pid}"  class="pid">{$val.product}</option>
+													</if>
+												</foreach>	
 											</select>
 										</div>
 									</div>
