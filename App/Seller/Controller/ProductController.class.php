@@ -37,7 +37,8 @@ class ProductController extends ComController {
 			$product = $Product -> field('pid,hc_product.cid,hc_product.photo,hc_product.tid,company,sort,product,aprice,psum') 
 								-> join('hc_company ON hc_company.cid = hc_product.cid','LEFT') 
 								-> join('hc_category ON hc_category.sid = hc_product.tid','LEFT') 
-								-> limit( $Page->firstRow . ',' . $Page->listRows)-> select();
+								-> limit( $Page->firstRow . ',' . $Page->listRows)
+								-> select();
 		}
 		$show = $Page->show(); // 分页显示输出
 		
