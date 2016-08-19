@@ -50,6 +50,12 @@ body {
 	font-size:0.9em;
 	color:#303030;
 	display:inline-block;
+	height:25px;
+	line-height:25px;
+}
+.cart a{
+	float:right;
+	display:inline-block;
 }
 .cart p span{
 	font-size:1.5em;
