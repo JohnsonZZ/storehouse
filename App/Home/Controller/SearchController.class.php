@@ -24,7 +24,7 @@ class SearchController extends Controller {
 		$goods = M($datatable)
 					->field('pid,product,pstatus,photo,company')
 					->join('LEFT JOIN hc_company ON hc_product.cid = hc_company.cid')
-					->where('product like "%'.$keyword.'%"')
+					->where('product like "%'.$keyword.'%" AND pstatus = 1')
 					->limit($Page->firstRow . ',' . $Page->listRows)
 					->select();
 		$this->assign('page', $show); // 赋值分页输出
