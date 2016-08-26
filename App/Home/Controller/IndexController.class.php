@@ -8,7 +8,7 @@ class IndexController extends Controller {
 					->field('pid,product,photo,pstatus,hc_company.company')
 					->join('LEFT JOIN hc_company ON hc_product.cid = hc_company.cid')
 					->limit(4)
-					->where('pstatus = 1')
+					->where('pstatus=1')
 					->order('pid desc')
 					->select();
 		$rand = M('Product')
@@ -16,7 +16,7 @@ class IndexController extends Controller {
 					->join('LEFT JOIN hc_company ON hc_product.cid = hc_company.cid')
 					->order('rand()')
 					->limit(4)
-					->where('pstatus = 1')
+					->where('pstatus=1')
 					->select();
 		$this->assign("category",$category);
 		$this->assign("goods",$goods);
