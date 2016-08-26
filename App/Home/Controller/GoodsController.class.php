@@ -27,7 +27,7 @@ class GoodsController extends Controller {
 		$Page->setConfig('header','');
 		$show = $Page->show(); // 分页显示输出
 		$goods = M('Product')
-					->field('pid,product,photo,company')
+					->field('pid,product,photo,pstatus,company')
 					->join('LEFT JOIN hc_company ON hc_product.cid = hc_company.cid')
 					->where($map)
 					->limit($Page->firstRow . ',' . $Page->listRows)

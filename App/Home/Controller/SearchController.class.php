@@ -22,7 +22,7 @@ class SearchController extends Controller {
 		$Page->setConfig('header','');
 		$show = $Page->show(); // 分页显示输出
 		$goods = M($datatable)
-					->field('pid,product,photo,company')
+					->field('pid,product,pstatus,photo,company')
 					->join('LEFT JOIN hc_company ON hc_product.cid = hc_company.cid')
 					->where('product like "%'.$keyword.'%"')
 					->limit($Page->firstRow . ',' . $Page->listRows)

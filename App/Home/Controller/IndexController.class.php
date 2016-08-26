@@ -5,13 +5,13 @@ class IndexController extends Controller {
     public function index(){
 		$category = M('Category')->where('prid=0')->select();
 		$goods = M('Product')
-					->field('pid,product,photo,hc_company.company')
+					->field('pid,product,photo,pstatus,hc_company.company')
 					->join('LEFT JOIN hc_company ON hc_product.cid = hc_company.cid')
 					->limit(4)
 					->order('pid desc')
 					->select();
 		$rand = M('Product')
-					->field('pid,product,photo,company')
+					->field('pid,product,photo,pstatus,company')
 					->join('LEFT JOIN hc_company ON hc_product.cid = hc_company.cid')
 					->order('rand()')
 					->limit(4)
