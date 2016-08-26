@@ -121,18 +121,22 @@
 											<th class="center">售出数量</th>	
 											<th class="center">售出总价</th>	
 											<th class="center">时间</th>
+											<th class="center">状态</th>
 											<th>
 												操作
 											</th>
 										</tr>
 									</thead>
 									<tbody>
+										<form id="form" method="get" action="">
 										 <foreach item="val" name="product" >
 											<tr>
 												<td class="center">
 													<label class="pos-rel">
-														<input type="checkbox" class="ace pid" name="pid[]" value="{$val['pid']}"/>
-														<span class="lbl"></span>
+														
+															<input type="checkbox" class="ace pid" name="pid[]" value="{$val['pid']}"/>
+															<span class="lbl"></span>
+														
 													</label>
 												</td>
 												<td class="center product-name">{$val.product}<!--<div class="product-name-div" ><img class="product-name-img" src="__PUBLIC__/upload/image/{$val.photo}"  height="200" width="200"> </div>-->
@@ -145,19 +149,28 @@
 												<td class="center">{$val.ssum}</td>
 												<td class="center">{$val.sprice}</td>
 												<td class="center">{$val.time}</td>
+												<td class="center">
+													{$val['pstatus']?'上架':'下架'}
+												</td>
 												<td>
 													<div class="hidden-sm hidden-xs action-buttons">
 														<a class="blue" href="{:U('edit')}?pid={$val.pid}">
 															<i class="ace-icon fa fa-pencil bigger-130" title="修改"></i>
 														</a>
-
+														<a class="grey status" val="{:U('status')}?pid={$val['pid']}" href="javascript:;">
+															{$val['pstatus']?'<i class="ace-icon fa fa-lock bigger-130" title="下架"></i>':'<i class="ace-icon fa fa-unlock bigger-130" title="上架"></i>'}
+															
+														</a>
+														
 														<a class="red del" val="{:U('del')}?pid={$val['pid']}" href="javascript:;">
 															<i class="ace-icon fa fa-trash-o bigger-130" title="删除"></i>
 														</a>
+														
 													</div>
 												</td>
 											</tr>
 										</foreach>	
+										</form>
 										<tr>
 											<td class="center">
 												<button id="del" class="btn btn-xs btn-danger">
@@ -165,7 +178,12 @@
 													删除
 												</button>
 											</td>	
-											
+											<td class="center">
+												<button id="status" class="btn btn-xs btn-success">
+													<i class="ace-icon fa fa-square-o bigger-110"></i>
+													上架/下架
+												</button>
+											</td>	
 										</tr>
 									</tbody>
 								</table>
@@ -205,6 +223,7 @@
 					});
 				});
 				$("#del").click(function(){
+					$('#form').attr('action',"{:U('del')}");
 					layer.open({
 						icon:0,
 						title: '删除列表',
@@ -223,6 +242,32 @@
 						title: '删除列表',
 						type: 0, 
 						content: '是否删除选中列表',
+						btn: ['确认', '取消'],
+						yes: function(){
+								location.href = val;
+							}
+					});	
+				});
+				$("#status").click(function(){
+					$('#form').attr('action',"{:U('status')}");
+					layer.open({
+						icon:0,
+						title: '删除列表',
+						type: 0, 
+						content: '是否上架/下架选中列表',
+						btn: ['确认', '取消'],
+						yes: function(){
+							$('#form').submit();
+							}
+					});	
+				});
+				$(".status").click(function(){
+					var val=$(this).attr('val');
+					layer.open({
+						icon:0,
+						title: '删除列表',
+						type: 0, 
+						content: '是否上架/下架选中列表',
 						btn: ['确认', '取消'],
 						yes: function(){
 								location.href = val;

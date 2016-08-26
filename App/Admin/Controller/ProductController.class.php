@@ -166,9 +166,28 @@ class ProductController extends ComController {
 			$this->success('成功删除产品：'.$product['product'], 'index');
 		} else {
 			addlog('删除产品失败：'.$product['product'],3);
-			$this->error('删除产品失败：');
+			$this->error('删除产品失败！');
 		}		
 	}	
+	public function status(){
+		$Model = new \Think\Model(); 
+		$pid = I('param.pid');	
+		if( is_array($pid) ){
+			$pid = implode(',',$pid);
+			$map['pid']  = array('in',$pid);
+			$result = $Model->execute("update hc_product set pstatus = !`pstatus` where pid in ($pid)");
+										//UPDATE `hc_product` SET `pstatus`= !`pstatus` WHERE pid in (8,9)
+		}else{
+			$result = $Model->execute("update hc_product set pstatus = !`pstatus` where pid=$pid");
+		}
+		if($result){
+			addlog('下架/上架产品成功：'.$pid,3);
+			$this->success('成功下架/上架产品：'.$pid, 'index');
+		} else {
+			addlog('下架/上架失败：'.$pid,3);
+			$this->error('下架/上架失败！');
+		}	
+	}
 	public function upsort(){   //更新类
 		$Category = M('Category');
 		$map['cid'] = I('post.cid');
