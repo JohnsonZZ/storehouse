@@ -11,7 +11,7 @@ class SearchController extends Controller {
 			die();
 		}
 		$keyword = I('get.search-keyword');
-		$count = M($datatable)->where('product like "%'.$keyword.'%"')->count();
+		$count = M($datatable)->where('product like "%'.$keyword.'%" AND pstatus=1')->count();
 		if($count == "0"){
 			$message = "<p>有0件相关产品</p>";
 			$this->assign("message",$message);
@@ -24,7 +24,7 @@ class SearchController extends Controller {
 		$goods = M($datatable)
 					->field('pid,product,pstatus,photo,company')
 					->join('LEFT JOIN hc_company ON hc_product.cid = hc_company.cid')
-					->where('product like "%'.$keyword.'%" AND pstatus=1')
+					->where('product like "%'.$keyword.'%"AND pstatus=1')
 					->limit($Page->firstRow . ',' . $Page->listRows)
 					->select();
 		$this->assign('page', $show); // 赋值分页输出
