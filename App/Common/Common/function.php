@@ -159,3 +159,17 @@
         $mail->AltBody = "这是一个纯文本的身体在非营利的HTML电子邮件客户端"; //邮件正文不支持HTML的备用显示
         return($mail->Send());
     }
+	/**
+	 * 时间比较函数
+	 * 与预定时间比较
+	 * @param string $otime 订单时间
+	 * @return TRUE OR FALSE
+	 */
+	function timeTime($otime){
+		$ltime = date("Y-m-d")." 16:00:00";
+		if(strtotime($otime)<strtotime($ltime)){
+			return true;
+		}else{
+			return false;
+		}	
+	}

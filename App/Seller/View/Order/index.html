@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<include file="Public/header"  title="华创 | 控制台"/>
+		<include file="Public/header"  title="控制台"/>
 
 	</head>
 
@@ -113,6 +113,13 @@
 											<td>{$val['address']}</td>
 											<td>{$val['ophone']}</td>
 											<td>
+												<if condition="timeTime($val['time'])">
+												<div class="action-buttons">
+													<a class="red"  href="javascript:;">
+														<i class="ace-icon fa fa-ban bigger-130" title="锁单"></i>
+													</a>
+												</div>
+												<else />
 												<div class="action-buttons">
 													<a id="print" class="blue" href="{:U('edit')}?id={$val['oid']}">
 														<i class="ace-icon fa fa-edit bigger-130" title="打印"></i>
@@ -121,6 +128,7 @@
 														<i class="ace-icon fa fa-trash-o bigger-130" title="删除"></i>
 													</a>
 												</div>
+												</if>
 											</td>
 										</tr>
 									</volist>

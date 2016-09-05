@@ -5,8 +5,9 @@ header("Content-type:text/html;charset=utf-8");
 class OrderController extends ComController {
     public function index(){
 		$Order = M('Order');
-		$order = $Order -> field('hc_order.*,product,name,sum') ->join('hc_user ON hc_order.uid = hc_user.id','LEFT') 
-											   ->join('hc_product ON hc_order.pid = hc_product.pid','LEFT') ->select();										   
+		$order = $Order -> field('hc_order.*,product,name,sum,hc_order.time') ->join('hc_user ON hc_order.uid = hc_user.id','LEFT') 
+											   ->join('hc_product ON hc_order.pid = hc_product.pid','LEFT') ->order('time desc')->select();		
+		
 		$this->assign('order',$order);
 		$this->display();
 	}
