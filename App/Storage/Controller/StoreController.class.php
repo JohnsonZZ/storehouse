@@ -6,7 +6,7 @@ class StoreController extends ComController {
     public function index(){
 		$Order = M('Order');
 		$order= $Order
-					->field('hc_order.oid,hc_order.pid,hc_product.product,buyer,ophone,address,express,hc_order.time,hc_user.name,hc_user.uphone,hc_kuyuan.kname')
+					->field('hc_order.oid,hc_order.pid,hc_product.product,buyer,sum,ophone,address,express,hc_order.time,hc_user.name,hc_user.uphone,hc_kuyuan.kname')
 					->join('LEFT JOIN hc_user ON hc_order.uid = hc_user.id')
 					->join('LEFT JOIN hc_product ON hc_order.pid = hc_product.pid')
 					->join('LEFT JOIN hc_kuyuan ON hc_kuyuan.kid = hc_order.kid')
@@ -20,9 +20,14 @@ class StoreController extends ComController {
 		$data['express'] = I('post.express');
 		$data['kid'] = session('id');
 		$data['oid'] = I('post.id');
+		$pid = I('post.pid');
+		$sum = I('post.sum');
 		
 		$Order = M('Order');
 		$Order->where('oid='.$data['oid'])->save($data); 
+		
+		$Product = M('Product');
+		$Product->where('pid='.$pid)->setDec('psum',$sum); 
 		
 		$this->ajaxReturn($data['oid']);
 	}

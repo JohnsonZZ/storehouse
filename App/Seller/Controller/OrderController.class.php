@@ -5,7 +5,7 @@ header("Content-type:text/html;charset=utf-8");
 class OrderController extends ComController {
     public function index(){
 		$Order = M('Order');
-		$order = $Order -> field('hc_order.*,product,name') ->join('hc_user ON hc_order.uid = hc_user.id','LEFT') 
+		$order = $Order -> field('hc_order.*,product,name,sum') ->join('hc_user ON hc_order.uid = hc_user.id','LEFT') 
 											   ->join('hc_product ON hc_order.pid = hc_product.pid','LEFT') ->select();										   
 		$this->assign('order',$order);
 		$this->display();
@@ -27,6 +27,7 @@ class OrderController extends ComController {
 		}
 		$data['uid'] = session('id');
 		$data['pid'] = I('post.pid');
+		$data['sum'] = I('post.sum');
 		$data['buyer'] = I('post.buyer');
 		$data['address'] = I('post.address');
 		$data['__hash__'] = I('post.__hash__');
@@ -72,7 +73,7 @@ class OrderController extends ComController {
 		$oid = I('get.id');
 		$Product = M('Product');
 		$product = $Product -> field('pid,product') -> select();
-		$order = M('Order')->field('oid,pid,buyer,address,ophone')->where('oid='.$oid)->find();
+		$order = M('Order')->field('oid,pid,buyer,address,ophone,sum')->where('oid='.$oid)->find();
 		$order['address'] = explode("-",$order['address']);
 		$this->assign('order',$order);
 		$this->assign('product',$product);

@@ -96,6 +96,7 @@
 											</label>
 										</th>
 										<th>产品</th>
+										<th>数量</th>
 										<th>接单人</th>
 										<th>联系电话</th>
 										<th>收件人</th>
@@ -120,6 +121,7 @@
 												</label>
 											</td>
 											<td>{$val['product']}</td>
+											<td>{$val['sum']}</td>
 											<td>{$val['name']}</td>
 											<td>{$val['uphone']}</td>
 											<td>{$val['buyer']}</td>
@@ -135,7 +137,7 @@
 														打印快递单
 													</button>
 													<empty name="val.express">
-													<button order="{$val['oid']}" class="pencil btn btn-white btn-info btn-bold" type="button">
+													<button order="{$val['oid']}" sum="{$val['sum']}" pid="{$val['pid']}" class="pencil btn btn-white btn-info btn-bold" type="button">
 														<i class="ace-icon fa fa-pencil bigger-120 blue"></i>
 														填写运单号
 													</button>
@@ -162,6 +164,7 @@
 												删除
 											</button>
 										</td>
+										<td></td>
 										<td></td>
 										<td></td>
 										<td></td>
@@ -206,11 +209,13 @@
 			});  
 			$(".pencil").click(function(){
 				var order = $(this).attr('order');
+				var sum = $(this).attr('sum');
+				var pid = $(this).attr('pid');
 				layer.prompt({
 					title: '输入运单号'
 					},function(value, index, elem){
 						layer.msg('订单信息正在写入...', {icon: 16});
-						$.post("{:U(addExpress)}",{express:value,id:order},function(data){
+						$.post("{:U(addExpress)}",{express:value,id:order,sum:sum,pid:pid},function(data){
 							location.reload();
 						});
 						layer.close(index);

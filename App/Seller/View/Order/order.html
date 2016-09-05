@@ -72,6 +72,27 @@
 											</select>
 										</div>
 									</div>
+									<div class="space-4"></div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="buyer"> 数量 </label>
+										<div class="col-sm-9">
+											<div class="ace-spinner middle touch-spinner" style="width: 125px;">
+												<div class="input-group">
+													<div class="spinbox-buttons input-group-btn">	
+														<button type="button" class="btn spinbox-down btn-sm btn-info">		
+															<i class="icon-only ace-icon ace-icon fa fa-minus bigger-110"></i>		
+														</button>			
+													</div>
+													<input type="text" id="sum" name="sum" class="spinbox-input form-control text-center" value="1" onkeyup="this.value=this.value.replace(/[^\d]/ig,'')" />
+													<div class="spinbox-buttons input-group-btn">					
+														<button type="button" class="btn spinbox-up btn-sm btn-info">					
+															<i class="icon-only ace-icon ace-icon fa fa-plus bigger-110"></i>				
+														</button>				
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
 									<!-- #section:elements.form -->
 									<div class="space-4"></div>
 									<div class="form-group">
@@ -139,7 +160,10 @@
 		<!-- basic scripts -->
 		<include file="Public/footer" />
 		<include file="Public/script" />
+		<script src="__PUBLIC__/js/spinbox.js"></script>
 		<script type="text/javascript">
+		
+		spinbox($("#sum"));
 		function istell(str){
 			var result=str.match(/\d{3}-\d{8}|\d{4}-\d{7}/);
 			if(result==null) return false;
@@ -161,7 +185,7 @@
 		$('#addOrder').addClass("active");
 		$('#addButton').click(function(){
 			var pid = $('#pid').val();
-			console.log(pid);
+			var sum = $('#sum').val();	
 			var buyer = $('#buyer').val();
 			var province = $('#province').val();
 			var city = $('#city').val();
@@ -170,6 +194,10 @@
 			var phone = $('#phone').val();				
 			if(pid == 0){
 				layer.msg('请选择产品！')
+				return false;
+			}
+			if(sum <= 0){
+				layer.msg('数量要大于0！')
 				return false;
 			}
 			if(buyer == ''){
