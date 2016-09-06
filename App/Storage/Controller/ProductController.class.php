@@ -10,7 +10,8 @@ class ProductController extends ComController {
 		$product = $Product -> field('product,photo,company,sort,psum,time') 
 							-> join('hc_company ON hc_company.cid = hc_product.cid','LEFT') 
 							-> join('hc_category ON hc_category.sid = hc_product.tid','LEFT') 
-						    ->order('time desc') 
+						    -> order('time desc') 
+							-> where('pstatus =1')
 							->limit($Page->firstRow . ',' . $Page->listRows)-> select();
 		$Page->setConfig('header','');
 		$show = $Page->show(); // 分页显示输出

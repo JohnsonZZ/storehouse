@@ -30,6 +30,7 @@ class ProductController extends ComController {
 							-> join('hc_category ON hc_category.sid = hc_product.tid','LEFT') 
 							-> where($map)
 							-> limit( $Page->firstRow . ',' . $Page->listRows)
+							-> where('pstatus = 1')
 							-> select();
 		}else{
 			$count = $Product -> count();
@@ -38,6 +39,7 @@ class ProductController extends ComController {
 								-> join('hc_company ON hc_company.cid = hc_product.cid','LEFT') 
 								-> join('hc_category ON hc_category.sid = hc_product.tid','LEFT') 
 								-> limit( $Page->firstRow . ',' . $Page->listRows)
+							    -> where('pstatus = 1')
 								-> select();
 		}
 		$show = $Page->show(); // 分页显示输出

@@ -14,7 +14,7 @@ class OrderController extends ComController {
 	public function order(){
 		$Product = M('Product');
 		$map = I('get.pid');
-		$product = $Product -> field('pid,product') -> select();
+		$product = $Product -> field('pid,product') -> where('pstatus = 1') -> select();
 		$this -> assign('map',$map);
 		$this -> assign('product',$product);
 		$this->display();
