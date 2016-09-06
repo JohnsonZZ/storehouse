@@ -167,7 +167,9 @@
 	 */
 	function timeTime($otime){
 		$ltime = date("Y-m-d")." 16:00:00";
-		if(strtotime($otime)<strtotime($ltime)){
+		$yesterday = strtotime($ltime)-86400;
+		$nowadays = strtotime($otime);
+		if($nowadays>$yesterday&&$nowadays<strtotime($ltime)||strtotime($ltime)<$nowadays){
 			return true;
 		}else{
 			return false;

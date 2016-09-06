@@ -54,7 +54,7 @@
 						<!-- /section:settings.box -->
 						<div class="page-header">
 							<h1>
-								产品列表
+								库存列表
 							</h1>
 						</div><!-- /.page-header -->
 
@@ -63,13 +63,7 @@
 								<div class="clearfix">
 										<div class="box-header pull-left">
 											  <form class="form-inline" action="" method="get" id="search-form">
-												<select name="category" class="form-control" id="search-sort">
-													<option value="0">请选择..</option>
-													{$category}
-												</select>
-												<select name="field" class="form-control">
-													<option value="0">请选择..</option>
-												</select>
+												
 												<div class="input-group" style="width: 150px;">
 												  <input type="text" name="table_search" class="form-control pull-right" placeholder="搜索">
 												  <div class="input-group-btn">
@@ -108,6 +102,7 @@
 											<th class="center">编号</th>
 											<th class="center">产品名</th>
 											<th class="center">库存</th>
+											<th class="center">售出数量</th>
 											<th class="col-sm-1">
 												下单
 											</th>
@@ -117,15 +112,14 @@
 									<tbody>
 										 <foreach item="val" name="product" >
 											<tr>
-												<td class="center product-name">{$val.product}<div class="product-name-div" ><img class="product-name-img" src="__PUBLIC__/upload/image/{$val.photo}"  height="200" width="200"> </div></td>
-												
-												<td class="center">{$val.company}</td>
-												<td class="center">{$val.sort}</td>
-												<td class="center">{$val.aprice}</td>
+											
+												<td class="center">{$val.pid}</td>
+												<td class="center product-name">{$val.product}</td>
 												<td class="center">{$val.psum}</td>
+												<td class="center">{$val.ssum}</td>
 												<td>
 													<div class="hidden-sm hidden-xs action-buttons">
-														<a class="blue" href="{:U('order/order')}?pid={$val.pid}">
+														<a class="blue" href="{:U('order')}?pid={$val.pid}">
 															<i class="ace-icon fa fa-pencil bigger-130" title="下单"></i>
 														</a>
 													</div>

@@ -13,7 +13,6 @@ class OrderController extends ComController {
 						->where($sess)
 						->select();		
 		
-		
 		$this->assign('order',$order);
 		$this->display();
 	}
@@ -52,29 +51,28 @@ class OrderController extends ComController {
 		}else{
 			$check = $Order -> autoCheckToken($_POST);
 			if($check){
-				$result = $Order->add($data);
-				if($result){
-					$count = $Product-> where('pid='.$data['pid']) -> find();
-					if($count['psum']>=1){
-						$Product -> where('pid='.$data['pid']) ->setDec('psum');
+				$count = $Product-> field('psum') -> where('pid='.$data['pid']) -> find();
+				if($count['psum']-$data['sum']>=0){
+					
+					$result = $Order->add($data);
+					if($result){
 						addlog('发单成功',session('sort'));
 						$this->success('发单成功','index');
-					}
-					if($count['psum'] <= 0){
-						addlog('缺货,发单失败',session('sort'));
-						$this->error('发单失败');				
-					}
 					}else{
 						addlog('添加订单失败',session('sort'));
-						$this->error('添加订单失败，发单失败');	
+					$this->error('添加订单失败，发单失败');	
 					}
 				}
-			else{
+				if($count['psum']-$data['sum'] < 0){
+					addlog('缺货,发单失败',session('sort'));
+					$this->error('发单失败');				
+				}
+			}else{
 				addlog('发单失败，表单令牌验证失败',session('sort'));
 				$this->error('发单失败，表单令牌验证失败');	
-			}			
+			}
 			
-		}
+		}	
 	}
 	public function edit(){
 		$oid = I('get.id');
@@ -113,9 +111,14 @@ class OrderController extends ComController {
 	public function table(){
 		$oid = I('post.sid');
 		$oid = implode(',',$oid);
-		$Model = new \Think\Model();
-		$sql = "select hc_order.*,hc_user.name from hc_order, hc_user where hc_order.uid = hc_user.id AND hc_order.oid in ($oid)";
-		$order = $Model->query($sql);
+		$map['oid'] = array('in',$oid);
+		$Order = M('Order');
+		$order = $Order ->field('hc_order.*,product,name,sum,hc_order.time') 
+						->join('hc_user ON hc_order.uid = hc_user.id','LEFT') 
+						->join('hc_product ON hc_order.pid = hc_product.pid','LEFT') 
+						->order('time desc')
+						->where($map)
+						->select();		
 		$this->assign('order',$order);
 		$this->display();
 	}
@@ -124,9 +127,14 @@ class OrderController extends ComController {
 		vendor("PHPExcel.PHPExcel.IOFactory");
 		$oid = I('post.sid');
 		$oid = implode(',',$oid);
-		$Model = new \Think\Model();
-		$sql = "select hc_order.*,hc_user.name from hc_order, hc_user where hc_order.uid = hc_user.id AND hc_order.oid in ($oid)";
-		$order = $Model->query($sql);
+		$map['oid'] = array('in',$oid);
+		$Order = M('Order');
+		$order = $Order ->field('hc_order.*,product,name,sum,hc_order.time') 
+						->join('hc_user ON hc_order.uid = hc_user.id','LEFT') 
+						->join('hc_product ON hc_order.pid = hc_product.pid','LEFT') 
+						->order('time desc')
+						->where($map)
+						->select();		
 		$i=1;
 		$objPHPExcel = new \PHPExcel();  		
 		$objPHPExcel->getProperties()->setCreator("Maarten Balliauw")
@@ -138,20 +146,22 @@ class OrderController extends ComController {
 							 ->setCategory("Test result file");
 		$objPHPExcel->getActiveSheet()->getStyle('A')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
 		$objPHPExcel->setActiveSheetIndex(0)
-					->setCellValue('A1', '产品')
-					->setCellValue('B1', '接单人')
-					->setCellValue('C1', '收件人')	
-					->setCellValue('D1', '收货地址')
-					->setCellValue('E1', '联系电话');
+					->setCellValue('A1', '订单号')
+					->setCellValue('B1', '产品')
+					->setCellValue('C1', '接单人')
+					->setCellValue('D1', '收件人')	
+					->setCellValue('E1', '收货地址')
+					->setCellValue('F1', '联系电话');
 							 
 		foreach($order as $value){
 			$i++;
 			$objPHPExcel->setActiveSheetIndex(0)
-						->setCellValue("A$i", $value['pid'])
-						->setCellValue("B$i", $value['name'])
-						->setCellValue("C$i", $value['buyer'])
-						->setCellValue("D$i", $value['address'])
-						->setCellValue("E$i", $value['ophone']);
+						->setCellValue("A$i", $value['oid'])
+						->setCellValue("B$i", $value['product'])
+						->setCellValue("C$i", $value['name'])
+						->setCellValue("D$i", $value['buyer'])
+						->setCellValue("E$i", $value['address'])
+						->setCellValue("F$i", $value['ophone']);
 		}
 		
 		$objPHPExcel->getActiveSheet()->setTitle('Simple');
