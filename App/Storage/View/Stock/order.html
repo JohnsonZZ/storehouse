@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<include file="Public/header"  title="控制台"/>
+
+	</head>
+
+	<body class="no-skin">
+		<include file="Public/nav" />
+
+		<!-- /section:basics/navbar.layout -->
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+			<include file="Public/sidebar" />
+			
+	
+			<!-- /section:basics/sidebar -->
+			<div class="main-content">
+				<div class="main-content-inner">
+					<!-- #section:basics/content.breadcrumbs -->
+					<div class="breadcrumbs" id="breadcrumbs">
+						<script type="text/javascript">
+							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+						</script>
+
+						<ul class="breadcrumb">
+							<li>
+								<i class="ace-icon fa fa-home home-icon"></i>
+								<a href="#">首页</a>
+							</li>
+							<li class="active">订单管理</li>
+						</ul><!-- /.breadcrumb -->
+
+						<!-- #section:basics/content.searchbox -->
+						<div class="nav-search" id="nav-search">
+							<form class="form-search">
+								<span class="input-icon">
+									<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+									<i class="ace-icon fa fa-search nav-search-icon"></i>
+								</span>
+							</form>
+						</div><!-- /.nav-search -->
+
+						<!-- /section:basics/content.searchbox -->
+					</div>
+
+					<!-- /section:basics/content.breadcrumbs -->
+					<div class="page-content">
+						<!-- #section:settings.box -->
+						
+
+						<!-- /section:settings.box -->
+						<div class="page-header">
+							<h1>
+								发送订单
+							</h1>
+						</div><!-- /.page-header -->
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+								<form class="form-horizontal" action="{:U('update')}" id="formAdmin" role="form" method="post">
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="pid">产品</label>
+										<div class="col-sm-3">
+											<select class="form-control" id="pid" name="pid">
+												<option value="0" class="pid" >选择产品</option>
+												<foreach item="val" name="product" >
+													<option value="{$val.pid}"  class="pid">{$val.product}</option>
+												</foreach>	
+											</select>
+										</div>
+									</div>
+									<div class="space-4"></div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="buyer"> 数量 </label>
+										<div class="col-sm-9">
+											<div class="ace-spinner middle touch-spinner" style="width: 125px;">
+												<div class="input-group">
+													<div class="spinbox-buttons input-group-btn">	
+														<button type="button" class="btn spinbox-down btn-sm btn-info">		
+															<i class="icon-only ace-icon ace-icon fa fa-minus bigger-110"></i>		
+														</button>			
+													</div>
+													<input type="text" id="sum" name="sum" class="spinbox-input form-control text-center" value="1" onkeyup="this.value=this.value.replace(/[^\d]/ig,'')" />
+													<div class="spinbox-buttons input-group-btn">					
+														<button type="button" class="btn spinbox-up btn-sm btn-info">					
+															<i class="icon-only ace-icon ace-icon fa fa-plus bigger-110"></i>				
+														</button>				
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- #section:elements.form -->
+									<div class="space-4"></div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="buyer"> 收件人 </label>
+										<div class="col-sm-9">
+											<input type="text" id="buyer" placeholder="收件人" name="buyer" class="col-xs-10 col-sm-5">
+										</div>
+									</div>
+									
+									<div class="space-4"></div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="address"> 收货地址 </label>
+										<input type="hidden" name="address" id="address" />
+										<div class="col-sm-9">
+											<select class="col-xs-5 col-sm-6 col-lg-2" id="province"></select>
+											<select class="col-xs-5 col-sm-6 col-lg-2" id="city"></select>
+											<select class="col-xs-5 col-sm-6 col-lg-2" id="town"></select>
+											<script src="__PUBLIC__/js/area.js" type="text/javascript"></script>
+											<script type="text/javascript">_init_area();</script>
+										</div>
+									</div>
+									<div class="space-4"></div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="detail"> 详细地址 </label>
+										<div class="col-sm-9">
+											
+											<input type="text" id="detail" placeholder="详细地址" name="detail"  class="col-xs-10 col-sm-5">
+										</div>
+									</div>
+									
+									<div class="space-4"></div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="phone"> 联系电话 </label>
+										<div class="col-sm-9">
+											<input type="text" id="phone" placeholder="联系电话" name="phone" maxlength="11" class="col-xs-10 col-sm-5">		
+										</div>
+									</div>
+									<div class="space-4"></div>
+									<div class="clearfix form-actions">
+										<div class="col-md-offset-3 col-md-9">
+											<button class="btn btn-info addButton" id="addButton" type="button">
+												<i class="ace-icon fa fa-check bigger-110"></i>
+												提交
+											</button>
+											&nbsp; &nbsp; &nbsp;
+											<button class="btn" type="reset">
+												<i class="ace-icon fa fa-undo bigger-110"></i>
+												重置
+											</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					
+					</div><!-- /.page-content -->
+				</div>
+			</div><!-- /.main-content -->
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+			</a>
+		</div><!-- /.main-container -->
+
+		<!-- basic scripts -->
+		<include file="Public/footer" />
+		<include file="Public/script" />
+		<script src="__PUBLIC__/js/spinbox.js"></script>
+		<script type="text/javascript">
+		
+		spinbox($("#sum"));
+		function istell(str){
+			var result=str.match(/\d{3}-\d{8}|\d{4}-\d{7}/);
+			if(result==null) return false;
+			return true;
+			}
+		$(function(){
+			var pid = "{$map}" ;
+			if( pid != '')
+			{
+				var pids = $('#pid').children();
+				pids.each(function(){
+					if($(this).val()  == pid ){
+						$(this).prop("selected",true);
+					}							
+				});	
+			}	
+		});
+		$('#allStock').addClass("active").siblings().removeClass("active");
+		$('#addButton').click(function(){
+			var pid = $('#pid').val();
+			var sum = $('#sum').val();	
+			var buyer = $('#buyer').val();
+			var province = $('#province').val();
+			var city = $('#city').val();
+			var town = $('#town').val();
+			var detail = $('#detail').val();
+			var phone = $('#phone').val();				
+			if(pid == 0){
+				layer.msg('请选择产品！')
+				return false;
+			}
+			if(sum <= 0){
+				layer.msg('数量要大于0！')
+				return false;
+			}
+			if(buyer == ''){
+				layer.msg('请填写收件人！')
+				return false;
+			}
+			if(province == '请选择..'){
+				layer.msg('请填写省份！')
+				return false;
+			}
+			if(city == '请选择..'){
+				layer.msg('请填写市(县)！')
+				return false;
+			}
+			if(town == '请选择..'){
+				layer.msg('请填写区(镇)！')
+				return false;
+			}
+			if(detail == ''){
+				layer.msg('请填写详细地址！')
+				return false;
+			}
+			$('#address').val(province+'-'+city+'-'+town+'-'+detail);
+			$('#formAdmin').submit();
+		});
+			
+		</script>
+	</body>
+</html>

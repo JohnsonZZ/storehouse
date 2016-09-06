@@ -47,12 +47,49 @@
 
 						<b class="arrow"></b>
 					</li>
+					
 					<li id="allProduct">
-						<a href="{:U('Product/index')}" >
+						<a href="#" class="dropdown-toggle">
 							<i class="menu-icon fa fa-list"></i>
-							<span class="menu-text"> 公司产品 </span>
+
+							<span class="menu-text">
+								产品库存
+
+								<!-- /section:basics/sidebar.layout.badge -->
+							</span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li id="coProduct">
+								<a href="{:U('Product/index')}">
+									<i class="menu-icon fa fa-caret-right"></i>
+									合作产品
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li id="hmProduct">
+								<a href="{:U('Product/huamao')}">
+									<i class="menu-icon fa fa-caret-right"></i>
+									华贸产品
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+						</ul>
+					</li>
+					<li id="allStock">
+						<a href="{:U('Stock/index')}" >
+							<i class="menu-icon fa fa-shopping-cart"></i>
+							<span class="menu-text"> 产品入库 </span>
 						</a>
 					</li>
+					
 					<li id="allStore">
 						<a href="{:U('Store/index')}">
 							<i class="menu-icon fa fa-calendar"></i>
