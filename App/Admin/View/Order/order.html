@@ -2,9 +2,21 @@
 <html lang="en">
 	<head>
 		<include file="Public/header"  title="控制台"/>
+		<link rel="stylesheet" type="text/css" href="__PLUGINS__/jqueryui/themes/default/easyui.css">
+		<link rel="stylesheet" type="text/css" href="__PLUGINS__/jqueryui/themes/icon.css">
 
 	</head>
-
+	<style>
+	.combo-arrow{background-color:#fff;
+				     background: url("/../..__PLUGINS__/jqueryui/themes/default/images/combo_arrow.png") no-repeat center center;}
+	.combo-arrow:hover{background-color:#fff;}
+	.combo{border-radius:0px;height:33.4px;}
+	.textbox easyui-fluid combo{height:33.4px;}
+	.textbox .textbox-text{height:33.4px!important;}
+	.textbox{border:1px solid #d5d5d5 }
+	.textbox-focused{border:1px solid #d5d5d5 ;box-shadow:0px 0px;}
+	.combobox-item-hover {cursor: pointer;}
+	</style>
 	<body class="no-skin">
 		<include file="Public/nav" />
 
@@ -64,8 +76,7 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="pid">产品</label>
 										<div class="col-sm-3">
-											<select class="form-control" id="pid" name="pid">
-												<option value="0" class="pid" >选择产品</option>
+											<select class="form-control easyui-combobox" id="pid" name="pid">
 												<foreach item="val" name="product" >
 													<option value="{$val.pid}"  class="pid">{$val.product}</option>
 												</foreach>	
@@ -138,6 +149,7 @@
 		<!-- basic scripts -->
 		<include file="Public/footer" />
 		<include file="Public/script" />
+		<script type="text/javascript" src="__PLUGINS__/jqueryui/jquery.easyui.min.js"></script>
 		<script type="text/javascript">
 		$('#allOrder').addClass("active").siblings().removeClass("active");
 		$('#addOrder').addClass("active");

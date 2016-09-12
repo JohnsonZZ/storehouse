@@ -2,9 +2,20 @@
 <html lang="en">
 	<head>
 		<include file="Public/header"  title="控制台"/>
-
+		<link rel="stylesheet" type="text/css" href="__PLUGINS__/jqueryui/themes/default/easyui.css">
+		<link rel="stylesheet" type="text/css" href="__PLUGINS__/jqueryui/themes/icon.css">
 	</head>
-
+	<style>
+	.combo-arrow{background-color:#fff;
+				     background: url("/../..__PLUGINS__/jqueryui/themes/default/images/combo_arrow.png") no-repeat center center;}
+	.combo-arrow:hover{background-color:#fff;}
+	.combo{border-radius:0px;height:33.4px;}
+	.textbox easyui-fluid combo{height:33.4px;}
+	.textbox .textbox-text{height:33.4px!important;}
+	.textbox{border:1px solid #d5d5d5 }
+	.textbox-focused{border:1px solid #d5d5d5 ;box-shadow:0px 0px;}
+	.combobox-item-hover {cursor: pointer;}
+	</style>
 	<body class="no-skin">
 		<include file="Public/nav" />
 
@@ -63,11 +74,10 @@
 								<form class="form-horizontal" action="{:U('update')}" id="formAdmin" role="form" method="post">
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="pid">产品</label>
-										<div class="col-sm-3">
-											<select class="form-control" id="pid" name="pid">
-												<option value="0" class="pid" >选择产品</option>
+										<div class="col-sm-8">
+											<select class="form-control easyui-combobox" id="pid" style="width:50%" name="pid">
 												<foreach item="val" name="product" >
-													<option value="{$val.pid}"  class="pid">{$val.product}</option>
+												<option value="{$val.pid}"  class="pid">{$val.product}</option>
 												</foreach>	
 											</select>
 										</div>
@@ -122,7 +132,6 @@
 											<input type="text" id="detail" placeholder="详细地址" name="detail"  class="col-xs-10 col-sm-5">
 										</div>
 									</div>
-									
 									<div class="space-4"></div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="phone"> 联系电话 </label>
@@ -161,8 +170,8 @@
 		<include file="Public/footer" />
 		<include file="Public/script" />
 		<script src="__PUBLIC__/js/spinbox.js"></script>
-		<script type="text/javascript">
-		
+		<script type="text/javascript" src="__PLUGINS__/jqueryui/jquery.easyui.min.js"></script>
+		<script type="text/javascript">		
 		spinbox($("#sum"));
 		function istell(str){
 			var result=str.match(/\d{3}-\d{8}|\d{4}-\d{7}/);
@@ -225,5 +234,8 @@
 		});
 			
 		</script>
+		
+		
+		
 	</body>
 </html>
