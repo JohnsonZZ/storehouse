@@ -19,6 +19,7 @@ class ProductController extends ComController {
 		$this->assign('product',$product);
 		$this->display();
 	}
+	
 	public function huamao(){
 		$Product = M('Product');
 		$count = $Product-> count();
@@ -35,5 +36,40 @@ class ProductController extends ComController {
 		$this->assign('product',$product);
 		$this->display();
 	}
+	public function edit(){
+		$pid = I('get.pid');
+		$Product = M('Product');
+		$product = $Product-> where('pid='.$pid) -> join('hc_user ON hc_user.id = hc_product.uid','LEFT') 
+										   -> find();
+		$User = M('User');
+		$user = $User -> field('id,uphone,name')-> where('id='.$product['uid']) -> find();
+		$users = $User -> field('id,uphone')-> select();
+		$this->assign('users',$users);
+		$this->assign('user',$user);
+		$this->assign('product',$product);
+		$this->display();
+	}
+	public function del(){
+		$Product = M('Product');
+		$pid = I('param.pid');	
+		if( is_array($pid) ){
+			$pid = implode(',',$pid);
+			$map['pid']  = array('in',$pid);
+			$product = $Product -> field('product') -> where($map) -> select();
+			$product = implode(',',$product);
+			$result = $Product -> where($map) -> delete();
+		}
+		else{
+			$product = $Product -> field('product') -> where('pid='.$pid) -> find();
+			$result = $Product -> where('pid='.$pid) -> delete();
+		}
+		if($result){
+			addlog('删除产品成功：'.$product['product'],3);
+			$this->success('成功删除产品：'.$product['product'], 'huamao');
+		} else {
+			addlog('删除产品失败：'.$product['product'],3);
+			$this->error('删除产品失败！');
+		}		
+	}	
 	
 }

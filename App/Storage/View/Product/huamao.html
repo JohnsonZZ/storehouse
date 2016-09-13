@@ -93,20 +93,34 @@
 											<th class="center col-sm-1">所有者</th>
 											<th class="center col-sm-1">库存</th>
 											<th class="center col-sm-1">时间</th>
+											<th class="center col-sm-1">操作</th>
 										</tr>
 									</thead>
 
 									<tbody>
+										<form id="form" method="get" action="">
 										 <foreach item="val" name="product" >
 											<tr>
 												<td class="center">{$val.pid}</td>
 												<td class="center "><div  class="product-name">{$val.product}<div class="product-name-div" ><img class="product-name-img" src="__PUBLIC__/upload/image/{$val.photo}"  height="200" width="200"> </div></div></td>
-												
 												<td class="center">{$val.name}</td>
 												<td class="center">{$val.psum}</td>
 												<td class="center">{$val.time}</td>
+												<td class="center">
+													<div class="hidden-sm hidden-xs action-buttons">
+														<a class="blue" href="{:U('edit')}?pid={$val.pid}">
+															<i class="ace-icon fa fa-pencil bigger-130" title="修改"></i>
+														</a>
+														
+														<a class="red del" val="{:U('del')}?pid={$val['pid']}" href="javascript:;">
+															<i class="ace-icon fa fa-trash-o bigger-130" title="删除"></i>
+														</a>
+														
+													</div>
+												</td>
 											</tr>
 										</foreach>	
+										</form>
 									</tbody>
 								</table>
 								</div>
@@ -132,31 +146,7 @@
 			$('#hmProduct').addClass("active");
 			
 			$(function(){
-				$(".check-all").click(function(){
-					$(".pid").prop("checked", this.checked);
-				});
-				$(".pid").click(function(){
-					$(".pid").each(function(i){
-						if(!this.checked){
-							$(".check-all").prop("checked", false);
-							return false;
-						}else{
-							$(".check-all").prop("checked", true);
-						}
-					});
-				});
-				$("#del").click(function(){
-					layer.open({
-						icon:0,
-						title: '删除列表',
-						type: 0, 
-						content: '是否删除选中列表',
-						btn: ['确认', '取消'],
-						yes: function(){
-							$('#form').submit();
-							}
-					});	
-				});
+				
 				$(".del").click(function(){
 					var val=$(this).attr('val');
 					layer.open({

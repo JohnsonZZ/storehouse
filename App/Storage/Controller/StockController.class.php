@@ -4,76 +4,75 @@ use Storage\Controller\ComController;
 header("Content-type:text/html;charset=utf-8");
 class StockController extends ComController {
     public function index(){
-		$sess['uid'] = session('id');
-		$Product = M('Product');
-		$count = $Product -> count();
-		$Page = new \Think\Page($count,10); // 实例化分页类 传入总记录数和每页显示的记录数(10)
-		$product = $Product -> field('pid,product,psum,ssum') 
-							-> limit( $Page->firstRow . ',' . $Page->listRows)
-							-> where($sess)
-							-> select();
-		$show = $Page->show(); // 分页显示输出
-		$this->assign('page', $show); // 赋值分页输出
-		$this->assign('product',$product);
+		$User = M('User');
+		$user = $User -> field('id,uphone')-> select();
+		$this -> assign('user',$user);
 		$this->display();
 	}
-	public function order(){
-		$sess['uid'] = session('id');
-		$Product = M('Product');
-		$map = I('get.pid');
-		$product = $Product -> field('pid,product') -> where($sess) -> select();
-		$this -> assign('map',$map);
-		$this -> assign('product',$product);
-		$this->display();
+	public function addName(){
+		$User = M('User');
+		$data['id'] = I('post.id');
+		$user = $User -> field('name')-> where($data) -> find();
+		$this->ajaxReturn($user['name']);
 	}
+	
 	public function update(){
-		$Order = M('Order');
 		$Product = M('Product');
-		$data['ophone'] = I('post.phone');
-		if(!isPhone($data['ophone'])){
-			$this->error('手机号码错误');
-		}
-		$data['uid'] = session('id');
-		$data['pid'] = I('post.pid');
-		$data['sum'] = I('post.sum');
-		$data['buyer'] = I('post.buyer');
-		$data['address'] = I('post.address');
-		$data['__hash__'] = I('post.__hash__');
-		$oid = I('post.id');
-		if($oid){
-			$check = $Order -> autoCheckToken($data);
-			if($check){
-				$Order->where('oid='.$oid)->save($data); 
-				addlog('修改id='.$oid."单号信息成功",session('sort'));
-				$this->success('修改成功','index');
-			}else{
-				addlog('修改id='.$oid."单号信息失败",session('sort'));
-				$this->error('修改失败，表单令牌验证失败','index');		
+		$pid = I('post.pid');		
+		//添加
+		$data['uid'] = I('post.uid');
+		$data['product'] = I('post.product');
+		$data['brief'] = I('post.brief');
+		$data['pstatus'] = 0;
+		$data['price'] = floatval(I('post.price'))?floatval(I('post.price')) : 0;
+		$data['aprice'] = floatval(I('post.aprice'));
+		$data['psum'] = I('post.sum') ? floatval(I('post.sum')): 10000;	
+		$data['content'] = $_POST['content'];
+		if(!empty($_FILES)){
+			$upload = new \Think\Upload();// 实例化上传类
+			$upload->subName   =     array('date', 'Ymd');
+			$upload->maxSize   =     1048576 ;// 设置附件上传大小
+			$upload->exts      =     array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
+			$upload->rootPath  =     'Public/upload/image/'; // 设置附件上传根目录
+			$upload->replace   =	 true;
+			$upload->savePath  =     ''; // 设置附件上传（子）目录
+			// 上传文件 
+			$info   =   $upload -> upload();
+			if($info) {
+				$data['photo'] = $info['photo']['savepath'] . $info['photo']['savename'];
 			}
-		}else{
-			$check = $Order -> autoCheckToken($_POST);
-			if($check){
-				$count = $Product-> field('psum') -> where('pid='.$data['pid']) -> find();
-				if($count['psum']-$data['sum']>=0){
-					
-					$result = $Order->add($data);
-					if($result){
-						addlog('发单成功',session('sort'));
-						$this->success('发单成功','index');
-					}else{
-						addlog('添加订单失败',session('sort'));
-					$this->error('添加订单失败，发单失败');	
-					}
-				}
-				if($count['psum']-$data['sum'] < 0){
-					addlog('缺货,发单失败',session('sort'));
-					$this->error('缺货,请勿超过库存'.$count['psum']);				
-				}
-			}else{
-				addlog('发单失败，表单令牌验证失败',session('sort'));
-				$this->error('发单失败，请刷新重试');	
+			else if($pid){ 
+				$data['photo'] = '' ;
 			}
-			
+			else	{$this->error('图片上传失败');}			
 		}
+		if($pid){	
+			$oldproduct = $Product -> where('pid='.$pid) ->find();		
+			$data['photo'] = empty($data['photo']) ? $oldproduct['photo'] : $data['photo'];
+			//删除旧照片
+			$path = $Product -> where('pid ='.$pid) -> field('photo') -> find();	//找到照片
+			$file = 'Product/upload/image/'.$path['photo']; //储存之前的图片路径			
+			$result = $Product -> where('pid='.$pid)-> save($data);
+			if($result){
+				if(isset($data['photo'])){
+					unlink($file);//成功后删除之前的图片
+				}
+				addlog('修改'.$data['product'].'产品成功',3);
+				$this->success('修改'.$data['product'].'成功', 'index');
+			} else {
+				addlog('修改'.$data['product'].'产品失败',3);
+				$this->error('修改'.$data['product'].'失败');
+			}	
+		}
+		else{		
+			$result = $Product->add($data);		
+			if($result){
+				addlog('增加'.$data['product'].'产品',3);
+				$this->success('新增'.$data['product'].'成功', 'index');
+			} else {
+				addlog('增加'.$data['product'].'产品失败',3);
+				$this->error('新增'.$data['product'].'失败');
+			}
+		}	
 	}
 }

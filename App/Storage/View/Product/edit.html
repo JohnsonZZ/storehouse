@@ -65,14 +65,15 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
-								<form class="form-horizontal" role="form"  action="{:U('update')}"  id="productform" method="post" enctype="multipart/form-data">
-									
+								<form class="form-horizontal" role="form"  action="{:U('Stock/update')}"  id="productform" method="post" enctype="multipart/form-data">
+									<input type="hidden" name="pid" value="{$product.pid}" />
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="uid">联系人号码</label>
 										<div class="col-sm-9">
 											<select id="uid" name="uid" class="col-xs-10 col-sm-5 easyui-combobox">
-												<foreach item="val" name="user">
-													<option value="{$val.id}" val = "{$val.id}" class="company">{$val.uphone}</option>
+													<option value="{$user.id}" class="company">{$user.uphone}</option>
+												<foreach item="val" name="users">
+													<option value="{$val.id}" class="company">{$val.uphone}</option>
 												</foreach>	
 											</select>
 										</div>
@@ -86,7 +87,7 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="product"> 产品名 </label>
 										<div class="col-sm-9">
-											<input type="text" id="product" placeholder="product name" name="product" class="col-xs-10 col-sm-5">
+											<input type="text" id="product" placeholder="product name" name="product" class="col-xs-10 col-sm-5" value="{$product.product}">
 										</div>
 									</div>
 									<div class="space-4"></div>
@@ -100,7 +101,7 @@
 															<i class="icon-only ace-icon ace-icon fa fa-minus bigger-110"></i>		
 														</button>			
 													</div>
-													<input type="text" id="sum" name="sum" class="spinbox-input form-control text-center" value="1" onkeyup="this.value=this.value.replace(/[^\d]/ig,'')" />
+													<input type="text" id="sum" name="sum" class="spinbox-input form-control text-center" value="{$product.psum}" onkeyup="this.value=this.value.replace(/[^\d]/ig,'')"/>
 													<div class="spinbox-buttons input-group-btn">					
 														<button type="button" class="btn spinbox-up btn-sm btn-info">					
 															<i class="icon-only ace-icon ace-icon fa fa-plus bigger-110"></i>				
@@ -113,22 +114,28 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="brief"> 简介 </label>
 										<div class="col-sm-9">
-											<input type="text" id="brief" placeholder="brief" name="brief" class="col-xs-10 col-sm-5">
+											<input type="text" id="brief" placeholder="brief" name="brief" class="col-xs-10 col-sm-5" value="{$product.brief}" />
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="price"> 出厂价 </label>
 										<div class="col-sm-9">
-											<input type="text" id="price" placeholder="price" name="price" class="col-xs-10 col-sm-5">
+											<input type="text" id="price" placeholder="price" name="price" class="col-xs-10 col-sm-5" value="{$product.price}" />
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="aprice"> 建议售价 </label>
 										<div class="col-sm-9">
-											<input type="text" id="aprice" placeholder="aprice" name="aprice" class="col-xs-10 col-sm-5">
+											<input type="text" id="aprice" placeholder="aprice" name="aprice" class="col-xs-10 col-sm-5" value="{$product.aprice}"/>
 											
 										</div>
-									</div>																	
+									</div>				
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right " for="photo"> 旧简图 </label>
+										<div class="col-sm-9">				
+											<img src="__PUBLIC__/upload/image/{$product.photo}"  style="border:1px solid #d5d5d5;" height="100" width="100" class="fr" />
+										</div>
+									</div>
 									<!-- #section:elements.form -->
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right " for=""> 简图 </label>
@@ -140,6 +147,7 @@
 										<label class="col-sm-3 control-label no-padding-right" for="content"> 内容 </label>
 										<div class="col-sm-9">
 											 <textarea id="content" name="content" type="text/plain">
+												{$product.content}
 											</textarea>
 										</div>
 									</div>
@@ -223,10 +231,6 @@
 					return false;
 				}
 				
-				if(photo.length==0){
-					layer.msg("图不能为空");
-					return false;
-				}
 				ue.ready(function(){ 				
 					 $('#content').value = ue.getContent();		
 				});
@@ -241,7 +245,7 @@
 			$(function(){
 				$('#uid').combobox({
 					onSelect: function(param){
-						$.post("{:U('addName')}",{ id : param.value }, function(data){
+						$.post("{:U('Stock/addName')}",{ id : param.value }, function(data){
 							if(data){
 								$('#name').empty();
 								$('#name').val(data); 
